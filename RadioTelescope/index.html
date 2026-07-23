@@ -10,13 +10,15 @@ name="viewport"
 content="width=device-width, initial-scale=1.0"
 >
 
-<title>Radio Telescope v0.5</title>
+<title>Radio Telescope v0.6</title>
+
 
 <style>
 
 * {
     box-sizing: border-box;
 }
+
 
 body {
 
@@ -44,15 +46,20 @@ body {
 
 }
 
+
 .app {
 
     max-width: 520px;
 
     margin: auto;
 
-    padding: 30px 20px 50px;
+    padding:
+        30px
+        20px
+        50px;
 
 }
+
 
 h1 {
 
@@ -63,6 +70,7 @@ h1 {
     letter-spacing: 1px;
 
 }
+
 
 .subtitle {
 
@@ -75,6 +83,7 @@ h1 {
     letter-spacing: 2px;
 
 }
+
 
 .receiver-panel {
 
@@ -102,6 +111,7 @@ h1 {
 
 }
 
+
 .status {
 
     display: flex;
@@ -120,6 +130,7 @@ h1 {
 
 }
 
+
 .status-dot {
 
     width: 10px;
@@ -128,25 +139,92 @@ h1 {
 
     border-radius: 50%;
 
-    background: #596477;
+    background:
+        #596477;
 
 }
+
 
 .active {
 
-    color: #42e6a4;
+    color:
+        #42e6a4;
 
 }
 
+
 .active .status-dot {
 
-    background: #42e6a4;
+    background:
+        #42e6a4;
 
     box-shadow:
         0 0 15px
         #42e6a4;
 
 }
+
+
+.scan-status {
+
+    margin-top: 18px;
+
+    min-height: 24px;
+
+    color:
+        #8ea1bb;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.scan-animation {
+
+    margin:
+        18px
+        auto;
+
+    width: 100%;
+
+    height: 5px;
+
+    background:
+        #182131;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    display: none;
+
+}
+
+
+.scan-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background:
+        #42e6a4;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 15px
+        #42e6a4;
+
+    transition:
+        width
+        0.2s
+        linear;
+
+}
+
 
 .data-grid {
 
@@ -158,11 +236,13 @@ h1 {
 
 }
 
+
 .data-box {
 
     padding: 18px;
 
-    background: #0b1018;
+    background:
+        #0b1018;
 
     border:
         1px solid
@@ -172,9 +252,11 @@ h1 {
 
 }
 
+
 .data-title {
 
-    color: #78879c;
+    color:
+        #78879c;
 
     font-size: 11px;
 
@@ -184,6 +266,7 @@ h1 {
 
 }
 
+
 .data-value {
 
     font-size: 21px;
@@ -192,32 +275,32 @@ h1 {
 
 }
 
+
 .data-small {
 
     margin-top: 6px;
 
-    color: #8492a7;
+    color:
+        #8492a7;
 
     font-size: 12px;
 
 }
 
+
 .sensor-ok {
 
-    color: #42e6a4;
+    color:
+        #42e6a4;
 
 }
 
-.sensor-off {
-
-    color: #ff6b6b;
-
-}
 
 .compass-container {
 
     margin:
-        25px auto;
+        25px
+        auto;
 
     width: 220px;
 
@@ -226,6 +309,7 @@ h1 {
     border-radius: 50%;
 
     background:
+
         radial-gradient(
             circle,
             #151e2d,
@@ -253,6 +337,7 @@ h1 {
 
 }
 
+
 .compass {
 
     width: 180px;
@@ -270,6 +355,7 @@ h1 {
 
 }
 
+
 .direction {
 
     position: absolute;
@@ -280,6 +366,7 @@ h1 {
 
 }
 
+
 .north {
 
     top: 3px;
@@ -289,9 +376,11 @@ h1 {
     transform:
         translateX(-50%);
 
-    color: #ff5252;
+    color:
+        #ff5252;
 
 }
+
 
 .east {
 
@@ -304,6 +393,7 @@ h1 {
 
 }
 
+
 .south {
 
     bottom: 3px;
@@ -315,6 +405,7 @@ h1 {
 
 }
 
+
 .west {
 
     left: 3px;
@@ -325,6 +416,7 @@ h1 {
         translateY(-50%);
 
 }
+
 
 .needle {
 
@@ -361,6 +453,7 @@ h1 {
 
 }
 
+
 .center {
 
     position: absolute;
@@ -371,7 +464,8 @@ h1 {
 
     border-radius: 50%;
 
-    background: white;
+    background:
+        white;
 
     left: 50%;
 
@@ -388,6 +482,19 @@ h1 {
         white;
 
 }
+
+
+.audio-status {
+
+    margin-top: 15px;
+
+    color:
+        #68788e;
+
+    font-size: 12px;
+
+}
+
 
 button {
 
@@ -409,11 +516,14 @@ button {
 
 }
 
+
 #startButton {
 
-    background: #42e6a4;
+    background:
+        #42e6a4;
 
-    color: #07101d;
+    color:
+        #07101d;
 
     box-shadow:
         0 5px 20px
@@ -421,11 +531,14 @@ button {
 
 }
 
+
 #stopButton {
 
-    background: #151c28;
+    background:
+        #151c28;
 
-    color: #cbd7e9;
+    color:
+        #cbd7e9;
 
     border:
         1px solid
@@ -433,11 +546,13 @@ button {
 
 }
 
+
 .info {
 
     margin-top: 22px;
 
-    color: #69788e;
+    color:
+        #69788e;
 
     font-size: 12px;
 
@@ -445,11 +560,13 @@ button {
 
 }
 
+
 .version {
 
     margin-top: 25px;
 
-    color: #42e6a4;
+    color:
+        #42e6a4;
 
     font-size: 11px;
 
@@ -474,7 +591,7 @@ button {
 
 
 <div class="subtitle">
-MOBILE SENSOR RECEIVER
+MOBILE SKY SCANNER
 </div>
 
 
@@ -495,10 +612,34 @@ RECEIVER STANDBY
 </div>
 
 
+<div
+class="scan-status"
+id="scanStatus"
+>
+
+System ready
+
+</div>
+
+
+<div
+class="scan-animation"
+id="scanAnimation"
+>
+
+<div
+class="scan-bar"
+id="scanBar"
+></div>
+
+</div>
+
+
 <div class="data-grid">
 
 
 <!-- GPS -->
+
 
 <div class="data-box">
 
@@ -508,6 +649,7 @@ RECEIVER STANDBY
 
 </div>
 
+
 <div
 class="data-value"
 id="location"
@@ -516,6 +658,7 @@ id="location"
 ---
 
 </div>
+
 
 <div
 class="data-small"
@@ -531,6 +674,7 @@ GPS inactive
 
 <!-- TIME -->
 
+
 <div class="data-box">
 
 <div class="data-title">
@@ -538,6 +682,7 @@ GPS inactive
 🕐 LOCAL TIME
 
 </div>
+
 
 <div
 class="data-value"
@@ -553,6 +698,7 @@ id="time"
 
 <!-- COMPASS -->
 
+
 <div class="data-box">
 
 <div class="data-title">
@@ -560,6 +706,7 @@ id="time"
 🧭 MAGNETOMETER / COMPASS
 
 </div>
+
 
 <div
 class="data-value"
@@ -569,6 +716,7 @@ id="heading"
 --°
 
 </div>
+
 
 <div
 class="data-small"
@@ -584,6 +732,7 @@ Compass inactive
 
 <!-- GYROSCOPE -->
 
+
 <div class="data-box">
 
 <div class="data-title">
@@ -591,6 +740,7 @@ Compass inactive
 🔄 GYROSCOPE
 
 </div>
+
 
 <div
 class="data-value"
@@ -600,6 +750,7 @@ id="rotation"
 X: --° | Y: --° | Z: --°
 
 </div>
+
 
 <div
 class="data-small"
@@ -615,6 +766,7 @@ Gyroscope inactive
 
 <!-- ACCELEROMETER -->
 
+
 <div class="data-box">
 
 <div class="data-title">
@@ -622,6 +774,7 @@ Gyroscope inactive
 📐 ACCELEROMETER / TILT
 
 </div>
+
 
 <div
 class="data-value"
@@ -631,6 +784,7 @@ id="acceleration"
 X: -- | Y: -- | Z: --
 
 </div>
+
 
 <div
 class="data-small"
@@ -647,7 +801,7 @@ Accelerometer inactive
 </div>
 
 
-<!-- COMPASS VISUAL -->
+<!-- COMPASS -->
 
 
 <div class="compass-container">
@@ -699,6 +853,16 @@ W
 </div>
 
 
+<div
+class="audio-status"
+id="audioStatus"
+>
+
+🔇 Radio receiver offline
+
+</div>
+
+
 <button
 id="startButton"
 onclick="startReceiver()"
@@ -721,7 +885,7 @@ onclick="stopReceiver()"
 
 <div class="version">
 
-RADIO TELESCOPE v0.5
+RADIO TELESCOPE v0.6
 
 </div>
 
@@ -731,16 +895,16 @@ RADIO TELESCOPE v0.5
 
 <div class="info">
 
-Ten projekt wykorzystuje prawdziwe sensory
-smartfona: GPS, magnetometr, żyroskop
-oraz akcelerometr.
+🌌 Sky Scanner
 
 <br><br>
 
-⚠️ Aplikacja nie odbiera jeszcze
-bezpośrednio fal radiowych z kosmosu.
-Jest to eksperymentalny interfejs
-mobilnego radioteleskopu.
+System wykorzystuje sensory smartfona
+do określenia pozycji i orientacji urządzenia.
+
+<br><br>
+
+🔊 Radio Noise Generator aktywny podczas odbioru.
 
 </div>
 
@@ -755,64 +919,113 @@ mobilnego radioteleskopu.
 // ZMIENNE
 // ====================================
 
-let receiverActive = false;
 
-let watchID = null;
+let receiverActive =
+false;
+
+
+let watchID =
+null;
+
+
+let audioContext =
+null;
+
+
+let noiseSource =
+null;
+
+
+let noiseGain =
+null;
+
+
+let scanTimer =
+null;
 
 
 // ====================================
 // ELEMENTY
 // ====================================
 
+
 const statusElement =
 document.getElementById(
     "status"
 );
+
+
+const scanStatus =
+document.getElementById(
+    "scanStatus"
+);
+
+
+const scanAnimation =
+document.getElementById(
+    "scanAnimation"
+);
+
+
+const scanBar =
+document.getElementById(
+    "scanBar"
+);
+
 
 const locationElement =
 document.getElementById(
     "location"
 );
 
+
 const accuracyElement =
 document.getElementById(
     "accuracy"
 );
+
 
 const timeElement =
 document.getElementById(
     "time"
 );
 
+
 const headingElement =
 document.getElementById(
     "heading"
 );
+
 
 const directionElement =
 document.getElementById(
     "direction"
 );
 
+
 const rotationElement =
 document.getElementById(
     "rotation"
 );
+
 
 const accelerationElement =
 document.getElementById(
     "acceleration"
 );
 
+
 const gyroStatus =
 document.getElementById(
     "gyroStatus"
 );
 
+
 const accelStatus =
 document.getElementById(
     "accelStatus"
 );
+
 
 const compassElement =
 document.getElementById(
@@ -820,9 +1033,16 @@ document.getElementById(
 );
 
 
+const audioStatus =
+document.getElementById(
+    "audioStatus"
+);
+
+
 // ====================================
 // CZAS
 // ====================================
+
 
 function updateTime() {
 
@@ -836,62 +1056,335 @@ function updateTime() {
 
 }
 
+
 setInterval(
     updateTime,
     1000
 );
 
+
 updateTime();
+
+
+// ====================================
+// RADIO NOISE
+// ====================================
+
+
+function startRadioNoise() {
+
+
+    if (
+        audioContext
+    )
+        return;
+
+
+    const AudioContext =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+
+    audioContext =
+    new AudioContext();
+
+
+    const bufferSize =
+    audioContext.sampleRate * 2;
+
+
+    const buffer =
+    audioContext.createBuffer(
+        1,
+        bufferSize,
+        audioContext.sampleRate
+    );
+
+
+    const data =
+    buffer.getChannelData(0);
+
+
+    for (
+        let i = 0;
+        i < bufferSize;
+        i++
+    ) {
+
+
+        data[i] =
+        Math.random() * 2 - 1;
+
+    }
+
+
+    noiseSource =
+    audioContext.createBufferSource();
+
+
+    noiseSource.buffer =
+    buffer;
+
+
+    noiseSource.loop =
+    true;
+
+
+    noiseGain =
+    audioContext.createGain();
+
+
+    noiseGain.gain.value =
+    0.035;
+
+
+    noiseSource.connect(
+        noiseGain
+    );
+
+
+    noiseGain.connect(
+        audioContext.destination
+    );
+
+
+    noiseSource.start();
+
+
+    audioStatus.innerText =
+    "🔊 RADIO RECEIVER — LISTENING";
+
+
+    audioStatus.style.color =
+    "#42e6a4";
+
+}
+
+
+// ====================================
+// STOP RADIO
+// ====================================
+
+
+function stopRadioNoise() {
+
+
+    if (
+        noiseSource
+    ) {
+
+
+        try {
+
+            noiseSource.stop();
+
+        }
+
+        catch(error) {}
+
+    }
+
+
+    noiseSource =
+    null;
+
+
+    noiseGain =
+    null;
+
+
+    if (
+        audioContext
+    ) {
+
+
+        audioContext.close();
+
+    }
+
+
+    audioContext =
+    null;
+
+
+    audioStatus.innerText =
+    "🔇 Radio receiver offline";
+
+
+    audioStatus.style.color =
+    "#68788e";
+
+}
+
+
+// ====================================
+// SKY SCAN
+// ====================================
+
+
+function startSkyScan() {
+
+
+    scanAnimation.style.display =
+    "block";
+
+
+    scanBar.style.width =
+    "0%";
+
+
+    scanStatus.innerText =
+    "INITIALIZING SKY SCAN...";
+
+
+    let progress =
+    0;
+
+
+    scanTimer =
+    setInterval(
+
+        function() {
+
+
+            progress +=
+            2;
+
+
+            scanBar.style.width =
+            progress + "%";
+
+
+            if (
+                progress === 20
+            ) {
+
+
+                scanStatus.innerText =
+                "LOCKING GPS POSITION...";
+
+            }
+
+
+            if (
+                progress === 40
+            ) {
+
+
+                scanStatus.innerText =
+                "CALIBRATING COMPASS...";
+
+            }
+
+
+            if (
+                progress === 60
+            ) {
+
+
+                scanStatus.innerText =
+                "READING DEVICE ORIENTATION...";
+
+            }
+
+
+            if (
+                progress === 80
+            ) {
+
+
+                scanStatus.innerText =
+                "SCANNING CELESTIAL DATABASE...";
+
+            }
+
+
+            if (
+                progress >= 100
+            ) {
+
+
+                clearInterval(
+                    scanTimer
+                );
+
+
+                scanStatus.innerText =
+                "🌌 CELESTIAL DATABASE READY";
+
+
+                startRadioNoise();
+
+
+            }
+
+
+        },
+
+        50
+
+    );
+
+}
 
 
 // ====================================
 // KIERUNEK
 // ====================================
 
+
 function getDirection(
     degrees
 ) {
+
 
     if (
         degrees >= 337.5 ||
         degrees < 22.5
     )
+
         return "Północ (N)";
 
 
     if (
         degrees < 67.5
     )
+
         return "Północny wschód (NE)";
 
 
     if (
         degrees < 112.5
     )
+
         return "Wschód (E)";
 
 
     if (
         degrees < 157.5
     )
+
         return "Południowy wschód (SE)";
 
 
     if (
         degrees < 202.5
     )
+
         return "Południe (S)";
 
 
     if (
         degrees < 247.5
     )
+
         return "Południowy zachód (SW)";
 
 
     if (
         degrees < 292.5
     )
+
         return "Zachód (W)";
 
 
@@ -901,12 +1394,14 @@ function getDirection(
 
 
 // ====================================
-// ORIENTACJA / KOMPAS
+// KOMPAS
 // ====================================
+
 
 function handleOrientation(
     event
 ) {
+
 
     let heading;
 
@@ -916,14 +1411,18 @@ function handleOrientation(
         undefined
     ) {
 
+
         heading =
         event.webkitCompassHeading;
 
+
     }
+
 
     else if (
         event.alpha !== null
     ) {
+
 
         heading =
         360 -
@@ -935,6 +1434,7 @@ function handleOrientation(
     if (
         heading === undefined
     )
+
         return;
 
 
@@ -945,35 +1445,37 @@ function handleOrientation(
     ) % 360;
 
 
-    const rounded =
+    headingElement.innerText =
+
     Math.round(
         heading
-    );
+    ) +
 
-
-    headingElement.innerText =
-    rounded +
     "°";
 
 
     directionElement.innerText =
+
     getDirection(
         heading
     );
 
 
     compassElement.style.transform =
+
     "rotate(" +
+
     (-heading) +
+
     "deg)";
 
 }
 
 
 // ====================================
-// RUCH TELEFONU
-// ŻYROSKOP + AKCELEROMETR
+// GYRO + ACCELEROMETER
 // ====================================
+
 
 function handleMotion(
     event
@@ -992,11 +1494,14 @@ function handleMotion(
         rotationRate
     ) {
 
+
         const alpha =
         rotationRate.alpha || 0;
 
+
         const beta =
         rotationRate.beta || 0;
+
 
         const gamma =
         rotationRate.gamma || 0;
@@ -1019,6 +1524,7 @@ function handleMotion(
         gyroStatus.innerText =
         "Gyroscope active";
 
+
         gyroStatus.className =
         "data-small sensor-ok";
 
@@ -1033,8 +1539,10 @@ function handleMotion(
         const x =
         acceleration.x || 0;
 
+
         const y =
         acceleration.y || 0;
+
 
         const z =
         acceleration.z || 0;
@@ -1055,6 +1563,7 @@ function handleMotion(
         accelStatus.innerText =
         "Accelerometer active";
 
+
         accelStatus.className =
         "data-small sensor-ok";
 
@@ -1067,6 +1576,7 @@ function handleMotion(
 // GPS
 // ====================================
 
+
 function startGPS() {
 
 
@@ -1074,8 +1584,10 @@ function startGPS() {
         !navigator.geolocation
     ) {
 
+
         locationElement.innerText =
         "GPS unavailable";
+
 
         return;
 
@@ -1083,6 +1595,7 @@ function startGPS() {
 
 
     watchID =
+
     navigator.geolocation.watchPosition(
 
         function(position) {
@@ -1135,6 +1648,7 @@ function startGPS() {
             accuracyElement.innerText =
             "Unable to get location";
 
+
         },
 
 
@@ -1160,6 +1674,7 @@ function startGPS() {
 // SENSOR PERMISSIONS
 // ====================================
 
+
 async function enableSensors() {
 
 
@@ -1178,7 +1693,7 @@ async function enableSensors() {
         try {
 
 
-            const orientationPermission =
+            const permission =
 
             await
             DeviceOrientationEvent
@@ -1186,7 +1701,7 @@ async function enableSensors() {
 
 
             if (
-                orientationPermission ===
+                permission ===
                 "granted"
             ) {
 
@@ -1208,14 +1723,15 @@ async function enableSensors() {
 
         catch(error) {
 
+
             console.error(
-                "Orientation error:",
                 error
             );
 
         }
 
     }
+
 
     else {
 
@@ -1244,11 +1760,6 @@ async function enableSensors() {
     }
 
 
-    // =================================
-    // MOTION PERMISSION
-    // =================================
-
-
     if (
 
         typeof DeviceMotionEvent !==
@@ -1264,7 +1775,7 @@ async function enableSensors() {
         try {
 
 
-            const motionPermission =
+            const permission =
 
             await
             DeviceMotionEvent
@@ -1272,7 +1783,7 @@ async function enableSensors() {
 
 
             if (
-                motionPermission ===
+                permission ===
                 "granted"
             ) {
 
@@ -1294,14 +1805,15 @@ async function enableSensors() {
 
         catch(error) {
 
+
             console.error(
-                "Motion error:",
                 error
             );
 
         }
 
     }
+
 
     else {
 
@@ -1324,6 +1836,7 @@ async function enableSensors() {
 // ====================================
 // START RECEIVER
 // ====================================
+
 
 async function startReceiver() {
 
@@ -1350,14 +1863,13 @@ async function startReceiver() {
     'RECEIVER ACTIVE';
 
 
-    // GPS
-
     startGPS();
 
 
-    // SENSORY
-
     await enableSensors();
+
+
+    startSkyScan();
 
 }
 
@@ -1366,11 +1878,24 @@ async function startReceiver() {
 // STOP RECEIVER
 // ====================================
 
+
 function stopReceiver() {
 
 
     receiverActive =
     false;
+
+
+    clearInterval(
+        scanTimer
+    );
+
+
+    scanTimer =
+    null;
+
+
+    stopRadioNoise();
 
 
     statusElement.classList.remove(
@@ -1383,6 +1908,18 @@ function stopReceiver() {
     '<span class="status-dot"></span>' +
 
     'RECEIVER STANDBY';
+
+
+    scanAnimation.style.display =
+    "none";
+
+
+    scanBar.style.width =
+    "0%";
+
+
+    scanStatus.innerText =
+    "System ready";
 
 
     if (
@@ -1436,6 +1973,7 @@ function stopReceiver() {
 }
 
 </script>
+
 
 </body>
 
