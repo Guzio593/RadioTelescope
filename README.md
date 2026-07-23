@@ -3,484 +3,461 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Radio Telescope v0.4</title>
+<title>Radio Telescope v0.5</title>
 
+<style>
 
-    <style>
+* {
+    box-sizing: border-box;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+body {
 
+    margin: 0;
 
-        body {
+    min-height: 100vh;
 
-            margin: 0;
+    background:
+        radial-gradient(
+            circle at top,
+            #111b2b,
+            #05070b 70%
+        );
 
-            min-height: 100vh;
+    color: white;
 
-            background:
-                radial-gradient(
-                    circle at top,
-                    #101827,
-                    #05070b 65%
-                );
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-            color: white;
+    text-align: center;
 
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Arial,
-                sans-serif;
+}
 
-            text-align: center;
+.app {
 
-        }
+    max-width: 520px;
 
+    margin: auto;
 
-        .app {
+    padding: 30px 20px 50px;
 
-            max-width: 520px;
+}
 
-            margin: auto;
+h1 {
 
-            padding: 30px 20px 40px;
+    margin: 0;
 
-        }
+    font-size: 29px;
 
+    letter-spacing: 1px;
 
-        h1 {
+}
 
-            margin: 0;
+.subtitle {
 
-            font-size: 30px;
+    margin-top: 8px;
 
-            letter-spacing: 1px;
+    color: #8290a5;
 
-        }
+    font-size: 12px;
 
+    letter-spacing: 2px;
 
-        .subtitle {
+}
 
-            margin-top: 8px;
+.receiver-panel {
 
-            color: #8491a5;
+    margin-top: 30px;
 
-            font-size: 12px;
+    padding: 25px;
 
-            letter-spacing: 2px;
+    background:
 
-        }
+        linear-gradient(
+            145deg,
+            #0f1622,
+            #080b11
+        );
 
+    border:
+        1px solid
+        #273348;
 
-        .receiver-panel {
+    border-radius: 25px;
 
-            margin-top: 35px;
+    box-shadow:
+        0 15px 45px
+        #00000099;
 
-            padding: 25px;
+}
 
-            background:
+.status {
 
-                linear-gradient(
-                    145deg,
-                    #0e141e,
-                    #080b11
-                );
+    display: flex;
 
-            border:
+    justify-content: center;
 
-                1px solid
-                #253044;
+    align-items: center;
 
-            border-radius: 25px;
+    gap: 10px;
 
-            box-shadow:
+    color: #7f8da2;
 
-                0 15px 40px
-                #00000088;
+    font-weight: bold;
 
-        }
+    letter-spacing: 1px;
 
+}
 
-        .status {
+.status-dot {
 
-            display: flex;
+    width: 10px;
 
-            justify-content: center;
+    height: 10px;
 
-            align-items: center;
+    border-radius: 50%;
 
-            gap: 10px;
+    background: #596477;
 
-            color: #7d8ba1;
+}
 
-            font-weight: bold;
+.active {
 
-            letter-spacing: 1px;
+    color: #42e6a4;
 
-        }
+}
 
+.active .status-dot {
 
-        .status-dot {
+    background: #42e6a4;
 
-            width: 10px;
+    box-shadow:
+        0 0 15px
+        #42e6a4;
 
-            height: 10px;
+}
 
-            border-radius: 50%;
+.data-grid {
 
-            background: #566174;
+    margin-top: 28px;
 
-        }
+    display: grid;
 
+    gap: 14px;
 
-        .active {
+}
 
-            color: #42e6a4;
+.data-box {
 
-        }
+    padding: 18px;
 
+    background: #0b1018;
 
-        .active .status-dot {
+    border:
+        1px solid
+        #202b3c;
 
-            background: #42e6a4;
+    border-radius: 18px;
 
-            box-shadow:
+}
 
-                0 0 15px
-                #42e6a4;
+.data-title {
 
-        }
+    color: #78879c;
 
+    font-size: 11px;
 
-        .data-grid {
+    letter-spacing: 1px;
 
-            margin-top: 30px;
+    margin-bottom: 9px;
 
-            display: grid;
+}
 
-            gap: 15px;
+.data-value {
 
-        }
+    font-size: 21px;
 
+    font-weight: bold;
 
-        .data-box {
+}
 
-            padding: 20px;
+.data-small {
 
-            background: #0b1018;
+    margin-top: 6px;
 
-            border:
+    color: #8492a7;
 
-                1px solid
-                #1e2939;
+    font-size: 12px;
 
-            border-radius: 18px;
+}
 
-        }
+.sensor-ok {
 
+    color: #42e6a4;
 
-        .data-title {
+}
 
-            color: #78879c;
+.sensor-off {
 
-            font-size: 12px;
+    color: #ff6b6b;
 
-            letter-spacing: 1px;
+}
 
-            margin-bottom: 10px;
+.compass-container {
 
-        }
+    margin:
+        25px auto;
 
+    width: 220px;
 
-        .data-value {
+    height: 220px;
 
-            font-size: 22px;
+    border-radius: 50%;
 
-            font-weight: bold;
+    background:
+        radial-gradient(
+            circle,
+            #151e2d,
+            #080b11
+        );
 
-        }
+    border:
+        3px solid
+        #2b374b;
 
+    display: flex;
 
-        .data-small {
+    align-items: center;
 
-            margin-top: 6px;
+    justify-content: center;
 
-            color: #8795ab;
+    box-shadow:
 
-            font-size: 13px;
+        inset
+        0 0 35px
+        #000000aa,
 
-        }
+        0 0 25px
+        #00000066;
 
+}
 
-        .compass-container {
+.compass {
 
-            margin:
+    width: 180px;
 
-                25px auto;
+    height: 180px;
 
-            width: 220px;
+    border-radius: 50%;
 
-            height: 220px;
+    position: relative;
 
-            border-radius: 50%;
+    transition:
+        transform
+        0.12s
+        linear;
 
-            background:
+}
 
-                radial-gradient(
-                    circle,
-                    #131b28,
-                    #080b11
-                );
+.direction {
 
-            border:
+    position: absolute;
 
-                3px solid
-                #293448;
+    font-weight: bold;
 
-            display: flex;
+    font-size: 18px;
 
-            justify-content: center;
+}
 
-            align-items: center;
+.north {
 
-            box-shadow:
+    top: 3px;
 
-                inset
-                0 0 30px
-                #000000aa,
+    left: 50%;
 
-                0 0 25px
-                #00000088;
+    transform:
+        translateX(-50%);
 
-        }
+    color: #ff5252;
 
+}
 
-        .compass {
+.east {
 
-            width: 180px;
+    right: 3px;
 
-            height: 180px;
+    top: 50%;
 
-            border-radius: 50%;
+    transform:
+        translateY(-50%);
 
-            position: relative;
+}
 
-            transition:
+.south {
 
-                transform
-                0.15s
-                ease-out;
+    bottom: 3px;
 
-        }
+    left: 50%;
 
+    transform:
+        translateX(-50%);
 
-        .direction {
+}
 
-            position: absolute;
+.west {
 
-            font-weight: bold;
+    left: 3px;
 
-            font-size: 18px;
+    top: 50%;
 
-        }
+    transform:
+        translateY(-50%);
 
+}
 
-        .north {
+.needle {
 
-            top: 3px;
+    position: absolute;
 
-            left: 50%;
+    width: 4px;
 
-            transform:
+    height: 70px;
 
-                translateX(-50%);
+    left: 50%;
 
-            color: #ff5252;
+    top: 20px;
 
-        }
+    transform:
+        translateX(-50%);
 
+    transform-origin:
+        50%
+        70px;
 
-        .east {
+    background:
 
-            right: 3px;
+        linear-gradient(
+            to bottom,
+            #ff3b3b 50%,
+            white 50%
+        );
 
-            top: 50%;
+    border-radius: 5px;
 
-            transform:
+    box-shadow:
+        0 0 12px
+        #ff3b3b88;
 
-                translateY(-50%);
+}
 
-        }
+.center {
 
+    position: absolute;
 
-        .south {
+    width: 18px;
 
-            bottom: 3px;
+    height: 18px;
 
-            left: 50%;
+    border-radius: 50%;
 
-            transform:
+    background: white;
 
-                translateX(-50%);
+    left: 50%;
 
-        }
+    top: 50%;
 
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
 
-        .west {
+    box-shadow:
+        0 0 12px
+        white;
 
-            left: 3px;
+}
 
-            top: 50%;
+button {
 
-            transform:
+    width: 100%;
 
-                translateY(-50%);
+    padding: 20px;
 
-        }
+    margin-top: 20px;
 
+    border: none;
 
-        .needle {
+    border-radius: 18px;
 
-            position: absolute;
+    font-size: 18px;
 
-            width: 4px;
+    font-weight: bold;
 
-            height: 70px;
+    cursor: pointer;
 
-            left: 50%;
+}
 
-            top: 20px;
+#startButton {
 
-            transform:
+    background: #42e6a4;
 
-                translateX(-50%);
+    color: #07101d;
 
-            transform-origin:
+    box-shadow:
+        0 5px 20px
+        #42e6a433;
 
-                50%
-                70px;
+}
 
-            background:
+#stopButton {
 
-                linear-gradient(
-                    to bottom,
-                    #ff3b3b 50%,
-                    white 50%
-                );
+    background: #151c28;
 
-            border-radius: 5px;
+    color: #cbd7e9;
 
-            box-shadow:
+    border:
+        1px solid
+        #293448;
 
-                0 0 12px
-                #ff3b3b88;
+}
 
-        }
+.info {
 
+    margin-top: 22px;
 
-        .center {
+    color: #69788e;
 
-            position: absolute;
+    font-size: 12px;
 
-            width: 18px;
+    line-height: 1.6;
 
-            height: 18px;
+}
 
-            border-radius: 50%;
+.version {
 
-            background: white;
+    margin-top: 25px;
 
-            left: 50%;
+    color: #42e6a4;
 
-            top: 50%;
+    font-size: 11px;
 
-            transform:
+    letter-spacing: 2px;
 
-                translate(
-                    -50%,
-                    -50%
-                );
+}
 
-            box-shadow:
-
-                0 0 12px
-                white;
-
-        }
-
-
-        button {
-
-            width: 100%;
-
-            padding: 20px;
-
-            margin-top: 20px;
-
-            border: none;
-
-            border-radius: 18px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-        }
-
-
-        #startButton {
-
-            background: #42e6a4;
-
-            color: #07101d;
-
-            box-shadow:
-
-                0 5px 20px
-                #42e6a433;
-
-        }
-
-
-        #stopButton {
-
-            background: #151c28;
-
-            color: #cbd7e9;
-
-            border:
-
-                1px solid
-                #293448;
-
-        }
-
-
-        .info {
-
-            margin-top: 20px;
-
-            color: #69788e;
-
-            font-size: 12px;
-
-            line-height: 1.5;
-
-        }
-
-    </style>
+</style>
 
 </head>
 
@@ -491,228 +468,281 @@
 <div class="app">
 
 
-    <h1>
-        📡 RADIO TELESCOPE
-    </h1>
+<h1>
+📡 RADIO TELESCOPE
+</h1>
 
 
-    <div class="subtitle">
+<div class="subtitle">
+MOBILE SENSOR RECEIVER
+</div>
 
-        RECEIVER CONTROL SYSTEM
 
-    </div>
+<div class="receiver-panel">
 
 
-    <div class="receiver-panel">
+<div
+class="status"
+id="status"
+>
 
+<span
+class="status-dot"
+></span>
 
-        <div
-            class="status"
-            id="status"
-        >
+RECEIVER STANDBY
 
-            <span
-                class="status-dot"
-            ></span>
+</div>
 
-            RECEIVER STANDBY
 
-        </div>
+<div class="data-grid">
 
 
-        <div class="data-grid">
+<!-- GPS -->
 
+<div class="data-box">
 
-            <!-- POZYCJA -->
+<div class="data-title">
 
+📍 USER POSITION
 
-            <div class="data-box">
+</div>
 
-                <div class="data-title">
+<div
+class="data-value"
+id="location"
+>
 
-                    📍 USER POSITION
+---
 
-                </div>
+</div>
 
+<div
+class="data-small"
+id="accuracy"
+>
 
-                <div
-                    class="data-value"
-                    id="location"
-                >
+GPS inactive
 
-                    ---
+</div>
 
-                </div>
+</div>
 
 
-                <div
-                    class="data-small"
-                    id="accuracy"
-                >
+<!-- TIME -->
 
-                    GPS inactive
+<div class="data-box">
 
-                </div>
+<div class="data-title">
 
-            </div>
+🕐 LOCAL TIME
 
+</div>
 
-            <!-- CZAS -->
+<div
+class="data-value"
+id="time"
+>
 
+--:--:--
 
-            <div class="data-box">
+</div>
 
-                <div class="data-title">
+</div>
 
-                    🕐 LOCAL TIME
 
-                </div>
+<!-- COMPASS -->
 
+<div class="data-box">
 
-                <div
-                    class="data-value"
-                    id="time"
-                >
+<div class="data-title">
 
-                    --:--:--
+🧭 MAGNETOMETER / COMPASS
 
-                </div>
+</div>
 
+<div
+class="data-value"
+id="heading"
+>
 
-            </div>
+--°
 
+</div>
 
-            <!-- KIERUNEK -->
+<div
+class="data-small"
+id="direction"
+>
 
+Compass inactive
 
-            <div class="data-box">
+</div>
 
-                <div class="data-title">
+</div>
 
-                    🧭 PHONE HEADING
 
-                </div>
+<!-- GYROSCOPE -->
 
+<div class="data-box">
 
-                <div
-                    class="data-value"
-                    id="heading"
-                >
+<div class="data-title">
 
-                    --°
+🔄 GYROSCOPE
 
-                </div>
+</div>
 
+<div
+class="data-value"
+id="rotation"
+>
 
-                <div
-                    class="data-small"
-                    id="direction"
-                >
+X: --° | Y: --° | Z: --°
 
-                    Compass inactive
+</div>
 
-                </div>
+<div
+class="data-small"
+id="gyroStatus"
+>
 
-            </div>
+Gyroscope inactive
 
+</div>
 
-        </div>
+</div>
 
 
-        <!-- KOMPAS -->
+<!-- ACCELEROMETER -->
 
+<div class="data-box">
 
-        <div class="compass-container">
+<div class="data-title">
 
+📐 ACCELEROMETER / TILT
 
-            <div
-                class="compass"
-                id="compass"
-            >
+</div>
 
+<div
+class="data-value"
+id="acceleration"
+>
 
-                <div
-                    class="direction north"
-                >
+X: -- | Y: -- | Z: --
 
-                    N
+</div>
 
-                </div>
+<div
+class="data-small"
+id="accelStatus"
+>
 
+Accelerometer inactive
 
-                <div
-                    class="direction east"
-                >
+</div>
 
-                    E
+</div>
 
-                </div>
 
+</div>
 
-                <div
-                    class="direction south"
-                >
 
-                    S
+<!-- COMPASS VISUAL -->
 
-                </div>
 
+<div class="compass-container">
 
-                <div
-                    class="direction west"
-                >
 
-                    W
+<div
+class="compass"
+id="compass"
+>
 
-                </div>
 
+<div
+class="direction north"
+>
+N
+</div>
 
-                <div class="needle"></div>
 
+<div
+class="direction east"
+>
+E
+</div>
 
-                <div class="center"></div>
 
+<div
+class="direction south"
+>
+S
+</div>
 
-            </div>
 
+<div
+class="direction west"
+>
+W
+</div>
 
-        </div>
 
+<div class="needle"></div>
 
-        <button
-            id="startButton"
-            onclick="startReceiver()"
-        >
 
-            📡 START RECEIVER
+<div class="center"></div>
 
-        </button>
 
+</div>
 
-        <button
-            id="stopButton"
-            onclick="stopReceiver()"
-        >
 
-            ■ STOP RECEIVER
+</div>
 
-        </button>
 
+<button
+id="startButton"
+onclick="startReceiver()"
+>
 
-    </div>
+📡 START RECEIVER
 
+</button>
 
-    <div class="info">
 
-        Radio Telescope v0.4
+<button
+id="stopButton"
+onclick="stopReceiver()"
+>
 
-        <br><br>
+■ STOP RECEIVER
 
-        Po uruchomieniu odbiornika aplikacja
-        pobiera pozycję GPS, aktualny czas
-        oraz kierunek telefonu.
+</button>
 
-    </div>
+
+<div class="version">
+
+RADIO TELESCOPE v0.5
+
+</div>
+
+
+</div>
+
+
+<div class="info">
+
+Ten projekt wykorzystuje prawdziwe sensory
+smartfona: GPS, magnetometr, żyroskop
+oraz akcelerometr.
+
+<br><br>
+
+⚠️ Aplikacja nie odbiera jeszcze
+bezpośrednio fal radiowych z kosmosu.
+Jest to eksperymentalny interfejs
+mobilnego radioteleskopu.
+
+</div>
 
 
 </div>
@@ -721,161 +751,147 @@
 <script>
 
 
-// =====================================
+// ====================================
 // ZMIENNE
-// =====================================
-
+// ====================================
 
 let receiverActive = false;
 
 let watchID = null;
 
-let compassActive = false;
 
-
-// =====================================
+// ====================================
 // ELEMENTY
-// =====================================
-
+// ====================================
 
 const statusElement =
-    document.getElementById(
-        "status"
-    );
-
+document.getElementById(
+    "status"
+);
 
 const locationElement =
-    document.getElementById(
-        "location"
-    );
-
+document.getElementById(
+    "location"
+);
 
 const accuracyElement =
-    document.getElementById(
-        "accuracy"
-    );
-
+document.getElementById(
+    "accuracy"
+);
 
 const timeElement =
-    document.getElementById(
-        "time"
-    );
-
+document.getElementById(
+    "time"
+);
 
 const headingElement =
-    document.getElementById(
-        "heading"
-    );
-
+document.getElementById(
+    "heading"
+);
 
 const directionElement =
-    document.getElementById(
-        "direction"
-    );
+document.getElementById(
+    "direction"
+);
 
+const rotationElement =
+document.getElementById(
+    "rotation"
+);
+
+const accelerationElement =
+document.getElementById(
+    "acceleration"
+);
+
+const gyroStatus =
+document.getElementById(
+    "gyroStatus"
+);
+
+const accelStatus =
+document.getElementById(
+    "accelStatus"
+);
 
 const compassElement =
-    document.getElementById(
-        "compass"
-    );
+document.getElementById(
+    "compass"
+);
 
 
-// =====================================
+// ====================================
 // CZAS
-// =====================================
-
+// ====================================
 
 function updateTime() {
 
-
     const now =
-        new Date();
-
-
-    const time =
-        now.toLocaleTimeString(
-            "pl-PL"
-        );
-
+    new Date();
 
     timeElement.innerText =
-        time;
+    now.toLocaleTimeString(
+        "pl-PL"
+    );
 
 }
-
 
 setInterval(
     updateTime,
     1000
 );
 
-
 updateTime();
 
 
-// =====================================
+// ====================================
 // KIERUNEK
-// =====================================
-
+// ====================================
 
 function getDirection(
     degrees
 ) {
 
-
     if (
         degrees >= 337.5 ||
         degrees < 22.5
     )
-
         return "Północ (N)";
 
 
     if (
-        degrees >= 22.5 &&
         degrees < 67.5
     )
-
         return "Północny wschód (NE)";
 
 
     if (
-        degrees >= 67.5 &&
         degrees < 112.5
     )
-
         return "Wschód (E)";
 
 
     if (
-        degrees >= 112.5 &&
         degrees < 157.5
     )
-
         return "Południowy wschód (SE)";
 
 
     if (
-        degrees >= 157.5 &&
         degrees < 202.5
     )
-
         return "Południe (S)";
 
 
     if (
-        degrees >= 202.5 &&
         degrees < 247.5
     )
-
         return "Południowy zachód (SW)";
 
 
     if (
-        degrees >= 247.5 &&
         degrees < 292.5
     )
-
         return "Zachód (W)";
 
 
@@ -884,15 +900,13 @@ function getDirection(
 }
 
 
-// =====================================
-// KOMPAS
-// =====================================
-
+// ====================================
+// ORIENTACJA / KOMPAS
+// ====================================
 
 function handleOrientation(
     event
 ) {
-
 
     let heading;
 
@@ -902,23 +916,18 @@ function handleOrientation(
         undefined
     ) {
 
-
         heading =
-            event.webkitCompassHeading;
-
+        event.webkitCompassHeading;
 
     }
-
 
     else if (
         event.alpha !== null
     ) {
 
-
         heading =
-            360 -
-            event.alpha;
-
+        360 -
+        event.alpha;
 
     }
 
@@ -926,72 +935,258 @@ function handleOrientation(
     if (
         heading === undefined
     )
-
         return;
 
 
     heading =
-        (
-            heading +
-            360
-        ) % 360;
+    (
+        heading +
+        360
+    ) % 360;
 
 
     const rounded =
-        Math.round(
-            heading
-        );
+    Math.round(
+        heading
+    );
 
 
     headingElement.innerText =
-        rounded +
-        "°";
+    rounded +
+    "°";
 
 
     directionElement.innerText =
-        getDirection(
-            heading
-        );
+    getDirection(
+        heading
+    );
 
 
     compassElement.style.transform =
-        "rotate(" +
-        (-heading) +
-        "deg)";
-
+    "rotate(" +
+    (-heading) +
+    "deg)";
 
 }
 
 
-// =====================================
-// KOMPAS — START
-// =====================================
+// ====================================
+// RUCH TELEFONU
+// ŻYROSKOP + AKCELEROMETR
+// ====================================
+
+function handleMotion(
+    event
+) {
 
 
-async function enableCompass() {
+    const rotationRate =
+    event.rotationRate;
+
+
+    const acceleration =
+    event.accelerationIncludingGravity;
 
 
     if (
+        rotationRate
+    ) {
+
+        const alpha =
+        rotationRate.alpha || 0;
+
+        const beta =
+        rotationRate.beta || 0;
+
+        const gamma =
+        rotationRate.gamma || 0;
+
+
+        rotationElement.innerText =
+
+        "X: " +
+        beta.toFixed(1) +
+
+        "° | Y: " +
+        gamma.toFixed(1) +
+
+        "° | Z: " +
+        alpha.toFixed(1) +
+
+        "°";
+
+
+        gyroStatus.innerText =
+        "Gyroscope active";
+
+        gyroStatus.className =
+        "data-small sensor-ok";
+
+    }
+
+
+    if (
+        acceleration
+    ) {
+
+
+        const x =
+        acceleration.x || 0;
+
+        const y =
+        acceleration.y || 0;
+
+        const z =
+        acceleration.z || 0;
+
+
+        accelerationElement.innerText =
+
+        "X: " +
+        x.toFixed(2) +
+
+        " | Y: " +
+        y.toFixed(2) +
+
+        " | Z: " +
+        z.toFixed(2);
+
+
+        accelStatus.innerText =
+        "Accelerometer active";
+
+        accelStatus.className =
+        "data-small sensor-ok";
+
+    }
+
+}
+
+
+// ====================================
+// GPS
+// ====================================
+
+function startGPS() {
+
+
+    if (
+        !navigator.geolocation
+    ) {
+
+        locationElement.innerText =
+        "GPS unavailable";
+
+        return;
+
+    }
+
+
+    watchID =
+    navigator.geolocation.watchPosition(
+
+        function(position) {
+
+
+            const latitude =
+            position.coords.latitude;
+
+
+            const longitude =
+            position.coords.longitude;
+
+
+            const accuracy =
+            position.coords.accuracy;
+
+
+            locationElement.innerText =
+
+            latitude.toFixed(6) +
+
+            "°, " +
+
+            longitude.toFixed(6) +
+
+            "°";
+
+
+            accuracyElement.innerText =
+
+            "Accuracy: ±" +
+
+            Math.round(
+                accuracy
+            ) +
+
+            " m";
+
+
+        },
+
+
+        function(error) {
+
+
+            locationElement.innerText =
+            "GPS permission denied";
+
+
+            accuracyElement.innerText =
+            "Unable to get location";
+
+        },
+
+
+        {
+
+            enableHighAccuracy:
+            true,
+
+            maximumAge:
+            1000,
+
+            timeout:
+            10000
+
+        }
+
+    );
+
+}
+
+
+// ====================================
+// SENSOR PERMISSIONS
+// ====================================
+
+async function enableSensors() {
+
+
+    if (
+
         typeof DeviceOrientationEvent !==
         "undefined" &&
 
         typeof DeviceOrientationEvent
-            .requestPermission ===
+        .requestPermission ===
         "function"
+
     ) {
 
 
         try {
 
 
-            const permission =
-                await
-                DeviceOrientationEvent
-                    .requestPermission();
+            const orientationPermission =
+
+            await
+            DeviceOrientationEvent
+            .requestPermission();
 
 
             if (
-                permission ===
+                orientationPermission ===
                 "granted"
             ) {
 
@@ -1006,34 +1201,21 @@ async function enableCompass() {
 
                 );
 
-
-                compassActive =
-                    true;
-
-
-                directionElement.innerText =
-                    "Compass active";
-
-
             }
 
 
         }
 
-
         catch(error) {
 
-
             console.error(
+                "Orientation error:",
                 error
             );
 
-
         }
 
-
     }
-
 
     else {
 
@@ -1059,119 +1241,89 @@ async function enableCompass() {
 
         );
 
-
-        compassActive =
-            true;
-
-
     }
 
 
-}
-
-
-// =====================================
-// GPS
-// =====================================
-
-
-function startGPS() {
+    // =================================
+    // MOTION PERMISSION
+    // =================================
 
 
     if (
-        !navigator.geolocation
+
+        typeof DeviceMotionEvent !==
+        "undefined" &&
+
+        typeof DeviceMotionEvent
+        .requestPermission ===
+        "function"
+
     ) {
 
 
-        locationElement.innerText =
-            "GPS unavailable";
+        try {
 
 
-        return;
+            const motionPermission =
+
+            await
+            DeviceMotionEvent
+            .requestPermission();
 
 
-    }
+            if (
+                motionPermission ===
+                "granted"
+            ) {
 
 
-    watchID =
-        navigator.geolocation.watchPosition(
+                window.addEventListener(
 
-            function(position) {
+                    "devicemotion",
 
+                    handleMotion,
 
-                const latitude =
-                    position.coords.latitude;
+                    true
 
-
-                const longitude =
-                    position.coords.longitude;
-
-
-                const accuracy =
-                    position.coords.accuracy;
-
-
-                locationElement.innerText =
-
-                    latitude.toFixed(6) +
-
-                    "°, " +
-
-                    longitude.toFixed(6) +
-
-                    "°";
-
-
-                accuracyElement.innerText =
-
-                    "Accuracy: ±" +
-
-                    Math.round(
-                        accuracy
-                    ) +
-
-                    " m";
-
-
-            },
-
-
-            function(error) {
-
-
-                locationElement.innerText =
-                    "GPS permission denied";
-
-
-                accuracyElement.innerText =
-                    "Unable to get location";
-
-
-            },
-
-
-            {
-
-                enableHighAccuracy:
-                    true,
-
-                maximumAge:
-                    1000,
-
-                timeout:
-                    10000
+                );
 
             }
 
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Motion error:",
+                error
+            );
+
+        }
+
+    }
+
+    else {
+
+
+        window.addEventListener(
+
+            "devicemotion",
+
+            handleMotion,
+
+            true
+
         );
+
+    }
 
 }
 
 
-// =====================================
+// ====================================
 // START RECEIVER
-// =====================================
-
+// ====================================
 
 async function startReceiver() {
 
@@ -1179,12 +1331,11 @@ async function startReceiver() {
     if (
         receiverActive
     )
-
         return;
 
 
     receiverActive =
-        true;
+    true;
 
 
     statusElement.classList.add(
@@ -1194,30 +1345,32 @@ async function startReceiver() {
 
     statusElement.innerHTML =
 
-        '<span class="status-dot"></span>' +
+    '<span class="status-dot"></span>' +
 
-        'RECEIVER ACTIVE';
+    'RECEIVER ACTIVE';
 
+
+    // GPS
 
     startGPS();
 
 
-    await enableCompass();
+    // SENSORY
 
+    await enableSensors();
 
 }
 
 
-// =====================================
+// ====================================
 // STOP RECEIVER
-// =====================================
-
+// ====================================
 
 function stopReceiver() {
 
 
     receiverActive =
-        false;
+    false;
 
 
     statusElement.classList.remove(
@@ -1227,9 +1380,9 @@ function stopReceiver() {
 
     statusElement.innerHTML =
 
-        '<span class="status-dot"></span>' +
+    '<span class="status-dot"></span>' +
 
-        'RECEIVER STANDBY';
+    'RECEIVER STANDBY';
 
 
     if (
@@ -1238,38 +1391,51 @@ function stopReceiver() {
 
 
         navigator.geolocation
-            .clearWatch(
-                watchID
-            );
+        .clearWatch(
+            watchID
+        );
 
 
         watchID =
-            null;
+        null;
 
     }
 
 
     locationElement.innerText =
-        "---";
+    "---";
 
 
     accuracyElement.innerText =
-        "GPS inactive";
+    "GPS inactive";
 
 
     headingElement.innerText =
-        "--°";
+    "--°";
 
 
     directionElement.innerText =
-        "Compass inactive";
+    "Compass inactive";
 
+
+    rotationElement.innerText =
+    "X: --° | Y: --° | Z: --°";
+
+
+    accelerationElement.innerText =
+    "X: -- | Y: -- | Z: --";
+
+
+    gyroStatus.innerText =
+    "Gyroscope inactive";
+
+
+    accelStatus.innerText =
+    "Accelerometer inactive";
 
 }
 
-
 </script>
-
 
 </body>
 
