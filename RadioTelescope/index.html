@@ -4,340 +4,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio Telescope v0.7.2</title>
+<title>Radio Telescope v0.7.3</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
-    margin:0;
-    min-height:100vh;
-    background:radial-gradient(circle at top,#142033,#05070b 70%);
-    color:white;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-    text-align:center;
+margin:0;
+min-height:100vh;
+background:radial-gradient(circle at top,#142033,#05070b 70%);
+color:white;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+text-align:center;
 }
 
 .app{
-    width:100%;
-    max-width:560px;
-    margin:auto;
-    padding:30px 20px 60px;
+width:100%;
+max-width:560px;
+margin:auto;
+padding:30px 20px 60px;
 }
 
 h1{
-    margin:0;
-    font-size:29px;
-    letter-spacing:1px;
+margin:0;
+font-size:29px;
+letter-spacing:1px;
 }
 
 .subtitle{
-    margin-top:8px;
-    color:#8290a5;
-    font-size:11px;
-    letter-spacing:2px;
+margin-top:8px;
+color:#8290a5;
+font-size:11px;
+letter-spacing:2px;
 }
 
 .receiver-panel{
-    margin-top:30px;
-    padding:25px;
-    background:linear-gradient(145deg,#101827,#080b11);
-    border:1px solid #273348;
-    border-radius:25px;
-    box-shadow:0 15px 45px #00000099;
+margin-top:30px;
+padding:25px;
+background:linear-gradient(145deg,#101827,#080b11);
+border:1px solid #273348;
+border-radius:25px;
+box-shadow:0 15px 45px #00000099;
 }
 
 .status{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    color:#7f8da2;
-    font-weight:bold;
-    letter-spacing:1px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+color:#7f8da2;
+font-weight:bold;
+letter-spacing:1px;
 }
 
 .status-dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:#596477;
+width:10px;
+height:10px;
+border-radius:50%;
+background:#596477;
 }
 
 .active{
-    color:#42e6a4;
+color:#42e6a4;
 }
 
 .active .status-dot{
-    background:#42e6a4;
-    box-shadow:0 0 15px #42e6a4;
+background:#42e6a4;
+box-shadow:0 0 15px #42e6a4;
 }
 
 .scan-status{
-    margin-top:18px;
-    min-height:24px;
-    color:#8ea1bb;
-    font-size:13px;
-    letter-spacing:1px;
-}
-
-.scan-animation{
-    margin:18px auto;
-    width:100%;
-    height:5px;
-    background:#182131;
-    border-radius:10px;
-    overflow:hidden;
-    display:none;
-}
-
-.scan-bar{
-    height:100%;
-    width:0%;
-    background:#42e6a4;
-    border-radius:10px;
-    box-shadow:0 0 15px #42e6a4;
-    transition:width .2s linear;
+margin-top:18px;
+min-height:24px;
+color:#8ea1bb;
+font-size:13px;
+letter-spacing:1px;
 }
 
 .data-grid{
-    margin-top:28px;
-    display:grid;
-    gap:14px;
+margin-top:28px;
+display:grid;
+gap:14px;
 }
 
 .data-box{
-    padding:18px;
-    background:#0b1018;
-    border:1px solid #202b3c;
-    border-radius:18px;
+padding:18px;
+background:#0b1018;
+border:1px solid #202b3c;
+border-radius:18px;
 }
 
 .data-title{
-    color:#78879c;
-    font-size:11px;
-    letter-spacing:1px;
-    margin-bottom:9px;
+color:#78879c;
+font-size:11px;
+letter-spacing:1px;
+margin-bottom:9px;
 }
 
 .data-value{
-    font-size:21px;
-    font-weight:bold;
+font-size:21px;
+font-weight:bold;
 }
 
 .data-small{
-    margin-top:6px;
-    color:#8492a7;
-    font-size:12px;
-}
-
-.sensor-ok{
-    color:#42e6a4;
+margin-top:6px;
+color:#8492a7;
+font-size:12px;
 }
 
 .compass-container{
-    margin:25px auto;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:radial-gradient(circle,#151e2d,#080b11);
-    border:3px solid #2b374b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:inset 0 0 35px #000000aa,0 0 25px #00000066;
+margin:25px auto;
+width:220px;
+height:220px;
+border-radius:50%;
+background:radial-gradient(circle,#151e2d,#080b11);
+border:3px solid #2b374b;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:inset 0 0 35px #000000aa,0 0 25px #00000066;
 }
 
 .compass{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    position:relative;
-    transition:transform .12s linear;
+width:180px;
+height:180px;
+border-radius:50%;
+position:relative;
+transition:transform .12s linear;
 }
 
 .direction{
-    position:absolute;
-    font-weight:bold;
-    font-size:18px;
+position:absolute;
+font-weight:bold;
+font-size:18px;
 }
 
 .north{
-    top:3px;
-    left:50%;
-    transform:translateX(-50%);
-    color:#ff5252;
+top:3px;
+left:50%;
+transform:translateX(-50%);
+color:#ff5252;
 }
 
 .east{
-    right:3px;
-    top:50%;
-    transform:translateY(-50%);
+right:3px;
+top:50%;
+transform:translateY(-50%);
 }
 
 .south{
-    bottom:3px;
-    left:50%;
-    transform:translateX(-50%);
+bottom:3px;
+left:50%;
+transform:translateX(-50%);
 }
 
 .west{
-    left:3px;
-    top:50%;
-    transform:translateY(-50%);
+left:3px;
+top:50%;
+transform:translateY(-50%);
 }
 
 .needle{
-    position:absolute;
-    width:4px;
-    height:70px;
-    left:50%;
-    top:20px;
-    transform:translateX(-50%);
-    transform-origin:50% 70px;
-    background:linear-gradient(to bottom,#ff3b3b 50%,white 50%);
-    border-radius:5px;
+position:absolute;
+width:4px;
+height:70px;
+left:50%;
+top:20px;
+transform:translateX(-50%);
+transform-origin:50% 70px;
+background:linear-gradient(to bottom,#ff3b3b 50%,white 50%);
+border-radius:5px;
 }
 
 .center{
-    position:absolute;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:white;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    box-shadow:0 0 12px white;
+position:absolute;
+width:18px;
+height:18px;
+border-radius:50%;
+background:white;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+box-shadow:0 0 12px white;
 }
 
 .audio-status{
-    margin-top:15px;
-    color:#42e6a4;
-    font-size:13px;
-    font-weight:bold;
+margin-top:15px;
+color:#42e6a4;
+font-size:13px;
+font-weight:bold;
 }
 
 .source-status{
-    margin-top:8px;
-    color:#65748a;
-    font-size:11px;
+margin-top:8px;
+color:#65748a;
+font-size:11px;
 }
 
 button{
-    width:100%;
-    padding:20px;
-    margin-top:20px;
-    border:none;
-    border-radius:18px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
+width:100%;
+padding:20px;
+margin-top:20px;
+border:none;
+border-radius:18px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
 }
 
 #startButton{
-    background:#42e6a4;
-    color:#07101d;
+background:#42e6a4;
+color:#07101d;
 }
 
 #stopButton{
-    background:#151c28;
-    color:#cbd7e9;
-    border:1px solid #293448;
+background:#151c28;
+color:#cbd7e9;
+border:1px solid #293448;
 }
 
 .detection-panel{
-    margin-top:25px;
-    padding:25px 20px;
-    background:linear-gradient(145deg,#101827,#080c13);
-    border:1px solid #29364b;
-    border-radius:22px;
-    text-align:left;
+margin-top:25px;
+padding:25px 20px;
+background:linear-gradient(145deg,#101827,#080c13);
+border:1px solid #29364b;
+border-radius:22px;
+text-align:left;
 }
 
 .detection-title{
-    text-align:center;
-    color:#42e6a4;
-    font-size:12px;
-    letter-spacing:2px;
-    margin-bottom:20px;
+text-align:center;
+color:#42e6a4;
+font-size:12px;
+letter-spacing:2px;
+margin-bottom:20px;
 }
 
 .target-name{
-    text-align:center;
-    font-size:27px;
-    font-weight:bold;
-    margin-bottom:10px;
+text-align:center;
+font-size:27px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
 .target-type{
-    text-align:center;
-    color:#8ea1bb;
-    font-size:12px;
-    margin-bottom:20px;
+text-align:center;
+color:#8ea1bb;
+font-size:12px;
+margin-bottom:20px;
 }
 
 .detection-row{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    padding:10px 0;
-    border-bottom:1px solid #1b2636;
-    font-size:13px;
+display:flex;
+justify-content:space-between;
+gap:15px;
+padding:10px 0;
+border-bottom:1px solid #1b2636;
+font-size:13px;
 }
 
 .detection-label{
-    color:#78879c;
+color:#78879c;
 }
 
 .detection-value{
-    font-weight:bold;
-    text-align:right;
+font-weight:bold;
+text-align:right;
 }
 
 .signal-bar{
-    margin-top:18px;
-    height:8px;
-    background:#182131;
-    border-radius:10px;
-    overflow:hidden;
+margin-top:18px;
+height:8px;
+background:#182131;
+border-radius:10px;
+overflow:hidden;
 }
 
 .signal-fill{
-    width:0%;
-    height:100%;
-    background:#42e6a4;
-    transition:width .3s ease;
+width:0%;
+height:100%;
+background:#42e6a4;
+transition:width .3s ease;
 }
 
 .lock-status{
-    margin-top:18px;
-    padding:12px;
-    border-radius:12px;
-    text-align:center;
-    background:#111a27;
-    color:#8290a5;
-    font-size:12px;
-    font-weight:bold;
+margin-top:18px;
+padding:12px;
+border-radius:12px;
+text-align:center;
+background:#111a27;
+color:#8290a5;
+font-size:12px;
+font-weight:bold;
 }
 
 .locked{
-    color:#42e6a4;
-    background:#0d211b;
+color:#42e6a4;
+background:#0d211b;
 }
 
 .info{
-    margin-top:22px;
-    color:#69788e;
-    font-size:12px;
-    line-height:1.6;
+margin-top:22px;
+color:#69788e;
+font-size:12px;
+line-height:1.6;
 }
 
 .version{
-    margin-top:25px;
-    color:#42e6a4;
-    font-size:11px;
-    letter-spacing:2px;
+margin-top:25px;
+color:#42e6a4;
+font-size:11px;
+letter-spacing:2px;
 }
 </style>
 
@@ -364,10 +341,6 @@ RECEIVER STANDBY
 System ready
 </div>
 
-<div class="scan-animation" id="scanAnimation">
-<div class="scan-bar" id="scanBar"></div>
-</div>
-
 <div class="data-grid">
 
 <div class="data-box">
@@ -388,7 +361,7 @@ System ready
 </div>
 
 <div class="data-box">
-<div class="data-title">📐 DEVICE ORIENTATION</div>
+<div class="data-title">📐 PHONE ALTITUDE</div>
 <div class="data-value" id="altitude">--°</div>
 <div class="data-small" id="altitudeStatus">Phone altitude unavailable</div>
 </div>
@@ -447,12 +420,12 @@ POINT RECEIVER AT THE SKY
 </div>
 
 <div class="detection-row">
-<span class="detection-label">🧭 Direction</span>
+<span class="detection-label">🧭 Object azimuth</span>
 <span class="detection-value" id="targetDirection">---</span>
 </div>
 
 <div class="detection-row">
-<span class="detection-label">📐 Altitude</span>
+<span class="detection-label">📐 Object altitude</span>
 <span class="detection-value" id="targetAltitude">---</span>
 </div>
 
@@ -468,12 +441,16 @@ POINT RECEIVER AT THE SKY
 
 <div class="detection-row">
 <span class="detection-label">🎧 Audio source</span>
-<span class="detection-value" id="targetAudioSource">Radio noise</span>
+<span class="detection-value" id="targetAudioSource">
+Radio noise
+</span>
 </div>
 
 <div class="detection-row">
 <span class="detection-label">🎯 Detection field</span>
-<span class="detection-value">±10°</span>
+<span class="detection-value">
+±10°
+</span>
 </div>
 
 <div class="signal-bar">
@@ -487,26 +464,26 @@ POINT RECEIVER AT THE SKY
 </div>
 
 <div class="version">
-RADIO TELESCOPE v0.7.2
+RADIO TELESCOPE v0.7.3
 </div>
 
 </div>
 
 <div class="info">
 
-📡 Radio Telescope v0.7.2 uruchamia
-syntetyczny szum radiowy natychmiast
-po kliknięciu START RECEIVER.
+📡 Radio Telescope v0.7.3 analizuje
+kierunek telefonu i wysokość nad horyzontem.
 
 <br><br>
 
-🧭 GPS, kompas i orientacja telefonu
-służą do określania kierunku obserwacji.
+🧭 Skieruj telefon na obiekt.
+Jeżeli znajdzie się w polu detekcji,
+odbiornik spróbuje go zidentyfikować.
 
 <br><br>
 
-🎧 Po wykryciu obiektu system może
-przełączyć się na jego sonifikację.
+🎧 Sonifikacja obiektu zostanie
+odtworzona po uzyskaniu blokady celu.
 
 </div>
 
@@ -515,7 +492,12 @@ przełączyć się na jego sonifikację.
 <script>
 
 /* ==================================================
-   RADIO TELESCOPE v0.7.2
+RADIO TELESCOPE v0.7.3
+================================================== */
+
+
+/* ==================================================
+GLOBAL VARIABLES
 ================================================== */
 
 let receiverActive = false;
@@ -523,8 +505,6 @@ let receiverActive = false;
 let watchID = null;
 
 let scanTimer = null;
-
-let detectionTimer = null;
 
 let compassHeading = null;
 
@@ -534,19 +514,107 @@ let userLatitude = null;
 
 let userLongitude = null;
 
-let currentTarget = null;
-
 let audioContext = null;
 
 let noiseSource = null;
 
 let noiseGain = null;
 
-let currentAudio = null;
+let currentTarget = null;
 
 
 /* ==================================================
-   ELEMENTS
+OBJECT DATABASE
+AZIMUTH / ALTITUDE ARE DEMO VALUES
+================================================== */
+
+const skyObjects = [
+
+{
+name:"JUPITER",
+type:"Planet",
+azimuth:90,
+altitude:35,
+distance:"~628 million km",
+difficulty:"ŁATWE",
+signal:92
+},
+
+{
+name:"SATURN",
+type:"Planet",
+azimuth:130,
+altitude:28,
+distance:"~1.4 billion km",
+difficulty:"ŁATWE",
+signal:88
+},
+
+{
+name:"VENUS",
+type:"Planet",
+azimuth:250,
+altitude:20,
+distance:"~100 million km",
+difficulty:"ŁATWE",
+signal:96
+},
+
+{
+name:"URANUS",
+type:"Planet",
+azimuth:160,
+altitude:40,
+distance:"~2.8 billion km",
+difficulty:"TRUDNE",
+signal:55
+},
+
+{
+name:"MOON",
+type:"Natural satellite",
+azimuth:40,
+altitude:50,
+distance:"384 400 km",
+difficulty:"BARDZO ŁATWE",
+signal:100
+},
+
+{
+name:"VEGA",
+type:"Star",
+azimuth:300,
+altitude:60,
+distance:"25 lat świetlnych",
+difficulty:"ŁATWE",
+signal:75
+},
+
+{
+name:"M31 ANDROMEDA",
+type:"Galaxy",
+azimuth:45,
+altitude:45,
+distance:"2.5 mln lat świetlnych",
+difficulty:"ŚREDNIE",
+signal:45
+},
+
+{
+name:"MILKY WAY CENTER",
+type:"Galactic center",
+azimuth:180,
+altitude:25,
+distance:"26 000 lat świetlnych",
+difficulty:"ŚREDNIE",
+signal:60
+}
+
+];
+
+
+/* ==================================================
+ELEMENTS
 ================================================== */
 
 const statusElement =
@@ -554,12 +622,6 @@ document.getElementById("status");
 
 const scanStatus =
 document.getElementById("scanStatus");
-
-const scanAnimation =
-document.getElementById("scanAnimation");
-
-const scanBar =
-document.getElementById("scanBar");
 
 const locationElement =
 document.getElementById("location");
@@ -623,15 +685,13 @@ document.getElementById("lockStatus");
 
 
 /* ==================================================
-   TIME
+TIME
 ================================================== */
 
 function updateTime(){
 
-const now = new Date();
-
 timeElement.innerText =
-now.toLocaleTimeString("pl-PL");
+new Date().toLocaleTimeString("pl-PL");
 
 }
 
@@ -641,7 +701,7 @@ updateTime();
 
 
 /* ==================================================
-   DIRECTION
+DIRECTION
 ================================================== */
 
 function getDirection(degrees){
@@ -673,23 +733,36 @@ return "NW";
 
 
 /* ==================================================
-   RADIO NOISE
-   STARTS IMMEDIATELY AFTER BUTTON CLICK
+ANGLE DIFFERENCE
+================================================== */
+
+function angleDifference(a,b){
+
+let difference =
+Math.abs(a-b);
+
+return Math.min(
+difference,
+360-difference
+);
+
+}
+
+
+/* ==================================================
+RADIO NOISE
 ================================================== */
 
 function startRadioNoise(){
 
 if(audioContext){
 
-if(audioContext.state === "suspended"){
+if(audioContext.state === "suspended")
 audioContext.resume();
-}
 
 return;
 
 }
-
-try{
 
 const AudioContext =
 window.AudioContext ||
@@ -701,7 +774,7 @@ new AudioContext();
 const buffer =
 audioContext.createBuffer(
 1,
-audioContext.sampleRate * 2,
+audioContext.sampleRate*2,
 audioContext.sampleRate
 );
 
@@ -711,7 +784,7 @@ buffer.getChannelData(0);
 for(let i=0;i<data.length;i++){
 
 data[i] =
-(Math.random()*2-1);
+Math.random()*2-1;
 
 }
 
@@ -728,9 +801,11 @@ noiseGain =
 audioContext.createGain();
 
 noiseGain.gain.value =
-0.035;
+0.04;
 
-noiseSource.connect(noiseGain);
+noiseSource.connect(
+noiseGain
+);
 
 noiseGain.connect(
 audioContext.destination
@@ -744,20 +819,11 @@ audioStatus.innerText =
 sourceStatus.innerText =
 "Source: Generated radio noise";
 
-}catch(error){
-
-console.error(error);
-
-audioStatus.innerText =
-"⚠️ AUDIO ERROR";
-
-}
-
 }
 
 
 /* ==================================================
-   STOP RADIO NOISE
+STOP RADIO
 ================================================== */
 
 function stopRadioNoise(){
@@ -788,7 +854,7 @@ null;
 
 
 /* ==================================================
-   COMPASS
+COMPASS
 ================================================== */
 
 function handleOrientation(event){
@@ -830,12 +896,14 @@ compassElement.style.transform =
 
 
 /* ==================================================
-   DEVICE MOTION
+DEVICE MOTION
 ================================================== */
 
 function handleMotion(event){
 
-if(!event.accelerationIncludingGravity)
+if(
+!event.accelerationIncludingGravity
+)
 return;
 
 const y =
@@ -863,14 +931,11 @@ Math.round(phoneAltitude)+"°";
 altitudeStatus.innerText =
 "Phone orientation active";
 
-altitudeStatus.className =
-"data-small sensor-ok";
-
 }
 
 
 /* ==================================================
-   GPS
+GPS
 ================================================== */
 
 function startGPS(){
@@ -895,19 +960,17 @@ position.coords.latitude;
 userLongitude =
 position.coords.longitude;
 
-const accuracy =
-position.coords.accuracy;
-
 locationElement.innerText =
-userLatitude.toFixed(6)+
+userLatitude.toFixed(5)+
 "°, "+
-userLongitude.toFixed(6)+
+userLongitude.toFixed(5)+
 "°";
 
 accuracyElement.innerText =
-"Accuracy: ±"+
-Math.round(accuracy)+
-" m";
+"Accuracy ±"+
+Math.round(
+position.coords.accuracy
+)+" m";
 
 },
 
@@ -930,7 +993,7 @@ timeout:10000
 
 
 /* ==================================================
-   SENSOR PERMISSIONS
+SENSOR PERMISSIONS
 ================================================== */
 
 async function enableSensors(){
@@ -964,12 +1027,6 @@ console.error(error);
 }
 
 }else{
-
-window.addEventListener(
-"deviceorientationabsolute",
-handleOrientation,
-true
-);
 
 window.addEventListener(
 "deviceorientation",
@@ -1022,7 +1079,7 @@ true
 
 
 /* ==================================================
-   START RECEIVER
+START RECEIVER
 ================================================== */
 
 async function startReceiver(){
@@ -1033,16 +1090,7 @@ return;
 receiverActive =
 true;
 
-
-/*
-IMPORTANT:
-Audio starts HERE,
-directly from the user's click.
-This is important for Safari/iOS.
-*/
-
 startRadioNoise();
-
 
 statusElement.classList.add(
 "active"
@@ -1052,78 +1100,23 @@ statusElement.innerHTML =
 '<span class="status-dot"></span>'+
 'RECEIVER ACTIVE';
 
-
 scanStatus.innerText =
-"📡 RADIO RECEIVER INITIALIZING...";
-
+"📡 INITIALIZING SKY SCANNER...";
 
 startGPS();
 
 await enableSensors();
 
-startSkyScan();
-
-}
-
-
-/* ==================================================
-   SKY SCAN
-================================================== */
-
-function startSkyScan(){
-
-scanAnimation.style.display =
-"block";
-
-scanBar.style.width =
-"0%";
-
-let progress = 0;
-
-scanTimer =
-setInterval(
+setTimeout(
 
 function(){
 
-progress +=2;
-
-scanBar.style.width =
-progress+"%";
-
-if(progress===20)
-scanStatus.innerText =
-"📍 LOCKING GPS POSITION...";
-
-if(progress===40)
-scanStatus.innerText =
-"🧭 CALIBRATING COMPASS...";
-
-if(progress===60)
-scanStatus.innerText =
-"📐 READING DEVICE ORIENTATION...";
-
-if(progress===80)
 scanStatus.innerText =
 "🌌 SCANNING SKY...";
 
-if(progress>=100){
-
-clearInterval(scanTimer);
-
-scanStatus.innerText =
-"🌌 SKY SCAN ACTIVE";
-
-detectionTimer =
-setInterval(
-detectObjects,
-500
-);
-
-}
-
 },
 
-50
+1500
 
 );
 
@@ -1131,7 +1124,7 @@ detectObjects,
 
 
 /* ==================================================
-   OBJECT DETECTION
+SKY OBJECT DETECTION
 ================================================== */
 
 function detectObjects(){
@@ -1139,36 +1132,78 @@ function detectObjects(){
 if(!receiverActive)
 return;
 
+if(
+compassHeading === null ||
+phoneAltitude === null
+)
+return;
+
+let bestTarget =
+null;
+
+let smallestDifference =
+Infinity;
+
+for(
+const object of skyObjects
+){
+
+const directionDifference =
+angleDifference(
+compassHeading,
+object.azimuth
+);
+
+const altitudeDifference =
+Math.abs(
+phoneAltitude-
+object.altitude
+);
+
 
 /*
-Na tym etapie dźwięk pozostaje
-aktywnym szumem radiowym.
+FIELD OF DETECTION
 
-Prawdziwe obliczanie pozycji obiektów
-dodamy w kolejnej wersji.
+AZIMUTH ±10°
+ALTITUDE ±15°
 */
 
 if(
-userLatitude !== null &&
-compassHeading !== null
+directionDifference <=10 &&
+altitudeDifference <=15
 ){
 
-/*
-Symulacja sygnału odbiornika.
-Później zastąpimy ją rzeczywistym
-wyliczaniem pozycji obiektów.
-*/
+const totalDifference =
+directionDifference+
+altitudeDifference;
 
-const signal =
-Math.floor(
-Math.random()*8
+if(
+totalDifference <
+smallestDifference
+){
+
+smallestDifference =
+totalDifference;
+
+bestTarget =
+object;
+
+}
+
+}
+
+}
+
+
+if(bestTarget){
+
+lockTarget(
+bestTarget
 );
 
-signalStrength.innerText =
-signal;
+}else{
 
-signalFill.style.width =
-signal+"%";
+unlockTarget();
 
 }
 
@@ -1176,7 +1211,160 @@ signal+"%";
 
 
 /* ==================================================
-   STOP RECEIVER
+LOCK TARGET
+================================================== */
+
+function lockTarget(object){
+
+if(
+currentTarget &&
+currentTarget.name === object.name
+)
+return;
+
+currentTarget =
+object;
+
+targetName.innerText =
+"🎯 "+object.name;
+
+targetType.innerText =
+object.type;
+
+signalStrength.innerText =
+object.signal;
+
+signalFill.style.width =
+object.signal+"%";
+
+targetDirection.innerText =
+object.azimuth+"° "+
+getDirection(object.azimuth);
+
+targetAltitude.innerText =
+object.altitude+"°";
+
+targetDistance.innerText =
+object.distance;
+
+targetDifficulty.innerText =
+object.difficulty;
+
+targetAudioSource.innerText =
+"Object signal";
+
+lockStatus.innerText =
+"🟢 TARGET LOCKED";
+
+lockStatus.classList.add(
+"locked"
+);
+
+audioStatus.innerText =
+"🎧 OBJECT DETECTED";
+
+sourceStatus.innerText =
+"Source: "+
+object.name;
+
+scanStatus.innerText =
+"🎯 SIGNAL LOCKED: "+
+object.name;
+
+
+/*
+Na tym etapie pozostawiamy
+szum radiowy.
+
+W kolejnej wersji tutaj
+podłączymy prawdziwy plik audio
+dla konkretnego obiektu.
+*/
+
+}
+
+
+/* ==================================================
+UNLOCK TARGET
+================================================== */
+
+function unlockTarget(){
+
+if(!currentTarget)
+return;
+
+currentTarget =
+null;
+
+targetName.innerText =
+"TARGET: NULL";
+
+targetType.innerText =
+"POINT RECEIVER AT THE SKY";
+
+signalStrength.innerText =
+"000000";
+
+signalFill.style.width =
+"0%";
+
+targetDirection.innerText =
+"---";
+
+targetAltitude.innerText =
+"---";
+
+targetDistance.innerText =
+"---";
+
+targetDifficulty.innerText =
+"---";
+
+targetAudioSource.innerText =
+"Radio noise";
+
+lockStatus.innerText =
+"🔴 NO TARGET LOCKED";
+
+lockStatus.classList.remove(
+"locked"
+);
+
+audioStatus.innerText =
+"🔊 RADIO RECEIVER ACTIVE";
+
+sourceStatus.innerText =
+"Source: Generated radio noise";
+
+scanStatus.innerText =
+"🌌 SCANNING SKY...";
+
+}
+
+
+/* ==================================================
+RUN DETECTION
+================================================== */
+
+setInterval(
+
+function(){
+
+if(receiverActive){
+
+detectObjects();
+
+}
+
+},
+
+500
+
+);
+
+
+/* ==================================================
+STOP RECEIVER
 ================================================== */
 
 function stopReceiver(){
@@ -1184,36 +1372,22 @@ function stopReceiver(){
 receiverActive =
 false;
 
-clearInterval(scanTimer);
-
-clearInterval(detectionTimer);
-
-scanTimer =
-null;
-
-detectionTimer =
-null;
-
-
-/* STOP AUDIO */
-
 stopRadioNoise();
-
-
-/* STOP GPS */
 
 if(watchID !== null){
 
 navigator.geolocation
-.clearWatch(watchID);
+.clearWatch(
+watchID
+);
 
 watchID =
 null;
 
 }
 
-
-/* RESET */
+currentTarget =
+null;
 
 statusElement.classList.remove(
 "active"
@@ -1223,12 +1397,6 @@ statusElement.innerHTML =
 '<span class="status-dot"></span>'+
 'RECEIVER STANDBY';
 
-scanAnimation.style.display =
-"none";
-
-scanBar.style.width =
-"0%";
-
 scanStatus.innerText =
 "System ready";
 
@@ -1237,7 +1405,6 @@ audioStatus.innerText =
 
 sourceStatus.innerText =
 "Source: None";
-
 
 targetName.innerText =
 "TARGET: NULL";
