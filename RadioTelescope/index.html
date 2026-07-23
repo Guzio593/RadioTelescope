@@ -12,31 +12,15 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 
 >
 
-<title>
-Radio Telescope v0.8.1
-</title>
-
-<!--
-====================================================
-ASTRONOMY ENGINE
-Prawdziwe obliczenia pozycji obiektów astronomicznych
-====================================================
--->
+<title>Radio Telescope v0.8.2</title>
 
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 
 <style>
 
-/* ==================================================
-   GLOBAL
-================================================== */
-
 *{
-
 box-sizing:border-box;
-
 }
-
 
 body{
 
@@ -74,7 +58,6 @@ text-align:center;
 
 }
 
-
 .app{
 
 width:100%;
@@ -83,16 +66,9 @@ max-width:560px;
 
 margin:auto;
 
-padding:
-
-30px 20px 60px;
+padding:30px 20px 60px;
 
 }
-
-
-/* ==================================================
-   HEADER
-================================================== */
 
 h1{
 
@@ -103,7 +79,6 @@ font-size:29px;
 letter-spacing:1px;
 
 }
-
 
 .subtitle{
 
@@ -116,11 +91,6 @@ font-size:11px;
 letter-spacing:2px;
 
 }
-
-
-/* ==================================================
-   RECEIVER PANEL
-================================================== */
 
 .receiver-panel{
 
@@ -140,9 +110,7 @@ linear-gradient(
 
 );
 
-border:
-
-1px solid #273348;
+border:1px solid #273348;
 
 border-radius:25px;
 
@@ -151,11 +119,6 @@ box-shadow:
 0 15px 45px #00000099;
 
 }
-
-
-/* ==================================================
-   STATUS
-================================================== */
 
 .status{
 
@@ -175,7 +138,6 @@ letter-spacing:1px;
 
 }
 
-
 .status-dot{
 
 width:10px;
@@ -188,13 +150,11 @@ background:#596477;
 
 }
 
-
 .status.active{
 
 color:#42e6a4;
 
 }
-
 
 .status.active .status-dot{
 
@@ -205,7 +165,6 @@ box-shadow:
 0 0 15px #42e6a4;
 
 }
-
 
 .scan-status{
 
@@ -221,11 +180,6 @@ letter-spacing:1px;
 
 }
 
-
-/* ==================================================
-   DATA GRID
-================================================== */
-
 .data-grid{
 
 margin-top:28px;
@@ -236,21 +190,17 @@ gap:14px;
 
 }
 
-
 .data-box{
 
 padding:18px;
 
 background:#0b1018;
 
-border:
-
-1px solid #202b3c;
+border:1px solid #202b3c;
 
 border-radius:18px;
 
 }
-
 
 .data-title{
 
@@ -264,7 +214,6 @@ margin-bottom:9px;
 
 }
 
-
 .data-value{
 
 font-size:21px;
@@ -274,7 +223,6 @@ font-weight:bold;
 word-break:break-word;
 
 }
-
 
 .data-small{
 
@@ -286,16 +234,9 @@ font-size:12px;
 
 }
 
-
-/* ==================================================
-   COMPASS
-================================================== */
-
 .compass-container{
 
-margin:
-
-25px auto;
+margin:25px auto;
 
 width:220px;
 
@@ -315,9 +256,7 @@ circle,
 
 );
 
-border:
-
-3px solid #2b374b;
+border:3px solid #2b374b;
 
 display:flex;
 
@@ -333,7 +272,6 @@ inset 0 0 35px #000000aa,
 
 }
 
-
 .compass{
 
 width:180px;
@@ -344,12 +282,9 @@ border-radius:50%;
 
 position:relative;
 
-transition:
-
-transform .12s linear;
+transition:transform .12s linear;
 
 }
-
 
 .direction{
 
@@ -361,21 +296,17 @@ font-size:18px;
 
 }
 
-
 .north{
 
 top:3px;
 
 left:50%;
 
-transform:
-
-translateX(-50%);
+transform:translateX(-50%);
 
 color:#ff5252;
 
 }
-
 
 .east{
 
@@ -383,12 +314,9 @@ right:3px;
 
 top:50%;
 
-transform:
-
-translateY(-50%);
+transform:translateY(-50%);
 
 }
-
 
 .south{
 
@@ -396,12 +324,9 @@ bottom:3px;
 
 left:50%;
 
-transform:
-
-translateX(-50%);
+transform:translateX(-50%);
 
 }
-
 
 .west{
 
@@ -409,12 +334,9 @@ left:3px;
 
 top:50%;
 
-transform:
-
-translateY(-50%);
+transform:translateY(-50%);
 
 }
-
 
 .needle{
 
@@ -428,9 +350,7 @@ left:50%;
 
 top:20px;
 
-transform:
-
-translateX(-50%);
+transform:translateX(-50%);
 
 background:
 
@@ -448,7 +368,6 @@ border-radius:5px;
 
 }
 
-
 .center{
 
 position:absolute;
@@ -465,20 +384,11 @@ left:50%;
 
 top:50%;
 
-transform:
+transform:translate(-50%,-50%);
 
-translate(-50%,-50%);
-
-box-shadow:
-
-0 0 12px white;
+box-shadow:0 0 12px white;
 
 }
-
-
-/* ==================================================
-   AUDIO
-================================================== */
 
 .audio-status{
 
@@ -492,7 +402,6 @@ font-weight:bold;
 
 }
 
-
 .source-status{
 
 margin-top:8px;
@@ -502,11 +411,6 @@ color:#65748a;
 font-size:11px;
 
 }
-
-
-/* ==================================================
-   BUTTONS
-================================================== */
 
 button{
 
@@ -530,7 +434,6 @@ cursor:pointer;
 
 }
 
-
 #startButton{
 
 background:#42e6a4;
@@ -539,23 +442,15 @@ color:#07101d;
 
 }
 
-
 #stopButton{
 
 background:#151c28;
 
 color:#cbd7e9;
 
-border:
-
-1px solid #293448;
+border:1px solid #293448;
 
 }
-
-
-/* ==================================================
-   DETECTION PANEL
-================================================== */
 
 .detection-panel{
 
@@ -575,16 +470,13 @@ linear-gradient(
 
 );
 
-border:
-
-1px solid #29364b;
+border:1px solid #29364b;
 
 border-radius:22px;
 
 text-align:left;
 
 }
-
 
 .detection-title{
 
@@ -600,7 +492,6 @@ margin-bottom:20px;
 
 }
 
-
 .target-name{
 
 text-align:center;
@@ -612,7 +503,6 @@ font-weight:bold;
 margin-bottom:10px;
 
 }
-
 
 .target-type{
 
@@ -626,7 +516,6 @@ margin-bottom:20px;
 
 }
 
-
 .detection-row{
 
 display:flex;
@@ -637,21 +526,17 @@ gap:15px;
 
 padding:10px 0;
 
-border-bottom:
-
-1px solid #1b2636;
+border-bottom:1px solid #1b2636;
 
 font-size:13px;
 
 }
-
 
 .detection-label{
 
 color:#78879c;
 
 }
-
 
 .detection-value{
 
@@ -660,7 +545,6 @@ font-weight:bold;
 text-align:right;
 
 }
-
 
 .signal-bar{
 
@@ -676,7 +560,6 @@ overflow:hidden;
 
 }
 
-
 .signal-fill{
 
 width:0%;
@@ -685,12 +568,9 @@ height:100%;
 
 background:#42e6a4;
 
-transition:
-
-width .3s ease;
+transition:width .3s ease;
 
 }
-
 
 .lock-status{
 
@@ -712,7 +592,6 @@ font-weight:bold;
 
 }
 
-
 .locked{
 
 color:#42e6a4;
@@ -720,11 +599,6 @@ color:#42e6a4;
 background:#0d211b;
 
 }
-
-
-/* ==================================================
-   INFO
-================================================== */
 
 .info{
 
@@ -737,7 +611,6 @@ font-size:12px;
 line-height:1.6;
 
 }
-
 
 .version{
 
@@ -778,10 +651,7 @@ class="status"
 id="status"
 >
 
-<span
-class="status-dot"
-
-> </span>
+<span class="status-dot"></span>
 
 RECEIVER STANDBY
 
@@ -797,8 +667,6 @@ System ready
 </div>
 
 <div class="data-grid">
-
-<!-- GPS -->
 
 <div class="data-box">
 
@@ -828,8 +696,6 @@ GPS inactive
 
 </div>
 
-<!-- TIME -->
-
 <div class="data-box">
 
 <div class="data-title">
@@ -848,8 +714,6 @@ id="time"
 </div>
 
 </div>
-
-<!-- COMPASS -->
 
 <div class="data-box">
 
@@ -878,8 +742,6 @@ Compass inactive
 </div>
 
 </div>
-
-<!-- ALTITUDE -->
 
 <div class="data-box">
 
@@ -911,8 +773,6 @@ Orientation unavailable
 
 </div>
 
-<!-- COMPASS VISUAL -->
-
 <div class="compass-container">
 
 <div
@@ -921,42 +781,30 @@ id="compass"
 >
 
 <div class="direction north">
-
 N
-
 </div>
 
 <div class="direction east">
-
 E
-
 </div>
 
 <div class="direction south">
-
 S
-
 </div>
 
 <div class="direction west">
-
 W
-
 </div>
 
 <div class="needle">
-
 </div>
 
 <div class="center">
-
 </div>
 
 </div>
 
 </div>
-
-<!-- AUDIO STATUS -->
 
 <div
 class="audio-status"
@@ -975,8 +823,6 @@ id="sourceStatus"
 Source: None
 
 </div>
-
-<!-- BUTTONS -->
 
 <button
 id="startButton"
@@ -997,8 +843,6 @@ onclick="stopReceiver()"
 ■ STOP RECEIVER
 
 </button>
-
-<!-- DETECTION -->
 
 <div class="detection-panel">
 
@@ -1189,7 +1033,7 @@ id="lockStatus"
 
 <div class="version">
 
-RADIO TELESCOPE v0.8.1
+RADIO TELESCOPE v0.8.2
 
 </div>
 
@@ -1197,27 +1041,32 @@ RADIO TELESCOPE v0.8.1
 
 <div class="info">
 
-🌍 Pozycja obiektów jest obliczana
-na podstawie GPS użytkownika.
+🌍 Pozycja obserwatora jest pobierana
+z GPS.
 
 <br><br>
 
-🕐 Obliczenia wykorzystują aktualną
-datę i godzinę.
+🕐 Aktualna data i godzina
+są używane do obliczeń astronomicznych.
 
 <br><br>
 
-🧭 Kierunek jest pobierany
-z czujników telefonu.
+🧭 Kierunek telefonu jest pobierany
+z czujników urządzenia.
 
 <br><br>
 
-🪐 Pozycje planet są obliczane
-astronomicznie w czasie rzeczywistym.
+⭐ v0.8.2 dodaje katalog jasnych gwiazd.
 
 <br><br>
 
-📡 Aplikacja jest edukacyjnym
+🪐 Pozycje planet i gwiazd są
+obliczane na podstawie aktualnego czasu
+i położenia obserwatora.
+
+<br><br>
+
+📡 Projekt jest edukacyjnym
 symulatorem radioteleskopu.
 
 </div>
@@ -1231,228 +1080,121 @@ symulatorem radioteleskopu.
    VARIABLES
 ================================================== */
 
+let receiverActive=false;
 
-let receiverActive =
-false;
+let watchID=null;
 
+let compassHeading=null;
 
-let watchID =
-null;
+let filteredHeading=null;
 
+let phoneAltitude=null;
 
-let compassHeading =
-null;
+let filteredAltitude=null;
 
+let userLatitude=null;
 
-let filteredHeading =
-null;
+let userLongitude=null;
 
+let audioContext=null;
 
-let phoneAltitude =
-null;
+let noiseSource=null;
 
+let noiseGain=null;
 
-let filteredAltitude =
-null;
+let detectionInterval=null;
 
+let currentTarget=null;
 
-let userLatitude =
-null;
-
-
-let userLongitude =
-null;
-
-
-let audioContext =
-null;
-
-
-let noiseSource =
-null;
-
-
-let noiseGain =
-null;
-
-
-let detectionInterval =
-null;
-
-
-let currentTarget =
-null;
-
-
-const SMOOTHING =
-0.15;
+const SMOOTHING=0.15;
 
 
 /* ==================================================
    ELEMENTS
 ================================================== */
 
+const statusElement=
+document.getElementById("status");
 
-const statusElement =
-document.getElementById(
-"status"
-);
+const scanStatus=
+document.getElementById("scanStatus");
 
+const locationElement=
+document.getElementById("location");
 
-const scanStatus =
-document.getElementById(
-"scanStatus"
-);
+const accuracyElement=
+document.getElementById("accuracy");
 
+const timeElement=
+document.getElementById("time");
 
-const locationElement =
-document.getElementById(
-"location"
-);
+const headingElement=
+document.getElementById("heading");
 
+const directionElement=
+document.getElementById("direction");
 
-const accuracyElement =
-document.getElementById(
-"accuracy"
-);
+const altitudeElement=
+document.getElementById("altitude");
 
+const altitudeStatus=
+document.getElementById("altitudeStatus");
 
-const timeElement =
-document.getElementById(
-"time"
-);
+const compassElement=
+document.getElementById("compass");
 
+const audioStatus=
+document.getElementById("audioStatus");
 
-const headingElement =
-document.getElementById(
-"heading"
-);
+const sourceStatus=
+document.getElementById("sourceStatus");
 
+const targetName=
+document.getElementById("targetName");
 
-const directionElement =
-document.getElementById(
-"direction"
-);
+const targetType=
+document.getElementById("targetType");
 
+const signalStrength=
+document.getElementById("signalStrength");
 
-const altitudeElement =
-document.getElementById(
-"altitude"
-);
+const signalFill=
+document.getElementById("signalFill");
 
+const targetDirection=
+document.getElementById("targetDirection");
 
-const altitudeStatus =
-document.getElementById(
-"altitudeStatus"
-);
+const targetAltitude=
+document.getElementById("targetAltitude");
 
+const targetDistance=
+document.getElementById("targetDistance");
 
-const compassElement =
-document.getElementById(
-"compass"
-);
+const targetDifficulty=
+document.getElementById("targetDifficulty");
 
+const targetAudioSource=
+document.getElementById("targetAudioSource");
 
-const audioStatus =
-document.getElementById(
-"audioStatus"
-);
-
-
-const sourceStatus =
-document.getElementById(
-"sourceStatus"
-);
-
-
-const targetName =
-document.getElementById(
-"targetName"
-);
-
-
-const targetType =
-document.getElementById(
-"targetType"
-);
-
-
-const signalStrength =
-document.getElementById(
-"signalStrength"
-);
-
-
-const signalFill =
-document.getElementById(
-"signalFill"
-);
-
-
-const targetDirection =
-document.getElementById(
-"targetDirection"
-);
-
-
-const targetAltitude =
-document.getElementById(
-"targetAltitude"
-);
-
-
-const targetDistance =
-document.getElementById(
-"targetDistance"
-);
-
-
-const targetDifficulty =
-document.getElementById(
-"targetDifficulty"
-);
-
-
-const targetAudioSource =
-document.getElementById(
-"targetAudioSource"
-);
-
-
-const lockStatus =
-document.getElementById(
-"lockStatus"
-);
+const lockStatus=
+document.getElementById("lockStatus");
 
 
 /* ==================================================
    TIME
 ================================================== */
 
-
 function updateTime(){
 
-const now =
-new Date();
+const now=new Date();
 
+timeElement.innerText=
 
-timeElement.innerText =
-
-now.toLocaleTimeString(
-"pl-PL"
-);
+now.toLocaleTimeString("pl-PL");
 
 }
 
-
-setInterval(
-
-updateTime,
-
-1000
-
-);
-
+setInterval(updateTime,1000);
 
 updateTime();
 
@@ -1461,63 +1203,30 @@ updateTime();
    DIRECTION
 ================================================== */
 
+function getDirection(degrees){
 
-function getDirection(
-degrees
-){
+if(degrees>=337.5||degrees<22.5)
+return"N";
 
+if(degrees<67.5)
+return"NE";
 
-if(
-degrees >=337.5 ||
-degrees <22.5
-)
+if(degrees<112.5)
+return"E";
 
-return "N";
+if(degrees<157.5)
+return"SE";
 
+if(degrees<202.5)
+return"S";
 
-if(
-degrees <67.5
-)
+if(degrees<247.5)
+return"SW";
 
-return "NE";
+if(degrees<292.5)
+return"W";
 
-
-if(
-degrees <112.5
-)
-
-return "E";
-
-
-if(
-degrees <157.5
-)
-
-return "SE";
-
-
-if(
-degrees <202.5
-)
-
-return "S";
-
-
-if(
-degrees <247.5
-)
-
-return "SW";
-
-
-if(
-degrees <292.5
-)
-
-return "W";
-
-
-return "NW";
+return"NW";
 
 }
 
@@ -1526,18 +1235,9 @@ return "NW";
    ANGLE DIFFERENCE
 ================================================== */
 
+function angleDifference(a,b){
 
-function angleDifference(
-a,
-b
-){
-
-const difference =
-
-Math.abs(
-a-b
-);
-
+const difference=Math.abs(a-b);
 
 return Math.min(
 
@@ -1554,7 +1254,6 @@ difference,
    SMOOTH ANGLE
 ================================================== */
 
-
 function smoothAngle(
 
 previous,
@@ -1565,44 +1264,39 @@ factor
 
 ){
 
-
-if(
-previous === null
-){
+if(previous===null){
 
 return current;
 
 }
 
-
-let difference =
+let difference=
 
 (
 
-(current -
+current-
 
-previous +
+previous+
 
-540)
+540
+
+)
 
 %
 
 360
 
-)
-
 -
 
 180;
 
+return(
 
-return (
+previous+
 
-previous +
+difference*
 
-difference *
-
-factor +
+factor+
 
 360
 
@@ -1619,40 +1313,23 @@ factor +
    RADIO NOISE
 ================================================== */
 
-
 function startRadioNoise(){
 
+const AudioContext=
 
-const AudioContext =
-
-window.AudioContext ||
+window.AudioContext||
 
 window.webkitAudioContext;
 
-
-if(
-!AudioContext
-){
-
-alert(
-
-"Twoja przeglądarka nie obsługuje Web Audio API."
-
-);
+if(!AudioContext){
 
 return;
 
 }
 
+if(audioContext){
 
-if(
-audioContext
-){
-
-if(
-audioContext.state ===
-"suspended"
-){
+if(audioContext.state==="suspended"){
 
 audioContext.resume();
 
@@ -1662,33 +1339,23 @@ return;
 
 }
 
+audioContext=new AudioContext();
 
-audioContext =
-
-new AudioContext();
-
-
-const buffer =
+const buffer=
 
 audioContext.createBuffer(
 
 1,
 
-audioContext.sampleRate *
-
-2,
+audioContext.sampleRate*2,
 
 audioContext.sampleRate
 
 );
 
+const data=
 
-const data =
-
-buffer.getChannelData(
-0
-);
-
+buffer.getChannelData(0);
 
 for(
 
@@ -1700,39 +1367,27 @@ i++
 
 ){
 
-data[i] =
+data[i]=
 
 Math.random()*2-1;
 
 }
 
-
-noiseSource =
+noiseSource=
 
 audioContext.createBufferSource();
 
+noiseSource.buffer=buffer;
 
-noiseSource.buffer =
-buffer;
+noiseSource.loop=true;
 
-
-noiseSource.loop =
-true;
-
-
-noiseGain =
+noiseGain=
 
 audioContext.createGain();
 
+noiseGain.gain.value=0.04;
 
-noiseGain.gain.value =
-0.04;
-
-
-noiseSource.connect(
-noiseGain
-);
-
+noiseSource.connect(noiseGain);
 
 noiseGain.connect(
 
@@ -1740,16 +1395,13 @@ audioContext.destination
 
 );
 
-
 noiseSource.start();
 
-
-audioStatus.innerText =
+audioStatus.innerText=
 
 "🔊 RADIO RECEIVER ACTIVE";
 
-
-sourceStatus.innerText =
+sourceStatus.innerText=
 
 "Source: Generated radio noise";
 
@@ -1760,13 +1412,9 @@ sourceStatus.innerText =
    STOP RADIO
 ================================================== */
 
-
 function stopRadioNoise(){
 
-
-if(
-noiseSource
-){
+if(noiseSource){
 
 try{
 
@@ -1776,23 +1424,17 @@ noiseSource.stop();
 
 catch(e){}
 
-
 noiseSource.disconnect();
 
-noiseSource =
-null;
+noiseSource=null;
 
 }
 
-
-if(
-audioContext
-){
+if(audioContext){
 
 audioContext.close();
 
-audioContext =
-null;
+audioContext=null;
 
 }
 
@@ -1803,57 +1445,39 @@ null;
    COMPASS
 ================================================== */
 
-
-function handleOrientation(
-event
-){
-
+function handleOrientation(event){
 
 let heading;
 
-
 if(
 
-event.webkitCompassHeading !==
-undefined &&
+event.webkitCompassHeading!==undefined&&
 
-event.webkitCompassHeading !==
-null
+event.webkitCompassHeading!==null
 
 ){
 
-heading =
+heading=
 
 event.webkitCompassHeading;
 
 }
 
+else if(event.alpha!==null){
 
-else if(
-
-event.alpha !==
-null
-
-){
-
-heading =
+heading=
 
 360-event.alpha;
 
 }
 
-
 if(
 
-heading ===
-undefined ||
+heading===undefined||
 
-heading ===
-null ||
+heading===null||
 
-isNaN(
-heading
-)
+isNaN(heading)
 
 ){
 
@@ -1861,12 +1485,11 @@ return;
 
 }
 
-
-heading =
+heading=
 
 (
 
-heading +
+heading+
 
 360
 
@@ -1876,8 +1499,7 @@ heading +
 
 360;
 
-
-filteredHeading =
+filteredHeading=
 
 smoothAngle(
 
@@ -1889,13 +1511,11 @@ SMOOTHING
 
 );
 
-
-compassHeading =
+compassHeading=
 
 filteredHeading;
 
-
-headingElement.innerText =
+headingElement.innerText=
 
 Math.round(
 
@@ -1903,8 +1523,7 @@ filteredHeading
 
 )+"°";
 
-
-directionElement.innerText =
+directionElement.innerText=
 
 getDirection(
 
@@ -1912,8 +1531,7 @@ filteredHeading
 
 );
 
-
-compassElement.style.transform =
+compassElement.style.transform=
 
 "rotate("+
 
@@ -1921,10 +1539,7 @@ compassElement.style.transform =
 
 "deg)";
 
-
-if(
-receiverActive
-){
+if(receiverActive){
 
 detectObjects();
 
@@ -1937,11 +1552,7 @@ detectObjects();
    PHONE ALTITUDE
 ================================================== */
 
-
-function handleMotion(
-event
-){
-
+function handleMotion(event){
 
 if(
 
@@ -1953,35 +1564,21 @@ return;
 
 }
 
+const y=
 
-const y =
+event.accelerationIncludingGravity.y;
 
-event
-.accelerationIncludingGravity
-.y;
+const z=
 
+event.accelerationIncludingGravity.z;
 
-const z =
-
-event
-.accelerationIncludingGravity
-.z;
-
-
-if(
-
-y === null ||
-
-z === null
-
-){
+if(y===null||z===null){
 
 return;
 
 }
 
-
-let angle =
+let angle=
 
 Math.atan2(
 
@@ -1993,14 +1590,11 @@ z
 
 *
 
-180
-
-/
+180/
 
 Math.PI;
 
-
-angle =
+angle=
 
 Math.max(
 
@@ -2016,28 +1610,19 @@ angle
 
 );
 
+if(filteredAltitude===null){
 
-if(
-
-filteredAltitude ===
-null
-
-){
-
-filteredAltitude =
-
-angle;
+filteredAltitude=angle;
 
 }
 
-
 else{
 
-filteredAltitude +=
+filteredAltitude+=
 
 (
 
-angle -
+angle-
 
 filteredAltitude
 
@@ -2049,13 +1634,11 @@ SMOOTHING;
 
 }
 
-
-phoneAltitude =
+phoneAltitude=
 
 filteredAltitude;
 
-
-altitudeElement.innerText =
+altitudeElement.innerText=
 
 Math.round(
 
@@ -2063,15 +1646,11 @@ filteredAltitude
 
 )+"°";
 
-
-altitudeStatus.innerText =
+altitudeStatus.innerText=
 
 "Orientation active";
 
-
-if(
-receiverActive
-){
+if(receiverActive){
 
 detectObjects();
 
@@ -2084,17 +1663,11 @@ detectObjects();
    GPS
 ================================================== */
 
-
 function startGPS(){
 
+if(!navigator.geolocation){
 
-if(
-
-!navigator.geolocation
-
-){
-
-locationElement.innerText =
+locationElement.innerText=
 
 "GPS unavailable";
 
@@ -2102,32 +1675,23 @@ return;
 
 }
 
-
-watchID =
+watchID=
 
 navigator.geolocation.watchPosition(
 
+function(position){
 
-function(
-position
-){
-
-
-userLatitude =
+userLatitude=
 
 position.coords.latitude;
 
-
-userLongitude =
+userLongitude=
 
 position.coords.longitude;
 
+locationElement.innerText=
 
-locationElement.innerText =
-
-userLatitude.toFixed(
-5
-)
+userLatitude.toFixed(5)
 
 +
 
@@ -2135,20 +1699,15 @@ userLatitude.toFixed(
 
 +
 
-userLongitude.toFixed(
-5
-)
+userLongitude.toFixed(5)
 
 +
 
 "°";
 
+accuracyElement.innerText=
 
-accuracyElement.innerText =
-
-"Accuracy ±"
-
-+
+"Accuracy ±"+
 
 Math.round(
 
@@ -2160,43 +1719,27 @@ position.coords.accuracy
 
 " m";
 
-
-scanStatus.innerText =
+scanStatus.innerText=
 
 "🌍 GPS POSITION LOCKED";
 
-
 },
 
+function(){
 
-function(
-error
-){
-
-
-console.error(
-error
-);
-
-
-scanStatus.innerText =
+scanStatus.innerText=
 
 "⚠️ GPS ERROR";
 
-
 },
-
 
 {
 
-enableHighAccuracy:
-true,
+enableHighAccuracy:true,
 
-maximumAge:
-1000,
+maximumAge:1000,
 
-timeout:
-10000
+timeout:10000
 
 }
 
@@ -2209,46 +1752,27 @@ timeout:
    SENSOR PERMISSIONS
 ================================================== */
 
-
 async function enableSensors(){
-
-
-/*
-iOS orientation
-*/
 
 if(
 
-typeof DeviceOrientationEvent !==
-"undefined"
+typeof DeviceOrientationEvent!=="undefined"
 
 &&
 
-typeof DeviceOrientationEvent
-.requestPermission ===
-"function"
+typeof DeviceOrientationEvent.requestPermission==="function"
 
 ){
-
 
 try{
 
-
-const permission =
+const permission=
 
 await
 
-DeviceOrientationEvent
-.requestPermission();
+DeviceOrientationEvent.requestPermission();
 
-
-if(
-
-permission ===
-"granted"
-
-){
-
+if(permission==="granted"){
 
 window.addEventListener(
 
@@ -2261,23 +1785,18 @@ true
 );
 
 }
-
 
 }
 
 catch(error){
 
-console.error(
-error
-);
+console.error(error);
 
 }
 
 }
-
 
 else{
-
 
 window.addEventListener(
 
@@ -2292,42 +1811,25 @@ true
 }
 
 
-/*
-iOS motion
-*/
-
 if(
 
-typeof DeviceMotionEvent !==
-"undefined"
+typeof DeviceMotionEvent!=="undefined"
 
 &&
 
-typeof DeviceMotionEvent
-.requestPermission ===
-"function"
+typeof DeviceMotionEvent.requestPermission==="function"
 
 ){
-
 
 try{
 
-
-const permission =
+const permission=
 
 await
 
-DeviceMotionEvent
-.requestPermission();
+DeviceMotionEvent.requestPermission();
 
-
-if(
-
-permission ===
-"granted"
-
-){
-
+if(permission==="granted"){
 
 window.addEventListener(
 
@@ -2341,22 +1843,17 @@ true
 
 }
 
-
 }
 
 catch(error){
 
-console.error(
-error
-);
+console.error(error);
 
 }
 
 }
-
 
 else{
-
 
 window.addEventListener(
 
@@ -2374,189 +1871,134 @@ true
 
 
 /* ==================================================
-   ASTRONOMICAL OBJECTS
+   PLANETS
 ================================================== */
 
-
-const bodies = [
-
+const bodies=[
 
 {
 
-name:
-"☀️ SUN",
+name:"☀️ SUN",
 
-body:
-"Sun",
+body:"Sun",
 
-type:
-"Star",
+type:"Star",
 
-difficulty:
-"BARDZO ŁATWE",
+difficulty:"BARDZO ŁATWE",
 
-signal:
-100
+signal:100
 
 },
 
-
 {
 
-name:
-"🌙 MOON",
+name:"🌙 MOON",
 
-body:
-"Moon",
+body:"Moon",
 
-type:
-"Natural satellite",
+type:"Natural satellite",
 
-difficulty:
-"BARDZO ŁATWE",
+difficulty:"BARDZO ŁATWE",
 
-signal:
-100
+signal:100
 
 },
 
-
 {
 
-name:
-"☿ MERCURY",
+name:"☿ MERCURY",
 
-body:
-"Mercury",
+body:"Mercury",
 
-type:
-"Planet",
+type:"Planet",
 
-difficulty:
-"TRUDNE",
+difficulty:"TRUDNE",
 
-signal:
-55
+signal:55
 
 },
 
-
 {
 
-name:
-"♀ VENUS",
+name:"♀ VENUS",
 
-body:
-"Venus",
+body:"Venus",
 
-type:
-"Planet",
+type:"Planet",
 
-difficulty:
-"ŁATWE",
+difficulty:"ŁATWE",
 
-signal:
-95
+signal:95
 
 },
 
-
 {
 
-name:
-"♂ MARS",
+name:"♂ MARS",
 
-body:
-"Mars",
+body:"Mars",
 
-type:
-"Planet",
+type:"Planet",
 
-difficulty:
-"ŚREDNIE",
+difficulty:"ŚREDNIE",
 
-signal:
-70
+signal:70
 
 },
 
-
 {
 
-name:
-"♃ JUPITER",
+name:"♃ JUPITER",
 
-body:
-"Jupiter",
+body:"Jupiter",
 
-type:
-"Planet",
+type:"Planet",
 
-difficulty:
-"ŁATWE",
+difficulty:"ŁATWE",
 
-signal:
-92
+signal:92
 
 },
 
-
 {
 
-name:
-"♄ SATURN",
+name:"♄ SATURN",
 
-body:
-"Saturn",
+body:"Saturn",
 
-type:
-"Planet",
+type:"Planet",
 
-difficulty:
-"ŁATWE",
+difficulty:"ŁATWE",
 
-signal:
-88
+signal:88
 
 },
 
-
 {
 
-name:
-"♅ URANUS",
+name:"♅ URANUS",
 
-body:
-"Uranus",
+body:"Uranus",
 
-type:
-"Planet",
+type:"Planet",
 
-difficulty:
-"TRUDNE",
+difficulty:"TRUDNE",
 
-signal:
-55
+signal:55
 
 },
 
-
 {
 
-name:
-"♆ NEPTUNE",
+name:"♆ NEPTUNE",
 
-body:
-"Neptune",
+body:"Neptune",
 
-type:
-"Planet",
+type:"Planet",
 
-difficulty:
-"BARDZO TRUDNE",
+difficulty:"BARDZO TRUDNE",
 
-signal:
-35
+signal:35
 
 }
 
@@ -2564,29 +2006,420 @@ signal:
 
 
 /* ==================================================
-   CALCULATE SKY POSITIONS
+   STARS
 ================================================== */
 
+const stars=[
 
-function calculateSkyPositions(){
+{
+
+name:"⭐ VEGA",
+
+type:"Star",
+
+ra:18.6156,
+
+dec:38.7837,
+
+distance:25.04,
+
+difficulty:"ŁATWE",
+
+signal:98
+
+},
+
+{
+
+name:"⭐ SIRIUS",
+
+type:"Star",
+
+ra:6.7525,
+
+dec:-16.7161,
+
+distance:8.60,
+
+difficulty:"BARDZO ŁATWE",
+
+signal:100
+
+},
+
+{
+
+name:"⭐ ARCTURUS",
+
+type:"Star",
+
+ra:14.2610,
+
+dec:19.1825,
+
+distance:36.7,
+
+difficulty:"ŁATWE",
+
+signal:96
+
+},
+
+{
+
+name:"⭐ ALTAIR",
+
+type:"Star",
+
+ra:19.8464,
+
+dec:8.8683,
+
+distance:16.73,
+
+difficulty:"ŁATWE",
+
+signal:94
+
+},
+
+{
+
+name:"⭐ CAPELLA",
+
+type:"Star",
+
+ra:5.2782,
+
+dec:45.9980,
+
+distance:42.92,
+
+difficulty:"ŁATWE",
+
+signal:95
+
+},
+
+{
+
+name:"⭐ BETELGEUSE",
+
+type:"Star",
+
+ra:5.9195,
+
+dec:7.4071,
+
+distance:642.5,
+
+difficulty:"ŚREDNIE",
+
+signal:90
+
+},
+
+{
+
+name:"⭐ RIGEL",
+
+type:"Star",
+
+ra:5.2423,
+
+dec:-8.2016,
+
+distance:860,
+
+difficulty:"ŚREDNIE",
+
+signal:85
+
+},
+
+{
+
+name:"⭐ DENEB",
+
+type:"Star",
+
+ra:20.6905,
+
+dec:45.2803,
+
+distance:2615,
+
+difficulty:"ŚREDNIE",
+
+signal:88
+
+},
+
+{
+
+name:"⭐ ALDEBARAN",
+
+type:"Star",
+
+ra:4.5987,
+
+dec:16.5093,
+
+distance:65.23,
+
+difficulty:"ŁATWE",
+
+signal:91
+
+},
+
+{
+
+name:"⭐ POLARIS",
+
+type:"Star",
+
+ra:2.5303,
+
+dec:89.2641,
+
+distance:447,
+
+difficulty:"ŁATWE",
+
+signal:93
+
+}
+
+];
 
 
-if(
+/* ==================================================
+   STAR CALCULATION
+================================================== */
 
-userLatitude ===
-null ||
+function calculateStarPosition(star){
 
-userLongitude ===
-null
+const date=
 
-){
+new Date();
 
-return [];
+const jd=
+
+Astronomy.MakeTime(date).ut;
+
+const T=
+
+(
+
+jd-
+
+2451545.0
+
+)
+
+/
+
+36525.0;
+
+const raDegrees=
+
+star.ra*15;
+
+const ra=
+
+raDegrees+
+
+(
+
+3.075+
+
+1.336*
+
+Math.sin(
+
+star.dec*
+
+Math.PI/
+
+180
+
+)
+
+)*T;
+
+const dec=
+
+star.dec+
+
+(
+
+20.04*T
+
+)/3600;
+
+const gst=
+
+Astronomy.SiderealTime(
+
+date
+
+);
+
+const lst=
+
+(
+
+gst+
+
+userLongitude/15
+
+)
+
+%24;
+
+let ha=
+
+lst-
+
+ra/15;
+
+if(ha<-12){
+
+ha+=24;
+
+}
+
+if(ha>12){
+
+ha-=24;
+
+}
+
+const haRad=
+
+ha*
+
+15*
+
+Math.PI/
+
+180;
+
+const decRad=
+
+dec*
+
+Math.PI/
+
+180;
+
+const latRad=
+
+userLatitude*
+
+Math.PI/
+
+180;
+
+const sinAltitude=
+
+Math.sin(decRad)*
+
+Math.sin(latRad)
+
++
+
+Math.cos(decRad)*
+
+Math.cos(latRad)*
+
+Math.cos(haRad);
+
+const altitude=
+
+Math.asin(
+
+sinAltitude
+
+)
+
+*
+
+180/
+
+Math.PI;
+
+let azimuth=
+
+Math.atan2(
+
+Math.sin(haRad),
+
+Math.cos(haRad)*
+
+Math.sin(latRad)
+
+-
+
+Math.tan(decRad)*
+
+Math.cos(latRad)
+
+)
+
+*
+
+180/
+
+Math.PI;
+
+azimuth=
+
+(
+
+azimuth+
+
+180+
+
+360
+
+)
+
+%360;
+
+return{
+
+...star,
+
+azimuth:azimuth,
+
+altitude:altitude
+
+};
 
 }
 
 
-const observer =
+/* ==================================================
+   ALL SKY POSITIONS
+================================================== */
+
+function calculateSkyPositions(){
+
+if(
+
+userLatitude===null||
+
+userLongitude===null
+
+){
+
+return[];
+
+}
+
+const observer=
 
 new Astronomy.Observer(
 
@@ -2598,14 +2431,14 @@ userLongitude,
 
 );
 
-
-const date =
+const date=
 
 new Date();
 
+const results=[];
 
-const results = [];
 
+/* PLANETS */
 
 for(
 
@@ -2613,11 +2446,9 @@ const object of bodies
 
 ){
 
-
 try{
 
-
-const equator =
+const equator=
 
 Astronomy.Equator(
 
@@ -2633,8 +2464,7 @@ true
 
 );
 
-
-const horizontal =
+const horizontal=
 
 Astronomy.Horizon(
 
@@ -2649,7 +2479,6 @@ equator.dec,
 "normal"
 
 );
-
 
 results.push({
 
@@ -2669,18 +2498,13 @@ horizontal.dist
 
 });
 
-
 }
-
 
 catch(error){
 
-
 console.error(
 
-"Calculation error:",
-
-object.name,
+"Planet error",
 
 error
 
@@ -2688,9 +2512,48 @@ error
 
 }
 
+}
+
+
+/* STARS */
+
+for(
+
+const star of stars
+
+){
+
+try{
+
+const position=
+
+calculateStarPosition(
+
+star
+
+);
+
+results.push(
+
+position
+
+);
 
 }
 
+catch(error){
+
+console.error(
+
+"Star error",
+
+error
+
+);
+
+}
+
+}
 
 return results;
 
@@ -2701,32 +2564,23 @@ return results;
    DETECTION
 ================================================== */
 
-
 function detectObjects(){
 
-
-if(
-
-!receiverActive
-
-){
+if(!receiverActive){
 
 return;
 
 }
 
-
 if(
 
-userLatitude ===
-null ||
+userLatitude===null||
 
-userLongitude ===
-null
+userLongitude===null
 
 ){
 
-scanStatus.innerText =
+scanStatus.innerText=
 
 "🌍 Waiting for GPS...";
 
@@ -2734,18 +2588,15 @@ return;
 
 }
 
-
 if(
 
-compassHeading ===
-null ||
+compassHeading===null||
 
-phoneAltitude ===
-null
+phoneAltitude===null
 
 ){
 
-scanStatus.innerText =
+scanStatus.innerText=
 
 "🧭 Waiting for phone orientation...";
 
@@ -2753,19 +2604,13 @@ return;
 
 }
 
-
-const objects =
+const objects=
 
 calculateSkyPositions();
 
+let bestTarget=null;
 
-let bestTarget =
-null;
-
-
-let bestScore =
-Infinity;
-
+let bestScore=Infinity;
 
 for(
 
@@ -2773,20 +2618,13 @@ const object of objects
 
 ){
 
-
-if(
-
-object.altitude <
-0
-
-){
+if(object.altitude<0){
 
 continue;
 
 }
 
-
-const azimuthDifference =
+const azimuthDifference=
 
 angleDifference(
 
@@ -2796,63 +2634,35 @@ object.azimuth
 
 );
 
-
-const altitudeDifference =
+const altitudeDifference=
 
 Math.abs(
 
-phoneAltitude -
+phoneAltitude-
 
 object.altitude
 
 );
 
-
-/*
-Detection field
-
-±12°
-*/
-
 if(
 
-azimuthDifference <=
-12
+azimuthDifference<=12&&
 
-&&
-
-altitudeDifference <=
-12
+altitudeDifference<=12
 
 ){
 
+const score=
 
-const score =
-
-(
-
-azimuthDifference *
-
-1.5
-
-)
-
-+
+azimuthDifference*1.5+
 
 altitudeDifference;
 
+if(score<bestScore){
 
-if(
+bestScore=score;
 
-score < bestScore
-
-){
-
-bestScore =
-score;
-
-bestTarget =
-object;
+bestTarget=object;
 
 }
 
@@ -2860,19 +2670,11 @@ object;
 
 }
 
+if(bestTarget){
 
-if(
-bestTarget
-){
-
-lockTarget(
-
-bestTarget
-
-);
+lockTarget(bestTarget);
 
 }
-
 
 else{
 
@@ -2887,49 +2689,31 @@ unlockTarget();
    LOCK TARGET
 ================================================== */
 
+function lockTarget(object){
 
-function lockTarget(
-object
-){
+currentTarget=object;
 
+targetName.innerText=
 
-currentTarget =
-object;
+"🎯 "+object.name;
 
-
-targetName.innerText =
-
-"🎯 " +
-
-object.name;
-
-
-targetType.innerText =
+targetType.innerText=
 
 object.type;
 
-
-signalStrength.innerText =
+signalStrength.innerText=
 
 object.signal;
 
+signalFill.style.width=
 
-signalFill.style.width =
+object.signal+"%";
 
-object.signal +
+targetDirection.innerText=
 
-"%";
+object.azimuth.toFixed(1)
 
-
-targetDirection.innerText =
-
-object.azimuth.toFixed(
-1
-)
-
-+
-
-"° "
++"° "
 
 +
 
@@ -2939,78 +2723,65 @@ object.azimuth
 
 );
 
+targetAltitude.innerText=
 
-targetAltitude.innerText =
+object.altitude.toFixed(1)
 
-object.altitude.toFixed(
-1
-)
++"°";
 
-+
+if(object.distance){
 
-"°";
+if(object.type==="Star"){
 
+targetDistance.innerText=
 
-if(
+object.distance+
 
-object.distance
-
-){
-
-targetDistance.innerText =
-
-object.distance.toFixed(
-4
-)
-
-+
-
-" AU";
+" light years";
 
 }
 
+else{
 
-targetDifficulty.innerText =
+targetDistance.innerText=
+
+object.distance.toFixed(4)
+
++" AU";
+
+}
+
+}
+
+targetDifficulty.innerText=
 
 object.difficulty;
 
-
-targetAudioSource.innerText =
+targetAudioSource.innerText=
 
 "Object signal";
 
-
-lockStatus.innerText =
+lockStatus.innerText=
 
 "🟢 TARGET LOCKED";
 
-
 lockStatus.classList.add(
+
 "locked"
+
 );
 
-
-audioStatus.innerText =
+audioStatus.innerText=
 
 "🎯 OBJECT DETECTED";
 
+sourceStatus.innerText=
 
-sourceStatus.innerText =
+"Source: "+object.name;
 
-"Source: "
+scanStatus.innerText=
 
-+
-
-object.name;
-
-
-scanStatus.innerText =
-
-"🎯 LOCKED: "
-
-+
-
-object.name;
+"🎯 LOCKED: "+object.name;
 
 }
 
@@ -3019,91 +2790,71 @@ object.name;
    UNLOCK
 ================================================== */
 
-
 function unlockTarget(){
 
-
-if(
-
-!currentTarget
-
-){
+if(!currentTarget){
 
 return;
 
 }
 
+currentTarget=null;
 
-currentTarget =
-null;
-
-
-targetName.innerText =
+targetName.innerText=
 
 "TARGET: NULL";
 
-
-targetType.innerText =
+targetType.innerText=
 
 "POINT RECEIVER AT THE SKY";
 
-
-signalStrength.innerText =
+signalStrength.innerText=
 
 "000000";
 
-
-signalFill.style.width =
+signalFill.style.width=
 
 "0%";
 
-
-targetDirection.innerText =
-
-"---";
-
-
-targetAltitude.innerText =
+targetDirection.innerText=
 
 "---";
 
-
-targetDistance.innerText =
-
-"---";
-
-
-targetDifficulty.innerText =
+targetAltitude.innerText=
 
 "---";
 
+targetDistance.innerText=
 
-targetAudioSource.innerText =
+"---";
+
+targetDifficulty.innerText=
+
+"---";
+
+targetAudioSource.innerText=
 
 "Radio noise";
 
-
-lockStatus.innerText =
+lockStatus.innerText=
 
 "🔴 NO TARGET LOCKED";
 
-
 lockStatus.classList.remove(
+
 "locked"
+
 );
 
-
-audioStatus.innerText =
+audioStatus.innerText=
 
 "🔊 RADIO RECEIVER ACTIVE";
 
-
-sourceStatus.innerText =
+sourceStatus.innerText=
 
 "Source: Generated radio noise";
 
-
-scanStatus.innerText =
+scanStatus.innerText=
 
 "🌌 SCANNING SKY...";
 
@@ -3111,59 +2862,46 @@ scanStatus.innerText =
 
 
 /* ==================================================
-   START RECEIVER
+   START
 ================================================== */
-
 
 async function startReceiver(){
 
-
-if(
-receiverActive
-){
+if(receiverActive){
 
 return;
 
 }
 
-
-receiverActive =
-true;
-
+receiverActive=true;
 
 startRadioNoise();
 
-
 statusElement.classList.add(
+
 "active"
+
 );
 
+statusElement.innerHTML=
 
-statusElement.innerHTML =
+'<span class="status-dot"></span>RECEIVER ACTIVE';
 
-'<span class="status-dot"></span>' +
-
-'RECEIVER ACTIVE';
-
-
-scanStatus.innerText =
+scanStatus.innerText=
 
 "📡 INITIALIZING...";
 
-
 startGPS();
 
-
 await enableSensors();
-
 
 setTimeout(
 
 function(){
 
-scanStatus.innerText =
+scanStatus.innerText=
 
-"🌌 CALCULATING REAL SKY POSITIONS...";
+"🌌 CALCULATING PLANETS + STARS...";
 
 },
 
@@ -3171,8 +2909,7 @@ scanStatus.innerText =
 
 );
 
-
-detectionInterval =
+detectionInterval=
 
 setInterval(
 
@@ -3186,22 +2923,14 @@ detectObjects,
 
 
 /* ==================================================
-   STOP RECEIVER
+   STOP
 ================================================== */
-
 
 function stopReceiver(){
 
+receiverActive=false;
 
-receiverActive =
-false;
-
-
-if(
-
-detectionInterval
-
-){
+if(detectionInterval){
 
 clearInterval(
 
@@ -3209,118 +2938,92 @@ detectionInterval
 
 );
 
-detectionInterval =
-null;
+detectionInterval=null;
 
 }
 
-
 stopRadioNoise();
 
+if(watchID!==null){
 
-if(
-
-watchID !==
-null
-
-){
-
-navigator.geolocation
-.clearWatch(
+navigator.geolocation.clearWatch(
 
 watchID
 
 );
 
-watchID =
-null;
+watchID=null;
 
 }
 
-
-currentTarget =
-null;
-
+currentTarget=null;
 
 statusElement.classList.remove(
+
 "active"
+
 );
 
+statusElement.innerHTML=
 
-statusElement.innerHTML =
+'<span class="status-dot"></span>RECEIVER STANDBY';
 
-'<span class="status-dot"></span>' +
-
-'RECEIVER STANDBY';
-
-
-scanStatus.innerText =
+scanStatus.innerText=
 
 "System ready";
 
-
-audioStatus.innerText =
+audioStatus.innerText=
 
 "🔇 RADIO RECEIVER OFFLINE";
 
-
-sourceStatus.innerText =
+sourceStatus.innerText=
 
 "Source: None";
 
-
-targetName.innerText =
+targetName.innerText=
 
 "TARGET: NULL";
 
-
-targetType.innerText =
+targetType.innerText=
 
 "POINT RECEIVER AT THE SKY";
 
-
-signalStrength.innerText =
+signalStrength.innerText=
 
 "000000";
 
-
-signalFill.style.width =
+signalFill.style.width=
 
 "0%";
 
-
-targetDirection.innerText =
-
-"---";
-
-
-targetAltitude.innerText =
+targetDirection.innerText=
 
 "---";
 
-
-targetDistance.innerText =
-
-"---";
-
-
-targetDifficulty.innerText =
+targetAltitude.innerText=
 
 "---";
 
+targetDistance.innerText=
 
-targetAudioSource.innerText =
+"---";
+
+targetDifficulty.innerText=
+
+"---";
+
+targetAudioSource.innerText=
 
 "Radio noise";
 
-
-lockStatus.innerText =
+lockStatus.innerText=
 
 "🔴 NO TARGET LOCKED";
 
-
 lockStatus.classList.remove(
+
 "locked"
+
 );
 
 }
@@ -3330,9 +3033,7 @@ lockStatus.classList.remove(
    INITIAL
 ================================================== */
 
-
 updateTime();
-
 
 </script>
 
