@@ -12,7 +12,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 
 >
 
-<title>Radio Telescope v0.8.3</title>
+<title>Radio Telescope v0.9.0</title>
 
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 
@@ -387,6 +387,42 @@ font-size:11px;
 
 }
 
+.audio-meter{
+
+margin-top:20px;
+
+height:10px;
+
+background:#182131;
+
+border-radius:10px;
+
+overflow:hidden;
+
+}
+
+.audio-meter-fill{
+
+height:100%;
+
+width:0%;
+
+background:#42e6a4;
+
+transition:width .2s ease;
+
+}
+
+.audio-info{
+
+margin-top:8px;
+
+font-size:11px;
+
+color:#738197;
+
+}
+
 button{
 
 width:100%;
@@ -585,29 +621,17 @@ font-weight:900;
 
 @keyframes blackHoleRainbow{
 
-0%{
-color:#ff004c;
-}
+0%{color:#ff004c;}
 
-20%{
-color:#ff8a00;
-}
+20%{color:#ff8a00;}
 
-40%{
-color:#ffee00;
-}
+40%{color:#ffee00;}
 
-60%{
-color:#00ff88;
-}
+60%{color:#00ff88;}
 
-80%{
-color:#00c8ff;
-}
+80%{color:#00c8ff;}
 
-100%{
-color:#ff00ff;
-}
+100%{color:#ff00ff;}
 
 }
 
@@ -870,6 +894,26 @@ Source: None
 
 </div>
 
+<div class="audio-meter">
+
+<div
+class="audio-meter-fill"
+id="audioMeterFill"
+>
+
+</div>
+
+</div>
+
+<div
+class="audio-info"
+id="audioInfo"
+>
+
+Signal audio: 0%
+
+</div>
+
 <button
 id="startButton"
 onclick="startReceiver()"
@@ -1043,7 +1087,7 @@ id="targetField"
 
 <span class="detection-label">
 
-🎧 Audio source
+🎧 Audio signal
 
 </span>
 
@@ -1083,7 +1127,7 @@ id="lockStatus"
 
 <div class="version">
 
-RADIO TELESCOPE v0.8.3
+RADIO TELESCOPE v0.9.0
 
 </div>
 
@@ -1095,23 +1139,19 @@ RADIO TELESCOPE v0.8.3
 
 <br><br>
 
-🕐 Aktualny czas jest używany
-do obliczeń pozycji obiektów.
-
-<br><br>
-
 🧭 Kompas i czujniki telefonu
 określają kierunek obserwacji.
 
 <br><br>
 
-🎯 Każdy obiekt posiada
-indywidualny zakres wykrywania.
+🎧 Dźwięk obiektu jest odtwarzany
+tak długo, jak długo obiekt znajduje
+się w polu sygnału.
 
 <br><br>
 
-🌈 Sagittarius A* posiada
-specjalny tryb czarnej dziury.
+📻 Im dokładniejsze namierzenie,
+tym mniej słyszalny jest szum.
 
 <br><br>
 
@@ -1123,6 +1163,39 @@ symulatorem radioteleskopu.
 </div>
 
 <script>
+
+
+/* ==================================================
+   RADIO TELESCOPE v0.9.0
+   AUDIO SIGNAL UPDATE
+================================================== */
+
+
+/* ==================================================
+   AUDIO FILES
+
+   PLIKI MUSZĄ BYĆ W TYM SAMYM
+   FOLDERZE CO index.html
+
+   ZMIEŃ NAZWY, JEŚLI TWOJE PLIKI
+   NAZYWAJĄ SIĘ INACZEJ.
+================================================== */
+
+const AUDIO_FILES={
+
+moon:"moon.mp3",
+
+sun:"sun.wav",
+
+venus:"venus.mp4",
+
+andromeda:"andromeda.mp3",
+
+vega:"vega.wav",
+
+whirlpool:null
+
+};
 
 
 /* ==================================================
@@ -1154,6 +1227,12 @@ let noiseGain=null;
 let detectionInterval=null;
 
 let currentTarget=null;
+
+let currentAudio=null;
+
+let currentAudioKey=null;
+
+let audioFadeInterval=null;
 
 const SMOOTHING=0.15;
 
@@ -1197,6 +1276,12 @@ document.getElementById("audioStatus");
 
 const sourceStatus=
 document.getElementById("sourceStatus");
+
+const audioMeterFill=
+document.getElementById("audioMeterFill");
+
+const audioInfo=
+document.getElementById("audioInfo");
 
 const targetName=
 document.getElementById("targetName");
@@ -1469,10 +1554,538 @@ sourceStatus.innerText=
 
 
 /* ==================================================
+   OBJECT AUDIO
+================================================== */
+
+function getAudioKey(object){
+
+if(
+object.audioKey
+){
+
+return object.audioKey;
+
+}
+
+if(
+object.name.includes("MOON")
+){
+
+return"moon";
+
+}
+
+if(
+object.name.includes("SUN")
+){
+
+return"sun";
+
+}
+
+if(
+object.name.includes("VENUS")
+){
+
+return"venus";
+
+}
+
+if(
+object.name.includes("VEGA")
+){
+
+return"vega";
+
+}
+
+if(
+object.name.includes("M31")
+){
+
+return"andromeda";
+
+}
+
+if(
+object.name.includes("M51")
+){
+
+return"whirlpool";
+
+}
+
+return null;
+
+}
+
+
+/* ==================================================
+   LOAD OBJECT AUDIO
+================================================== */
+
+function playObjectAudio(
+
+object,
+
+volume
+
+){
+
+const key=
+
+getAudioKey(
+object
+);
+
+const file=
+
+AUDIO_FILES[key];
+
+if(
+!file
+){
+
+return;
+
+}
+
+
+/* SAME AUDIO */
+
+if(
+
+currentAudio&&
+
+currentAudioKey===key
+
+){
+
+fadeAudioVolume(
+volume
+);
+
+return;
+
+}
+
+
+/* STOP PREVIOUS */
+
+stopObjectAudio();
+
+
+currentAudio=
+
+new Audio(
+file
+);
+
+currentAudio.loop=
+true;
+
+currentAudio.volume=0;
+
+currentAudio.preload=
+"auto";
+
+currentAudioKey=
+key;
+
+
+/*
+
+IMPORTANT:
+
+The first START RECEIVER click
+already gives Safari permission
+to play audio.
+
+*/
+
+const playPromise=
+
+currentAudio.play();
+
+if(
+playPromise
+){
+
+playPromise.catch(
+
+function(error){
+
+console.warn(
+"Audio playback blocked:",
+error
+);
+
+}
+
+);
+
+}
+
+
+fadeAudioVolume(
+volume
+);
+
+
+audioStatus.innerText=
+
+"🎧 OBJECT AUDIO ACTIVE";
+
+sourceStatus.innerText=
+
+"Source: "+
+file;
+
+targetAudioSource.innerText=
+
+"🎧 "+
+file;
+
+}
+
+
+/* ==================================================
+   FADE AUDIO
+================================================== */
+
+function fadeAudioVolume(
+targetVolume
+){
+
+if(!currentAudio){
+
+return;
+
+}
+
+targetVolume=
+
+Math.max(
+
+0,
+
+Math.min(
+
+1,
+
+targetVolume
+
+)
+
+);
+
+
+/* CANCEL OLD FADE */
+
+if(
+audioFadeInterval
+){
+
+clearInterval(
+audioFadeInterval
+);
+
+}
+
+const start=
+
+currentAudio.volume;
+
+const difference=
+
+targetVolume-
+start;
+
+const steps=
+12;
+
+let step=
+0;
+
+audioFadeInterval=
+
+setInterval(
+
+function(){
+
+step++;
+
+currentAudio.volume=
+
+Math.max(
+
+0,
+
+Math.min(
+
+1,
+
+start+
+difference*
+(
+step/
+steps
+)
+
+)
+
+);
+
+if(
+step>=steps
+){
+
+clearInterval(
+audioFadeInterval
+);
+
+audioFadeInterval=
+null;
+
+}
+
+},
+
+30
+
+);
+
+}
+
+
+/* ==================================================
+   STOP OBJECT AUDIO
+================================================== */
+
+function stopObjectAudio(){
+
+if(
+audioFadeInterval
+){
+
+clearInterval(
+audioFadeInterval
+);
+
+audioFadeInterval=
+null;
+
+}
+
+if(
+currentAudio
+){
+
+fadeAudioVolume(0);
+
+const audioToStop=
+currentAudio;
+
+setTimeout(
+
+function(){
+
+try{
+
+audioToStop.pause();
+
+audioToStop.currentTime=0;
+
+}
+
+catch(e){}
+
+},
+
+400
+
+);
+
+}
+
+currentAudio=
+null;
+
+currentAudioKey=
+null;
+
+}
+
+
+/* ==================================================
+   UPDATE AUDIO MIX
+================================================== */
+
+function updateAudioMix(
+
+object,
+
+accuracyScore
+
+){
+
+/*
+
+accuracyScore:
+
+0 = perfect
+
+1 = edge of detection field
+
+*/
+
+if(!noiseGain){
+
+return;
+
+}
+
+const signalBase=
+
+object.signal/
+100;
+
+
+/*
+
+HOW CLOSE ARE WE?
+
+0 = center
+
+1 = edge
+
+*/
+
+const proximity=
+
+Math.max(
+
+0,
+
+Math.min(
+
+1,
+
+1-
+accuracyScore
+
+)
+
+);
+
+
+/*
+
+OBJECT AUDIO
+
+The object's maximum signal
+determines its maximum volume.
+
+*/
+
+const objectVolume=
+
+signalBase*
+proximity;
+
+
+/*
+
+NOISE
+
+Strong object = less noise.
+
+*/
+
+const noiseVolume=
+
+0.04*
+
+(
+1-
+proximity*
+signalBase
+);
+
+
+/* UPDATE NOISE */
+
+noiseGain.gain.setTargetAtTime(
+
+noiseVolume,
+
+audioContext.currentTime,
+
+0.05
+
+);
+
+
+/* UPDATE OBJECT */
+
+if(
+getAudioKey(object)
+){
+
+playObjectAudio(
+
+object,
+
+objectVolume
+
+);
+
+}
+
+else{
+
+stopObjectAudio();
+
+}
+
+
+/* UI */
+
+audioMeterFill.style.width=
+
+Math.round(
+objectVolume*
+100
+)+"%";
+
+audioInfo.innerText=
+
+"Object signal: "+
+Math.round(
+objectVolume*
+100
+)+
+"% | Radio noise: "+
+Math.round(
+(
+noiseVolume/
+0.04
+)
+*
+100
+)+
+"%";
+
+}
+
+
+/* ==================================================
    STOP RADIO
 ================================================== */
 
 function stopRadioNoise(){
+
+stopObjectAudio();
 
 if(noiseSource){
 
@@ -1497,6 +2110,8 @@ audioContext.close();
 audioContext=null;
 
 }
+
+noiseGain=null;
 
 }
 
@@ -1940,9 +2555,7 @@ difficulty:"BARDZO ŁATWE",
 
 signal:100,
 
-detectionRadius:14,
-
-distanceLabel:"384 400 km"
+detectionRadius:14
 
 },
 
@@ -1974,7 +2587,9 @@ difficulty:"ŁATWE",
 
 signal:95,
 
-detectionRadius:14
+detectionRadius:14,
+
+audioKey:"venus"
 
 },
 
@@ -2081,9 +2696,11 @@ distance:25.04,
 
 difficulty:"ŁATWE",
 
-signal:98,
+signal:90,
 
-detectionRadius:13
+detectionRadius:13,
+
+audioKey:"vega"
 
 },
 
@@ -2271,7 +2888,7 @@ detectionRadius:12
 
 
 /* ==================================================
-   DEEP SKY OBJECTS
+   DEEP SKY
 ================================================== */
 
 const deepSky=[
@@ -2290,17 +2907,19 @@ distance:2540000,
 
 difficulty:"ŁATWE",
 
-signal:92,
+signal:80,
 
 detectionRadius:12,
 
-distanceLabel:"2.54 million light years"
+distanceLabel:"2.54 million light years",
+
+audioKey:"andromeda"
 
 },
 
 {
 
-name:"🌌 M51 — WHIRLPOOL GALAXY",
+name:"🌀 M51 — WHIRLPOOL GALAXY",
 
 type:"Galaxy",
 
@@ -2312,11 +2931,13 @@ distance:23000000,
 
 difficulty:"TRUDNE",
 
-signal:65,
+signal:50,
 
 detectionRadius:11,
 
-distanceLabel:"23 million light years"
+distanceLabel:"23 million light years",
+
+audioKey:"whirlpool"
 
 },
 
@@ -2356,7 +2977,7 @@ distance:31000000,
 
 difficulty:"TRUDNE",
 
-signal:60,
+signal:50,
 
 detectionRadius:10,
 
@@ -2781,22 +3402,7 @@ altitude
 
 
 /* ==================================================
-   DEEP SKY POSITION
-================================================== */
-
-function calculateDeepSkyPosition(object){
-
-return calculateStarPosition({
-
-...object
-
-});
-
-}
-
-
-/* ==================================================
-   ALL SKY POSITIONS
+   SKY POSITIONS
 ================================================== */
 
 function calculateSkyPositions(){
@@ -2946,7 +3552,7 @@ try{
 
 results.push(
 
-calculateDeepSkyPosition(
+calculateStarPosition(
 object
 )
 
@@ -3057,18 +3663,10 @@ object.altitude
 
 );
 
-
-/*
-
-INDIVIDUAL DETECTION RADIUS
-
-*/
-
 const radius=
 
 object.detectionRadius||
 12;
-
 
 if(
 
@@ -3102,8 +3700,65 @@ object;
 
 if(bestTarget){
 
+const radius=
+
+bestTarget.detectionRadius||
+12;
+
+const azimuthDifference=
+
+angleDifference(
+
+compassHeading,
+
+bestTarget.azimuth
+
+);
+
+const altitudeDifference=
+
+Math.abs(
+
+phoneAltitude-
+
+bestTarget.altitude
+
+);
+
+const accuracy=
+
+Math.min(
+
+1,
+
+(
+
+azimuthDifference+
+altitudeDifference
+)
+
+/
+
+(
+radius*2
+)
+
+);
+
+updateAudioMix(
+
+bestTarget,
+
+accuracy
+
+);
+
 lockTarget(
-bestTarget
+
+bestTarget,
+
+accuracy
+
 );
 
 }
@@ -3121,7 +3776,13 @@ unlockTarget();
    LOCK TARGET
 ================================================== */
 
-function lockTarget(object){
+function lockTarget(
+
+object,
+
+accuracy
+
+){
 
 currentTarget=
 object;
@@ -3155,7 +3816,6 @@ targetAltitude.innerText=
 object.altitude.toFixed(1)
 +"°";
 
-
 if(
 object.distanceLabel
 ){
@@ -3188,7 +3848,6 @@ object.distance.toFixed(4)+" AU"
 
 }
 
-
 targetDifficulty.innerText=
 object.difficulty;
 
@@ -3198,9 +3857,30 @@ targetField.innerText=
 object.detectionRadius+
 "°";
 
-targetAudioSource.innerText=
-"Object signal";
+const audioKey=
+getAudioKey(
+object
+);
 
+if(
+audioKey&&
+AUDIO_FILES[audioKey]
+){
+
+targetAudioSource.innerText=
+
+"🎧 "+
+AUDIO_FILES[audioKey];
+
+}
+
+else{
+
+targetAudioSource.innerText=
+
+"📻 Radio noise";
+
+}
 
 lockStatus.innerText=
 "🟢 TARGET LOCKED";
@@ -3210,7 +3890,7 @@ lockStatus.classList.add(
 );
 
 
-/* BLACK HOLE MODE */
+/* BLACK HOLE */
 
 if(
 object.blackHole
@@ -3224,20 +3904,9 @@ detectionPanel.classList.add(
 "black-hole-panel"
 );
 
-lockStatus.innerText=
-
-"🕳️🌈 YOU FOUND THE VOID! 🌈🕳️";
-
-audioStatus.innerText=
-"🕳️ BLACK HOLE DETECTED";
-
-sourceStatus.innerText=
-
-"Source: Sagittarius A*";
-
 scanStatus.innerText=
 
-"🕳️🌈 CONGRATULATIONS! YOU FOUND A BLACK HOLE! 🌈🕳️";
+"🕳️🌈 YOU FOUND THE VOID! 🌈🕳️";
 
 }
 
@@ -3250,14 +3919,6 @@ targetName.classList.remove(
 detectionPanel.classList.remove(
 "black-hole-panel"
 );
-
-audioStatus.innerText=
-"🎯 OBJECT DETECTED";
-
-sourceStatus.innerText=
-
-"Source: "+
-object.name;
 
 scanStatus.innerText=
 
@@ -3275,14 +3936,37 @@ object.name;
 
 function unlockTarget(){
 
-if(!currentTarget){
-
-return;
-
-}
+if(
+currentTarget
+){
 
 currentTarget=
 null;
+
+}
+
+if(noiseGain&&audioContext){
+
+noiseGain.gain.setTargetAtTime(
+
+0.04,
+
+audioContext.currentTime,
+
+0.15
+
+);
+
+}
+
+stopObjectAudio();
+
+audioMeterFill.style.width=
+"0%";
+
+audioInfo.innerText=
+
+"Signal audio: 0% | Radio noise: 100%";
 
 targetName.classList.remove(
 "black-hole"
@@ -3342,7 +4026,7 @@ scanStatus.innerText=
 
 
 /* ==================================================
-   START
+   START RECEIVER
 ================================================== */
 
 async function startReceiver(){
@@ -3358,7 +4042,21 @@ return;
 receiverActive=
 true;
 
+
+/*
+
+IMPORTANT:
+
+Audio is initialized directly
+after the user's button click.
+
+This helps Safari/iOS allow
+audio playback.
+
+*/
+
 startRadioNoise();
+
 
 statusElement.classList.add(
 "active"
@@ -3369,11 +4067,14 @@ statusElement.innerHTML=
 '<span class="status-dot"></span>RECEIVER ACTIVE';
 
 scanStatus.innerText=
-"📡 INITIALIZING...";
+"📡 INITIALIZING RECEIVER...";
+
 
 startGPS();
 
+
 await enableSensors();
+
 
 setTimeout(
 
@@ -3381,7 +4082,7 @@ function(){
 
 scanStatus.innerText=
 
-"🌌 CALCULATING PLANETS + STARS + DEEP SKY...";
+"🌌 CALCULATING SKY OBJECTS...";
 
 },
 
@@ -3389,13 +4090,14 @@ scanStatus.innerText=
 
 );
 
+
 detectionInterval=
 
 setInterval(
 
 detectObjects,
 
-1000
+500
 
 );
 
@@ -3403,7 +4105,7 @@ detectObjects,
 
 
 /* ==================================================
-   STOP
+   STOP RECEIVER
 ================================================== */
 
 function stopReceiver(){
@@ -3458,6 +4160,12 @@ audioStatus.innerText=
 
 sourceStatus.innerText=
 "Source: None";
+
+audioMeterFill.style.width=
+"0%";
+
+audioInfo.innerText=
+"Signal audio: 0%";
 
 targetName.classList.remove(
 "black-hole"
