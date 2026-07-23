@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html lang="pl">
-
 <head>
 
 <meta charset="UTF-8">
@@ -12,7 +11,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 
 >
 
-<title>Radio Telescope v0.9.0</title>
+<title>Radio Telescope v0.9.1</title>
 
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 
@@ -29,7 +28,6 @@ margin:0;
 min-height:100vh;
 
 background:
-
 radial-gradient(
 circle at top,
 #18263b,
@@ -90,7 +88,6 @@ margin-top:30px;
 padding:25px;
 
 background:
-
 linear-gradient(
 145deg,
 #101827,
@@ -230,7 +227,6 @@ height:220px;
 border-radius:50%;
 
 background:
-
 radial-gradient(
 circle,
 #151e2d,
@@ -332,7 +328,6 @@ top:20px;
 transform:translateX(-50%);
 
 background:
-
 linear-gradient(
 to bottom,
 #ff3b3b 50%,
@@ -470,7 +465,6 @@ margin-top:25px;
 padding:25px 20px;
 
 background:
-
 linear-gradient(
 145deg,
 #101827,
@@ -610,9 +604,7 @@ background:#0d211b;
 .black-hole{
 
 animation:
-
 blackHoleRainbow 2s linear infinite,
-
 blackHolePulse 1s ease-in-out infinite alternate;
 
 font-weight:900;
@@ -703,15 +695,11 @@ letter-spacing:2px;
 <div class="app">
 
 <h1>
-
 📡 RADIO TELESCOPE
-
 </h1>
 
 <div class="subtitle">
-
 REAL-TIME ASTRONOMICAL SKY TRACKER
-
 </div>
 
 <div class="receiver-panel">
@@ -741,9 +729,7 @@ System ready
 <div class="data-box">
 
 <div class="data-title">
-
 📍 OBSERVER POSITION
-
 </div>
 
 <div
@@ -769,9 +755,7 @@ GPS inactive
 <div class="data-box">
 
 <div class="data-title">
-
 🕐 OBSERVATION TIME
-
 </div>
 
 <div
@@ -788,9 +772,7 @@ id="time"
 <div class="data-box">
 
 <div class="data-title">
-
 🧭 PHONE AZIMUTH
-
 </div>
 
 <div
@@ -816,9 +798,7 @@ Compass inactive
 <div class="data-box">
 
 <div class="data-title">
-
 📐 PHONE ALTITUDE
-
 </div>
 
 <div
@@ -966,9 +946,7 @@ POINT RECEIVER AT THE SKY
 <div class="detection-row">
 
 <span class="detection-label">
-
 📡 Signal strength
-
 </span>
 
 <span
@@ -986,9 +964,7 @@ id="signalStrength"
 <div class="detection-row">
 
 <span class="detection-label">
-
 🧭 Object azimuth
-
 </span>
 
 <span
@@ -1006,9 +982,7 @@ id="targetDirection"
 <div class="detection-row">
 
 <span class="detection-label">
-
 📐 Object altitude
-
 </span>
 
 <span
@@ -1026,9 +1000,7 @@ id="targetAltitude"
 <div class="detection-row">
 
 <span class="detection-label">
-
 📏 Distance
-
 </span>
 
 <span
@@ -1046,9 +1018,7 @@ id="targetDistance"
 <div class="detection-row">
 
 <span class="detection-label">
-
 🔭 Detection difficulty
-
 </span>
 
 <span
@@ -1066,9 +1036,7 @@ id="targetDifficulty"
 <div class="detection-row">
 
 <span class="detection-label">
-
 🎯 Detection field
-
 </span>
 
 <span
@@ -1086,9 +1054,7 @@ id="targetField"
 <div class="detection-row">
 
 <span class="detection-label">
-
 🎧 Audio signal
-
 </span>
 
 <span
@@ -1127,7 +1093,7 @@ id="lockStatus"
 
 <div class="version">
 
-RADIO TELESCOPE v0.9.0
+RADIO TELESCOPE v0.9.1
 
 </div>
 
@@ -1155,6 +1121,11 @@ tym mniej słyszalny jest szum.
 
 <br><br>
 
+⭐ Gwiazdy mają zwiększone pole
+detekcji dla łatwiejszego namierzania.
+
+<br><br>
+
 📡 Projekt jest edukacyjnym
 symulatorem radioteleskopu.
 
@@ -1166,8 +1137,8 @@ symulatorem radioteleskopu.
 
 
 /* ==================================================
-   RADIO TELESCOPE v0.9.0
-   AUDIO SIGNAL UPDATE
+   RADIO TELESCOPE v0.9.1
+   AUDIO + SATURN + NEPTUNE UPDATE
 ================================================== */
 
 
@@ -1176,9 +1147,6 @@ symulatorem radioteleskopu.
 
    PLIKI MUSZĄ BYĆ W TYM SAMYM
    FOLDERZE CO index.html
-
-   ZMIEŃ NAZWY, JEŚLI TWOJE PLIKI
-   NAZYWAJĄ SIĘ INACZEJ.
 ================================================== */
 
 const AUDIO_FILES={
@@ -1191,7 +1159,11 @@ venus:"venus.mp4",
 
 andromeda:"andromeda.mp3",
 
-vega:"vega.wav",
+vega:"vega.mp3",
+
+saturn:"saturn.mp3",
+
+neptune:"neptune.mp3",
 
 whirlpool:null
 
@@ -1329,7 +1301,6 @@ function updateTime(){
 const now=new Date();
 
 timeElement.innerText=
-
 now.toLocaleTimeString("pl-PL");
 
 }
@@ -1384,7 +1355,6 @@ return"NW";
 function angleDifference(a,b){
 
 const difference=
-
 Math.abs(
 a-b
 );
@@ -1405,13 +1375,9 @@ difference,
 ================================================== */
 
 function smoothAngle(
-
 previous,
-
 current,
-
 factor
-
 ){
 
 if(
@@ -1497,27 +1463,20 @@ audioContext.sampleRate
 );
 
 const data=
-
 buffer.getChannelData(0);
 
 for(
-
 let i=0;
-
 i<data.length;
-
 i++
-
 ){
 
 data[i]=
-
 Math.random()*2-1;
 
 }
 
 noiseSource=
-
 audioContext.createBufferSource();
 
 noiseSource.buffer=
@@ -1543,18 +1502,16 @@ audioContext.destination
 noiseSource.start();
 
 audioStatus.innerText=
-
 "🔊 RADIO RECEIVER ACTIVE";
 
 sourceStatus.innerText=
-
 "Source: Generated radio noise";
 
 }
 
 
 /* ==================================================
-   OBJECT AUDIO
+   OBJECT AUDIO KEY
 ================================================== */
 
 function getAudioKey(object){
@@ -1600,6 +1557,22 @@ return"vega";
 }
 
 if(
+object.name.includes("SATURN")
+){
+
+return"saturn";
+
+}
+
+if(
+object.name.includes("NEPTUNE")
+){
+
+return"neptune";
+
+}
+
+if(
 object.name.includes("M31")
 ){
 
@@ -1621,25 +1594,18 @@ return null;
 
 
 /* ==================================================
-   LOAD OBJECT AUDIO
+   OBJECT AUDIO
 ================================================== */
 
 function playObjectAudio(
-
 object,
-
 volume
-
 ){
 
 const key=
-
-getAudioKey(
-object
-);
+getAudioKey(object);
 
 const file=
-
 AUDIO_FILES[key];
 
 if(
@@ -1650,41 +1616,27 @@ return;
 
 }
 
-
-/* SAME AUDIO */
-
 if(
-
 currentAudio&&
-
 currentAudioKey===key
-
 ){
 
-fadeAudioVolume(
-volume
-);
+fadeAudioVolume(volume);
 
 return;
 
 }
 
-
-/* STOP PREVIOUS */
-
 stopObjectAudio();
 
-
 currentAudio=
-
-new Audio(
-file
-);
+new Audio(file);
 
 currentAudio.loop=
 true;
 
-currentAudio.volume=0;
+currentAudio.volume=
+0;
 
 currentAudio.preload=
 "auto";
@@ -1692,19 +1644,23 @@ currentAudio.preload=
 currentAudioKey=
 key;
 
+currentAudio.addEventListener(
+"error",
+function(){
 
-/*
+console.warn(
+"Nie można odtworzyć pliku audio:",
+file
+);
 
-IMPORTANT:
+sourceStatus.innerText=
+"⚠️ Audio unavailable: "+
+file;
 
-The first START RECEIVER click
-already gives Safari permission
-to play audio.
-
-*/
+}
+);
 
 const playPromise=
-
 currentAudio.play();
 
 if(
@@ -1712,7 +1668,6 @@ playPromise
 ){
 
 playPromise.catch(
-
 function(error){
 
 console.warn(
@@ -1720,29 +1675,24 @@ console.warn(
 error
 );
 
-}
+sourceStatus.innerText=
+"⚠️ Audio playback blocked";
 
+}
 );
 
 }
 
-
-fadeAudioVolume(
-volume
-);
-
+fadeAudioVolume(volume);
 
 audioStatus.innerText=
-
 "🎧 OBJECT AUDIO ACTIVE";
 
 sourceStatus.innerText=
-
 "Source: "+
 file;
 
 targetAudioSource.innerText=
-
 "🎧 "+
 file;
 
@@ -1766,21 +1716,12 @@ return;
 targetVolume=
 
 Math.max(
-
 0,
-
 Math.min(
-
 1,
-
 targetVolume
-
 )
-
 );
-
-
-/* CANCEL OLD FADE */
 
 if(
 audioFadeInterval
@@ -1793,11 +1734,9 @@ audioFadeInterval
 }
 
 const start=
-
 currentAudio.volume;
 
 const difference=
-
 targetVolume-
 start;
 
@@ -1808,7 +1747,6 @@ let step=
 0;
 
 audioFadeInterval=
-
 setInterval(
 
 function(){
@@ -1818,22 +1756,16 @@ step++;
 currentAudio.volume=
 
 Math.max(
-
 0,
-
 Math.min(
-
 1,
-
 start+
 difference*
 (
 step/
 steps
 )
-
 )
-
 );
 
 if(
@@ -1881,10 +1813,10 @@ if(
 currentAudio
 ){
 
-fadeAudioVolume(0);
-
 const audioToStop=
 currentAudio;
+
+fadeAudioVolume(0);
 
 setTimeout(
 
@@ -1894,7 +1826,8 @@ try{
 
 audioToStop.pause();
 
-audioToStop.currentTime=0;
+audioToStop.currentTime=
+0;
 
 }
 
@@ -1918,26 +1851,13 @@ null;
 
 
 /* ==================================================
-   UPDATE AUDIO MIX
+   AUDIO MIX
 ================================================== */
 
 function updateAudioMix(
-
 object,
-
 accuracyScore
-
 ){
-
-/*
-
-accuracyScore:
-
-0 = perfect
-
-1 = edge of detection field
-
-*/
 
 if(!noiseGain){
 
@@ -1946,74 +1866,30 @@ return;
 }
 
 const signalBase=
-
 object.signal/
 100;
 
-
-/*
-
-HOW CLOSE ARE WE?
-
-0 = center
-
-1 = edge
-
-*/
-
 const proximity=
-
 Math.max(
-
 0,
-
 Math.min(
-
 1,
-
 1-
 accuracyScore
-
 )
-
 );
 
-
-/*
-
-OBJECT AUDIO
-
-The object's maximum signal
-determines its maximum volume.
-
-*/
-
 const objectVolume=
-
 signalBase*
 proximity;
 
-
-/*
-
-NOISE
-
-Strong object = less noise.
-
-*/
-
 const noiseVolume=
-
 0.04*
-
 (
 1-
 proximity*
 signalBase
 );
-
-
-/* UPDATE NOISE */
 
 noiseGain.gain.setTargetAtTime(
 
@@ -2024,9 +1900,6 @@ audioContext.currentTime,
 0.05
 
 );
-
-
-/* UPDATE OBJECT */
 
 if(
 getAudioKey(object)
@@ -2048,11 +1921,7 @@ stopObjectAudio();
 
 }
 
-
-/* UI */
-
 audioMeterFill.style.width=
-
 Math.round(
 objectVolume*
 100
@@ -2094,12 +1963,12 @@ try{
 noiseSource.stop();
 
 }
-
 catch(e){}
 
 noiseSource.disconnect();
 
-noiseSource=null;
+noiseSource=
+null;
 
 }
 
@@ -2107,11 +1976,13 @@ if(audioContext){
 
 audioContext.close();
 
-audioContext=null;
+audioContext=
+null;
 
 }
 
-noiseGain=null;
+noiseGain=
+null;
 
 }
 
@@ -2133,7 +2004,6 @@ event.webkitCompassHeading!==null
 ){
 
 heading=
-
 event.webkitCompassHeading;
 
 }
@@ -2143,7 +2013,6 @@ event.alpha!==null
 ){
 
 heading=
-
 360-
 event.alpha;
 
@@ -2164,7 +2033,6 @@ return;
 }
 
 heading=
-
 (
 heading+
 360
@@ -2173,7 +2041,6 @@ heading+
 360;
 
 filteredHeading=
-
 smoothAngle(
 
 filteredHeading,
@@ -2188,20 +2055,17 @@ compassHeading=
 filteredHeading;
 
 headingElement.innerText=
-
 Math.round(
 filteredHeading
 )
 +"°";
 
 directionElement.innerText=
-
 getDirection(
 filteredHeading
 );
 
 compassElement.style.transform=
-
 "rotate("+
 (-filteredHeading)+
 "deg)";
@@ -2232,11 +2096,9 @@ return;
 }
 
 const y=
-
 event.accelerationIncludingGravity.y;
 
 const z=
-
 event.accelerationIncludingGravity.z;
 
 if(
@@ -2259,7 +2121,6 @@ z
 Math.PI;
 
 angle=
-
 Math.max(
 0,
 Math.min(
@@ -2294,14 +2155,12 @@ phoneAltitude=
 filteredAltitude;
 
 altitudeElement.innerText=
-
 Math.round(
 filteredAltitude
 )
 +"°";
 
 altitudeStatus.innerText=
-
 "Orientation active";
 
 if(receiverActive){
@@ -2360,12 +2219,10 @@ accuracyElement.innerText=
 "Accuracy ±"+
 Math.round(
 position.coords.accuracy
-)
-+
+)+
 " m";
 
 scanStatus.innerText=
-
 "🌍 GPS POSITION LOCKED";
 
 },
@@ -2373,7 +2230,6 @@ scanStatus.innerText=
 function(){
 
 scanStatus.innerText=
-
 "⚠️ GPS ERROR";
 
 },
@@ -2412,9 +2268,7 @@ typeof DeviceOrientationEvent.requestPermission==="function"
 try{
 
 const permission=
-
 await
-
 DeviceOrientationEvent.requestPermission();
 
 if(
@@ -2422,13 +2276,9 @@ permission==="granted"
 ){
 
 window.addEventListener(
-
 "deviceorientation",
-
 handleOrientation,
-
 true
-
 );
 
 }
@@ -2446,13 +2296,9 @@ console.error(error);
 else{
 
 window.addEventListener(
-
 "deviceorientation",
-
 handleOrientation,
-
 true
-
 );
 
 }
@@ -2471,9 +2317,7 @@ typeof DeviceMotionEvent.requestPermission==="function"
 try{
 
 const permission=
-
 await
-
 DeviceMotionEvent.requestPermission();
 
 if(
@@ -2481,13 +2325,9 @@ permission==="granted"
 ){
 
 window.addEventListener(
-
 "devicemotion",
-
 handleMotion,
-
 true
-
 );
 
 }
@@ -2505,13 +2345,9 @@ console.error(error);
 else{
 
 window.addEventListener(
-
 "devicemotion",
-
 handleMotion,
-
 true
-
 );
 
 }
@@ -2537,9 +2373,7 @@ difficulty:"BARDZO ŁATWE",
 
 signal:100,
 
-detectionRadius:14,
-
-distanceLabel:"150 million km"
+detectionRadius:14
 
 },
 
@@ -2571,7 +2405,7 @@ difficulty:"TRUDNE",
 
 signal:55,
 
-detectionRadius:10
+detectionRadius:11
 
 },
 
@@ -2637,7 +2471,9 @@ difficulty:"ŁATWE",
 
 signal:88,
 
-detectionRadius:12
+detectionRadius:13,
+
+audioKey:"saturn"
 
 },
 
@@ -2653,7 +2489,7 @@ difficulty:"TRUDNE",
 
 signal:55,
 
-detectionRadius:10
+detectionRadius:11
 
 },
 
@@ -2669,7 +2505,9 @@ difficulty:"BARDZO TRUDNE",
 
 signal:35,
 
-detectionRadius:10
+detectionRadius:11,
+
+audioKey:"neptune"
 
 }
 
@@ -2678,6 +2516,10 @@ detectionRadius:10
 
 /* ==================================================
    STARS
+
+   v0.9.1:
+   INCREASED DETECTION FIELD
+   FROM ~12° TO ~15°
 ================================================== */
 
 const stars=[
@@ -2698,7 +2540,7 @@ difficulty:"ŁATWE",
 
 signal:90,
 
-detectionRadius:13,
+detectionRadius:15,
 
 audioKey:"vega"
 
@@ -2720,7 +2562,7 @@ difficulty:"BARDZO ŁATWE",
 
 signal:100,
 
-detectionRadius:12
+detectionRadius:15
 
 },
 
@@ -2740,7 +2582,7 @@ difficulty:"ŁATWE",
 
 signal:96,
 
-detectionRadius:12
+detectionRadius:15
 
 },
 
@@ -2760,7 +2602,7 @@ difficulty:"ŁATWE",
 
 signal:94,
 
-detectionRadius:12
+detectionRadius:15
 
 },
 
@@ -2780,7 +2622,7 @@ difficulty:"ŁATWE",
 
 signal:95,
 
-detectionRadius:12
+detectionRadius:15
 
 },
 
@@ -2800,7 +2642,7 @@ difficulty:"ŚREDNIE",
 
 signal:90,
 
-detectionRadius:12
+detectionRadius:15
 
 },
 
@@ -2820,7 +2662,7 @@ difficulty:"ŚREDNIE",
 
 signal:85,
 
-detectionRadius:12
+detectionRadius:15
 
 },
 
@@ -2840,7 +2682,7 @@ difficulty:"ŚREDNIE",
 
 signal:88,
 
-detectionRadius:12
+detectionRadius:15
 
 },
 
@@ -2860,7 +2702,7 @@ difficulty:"ŁATWE",
 
 signal:91,
 
-detectionRadius:12
+detectionRadius:15
 
 },
 
@@ -2880,7 +2722,7 @@ difficulty:"ŁATWE",
 
 signal:93,
 
-detectionRadius:12
+detectionRadius:15
 
 }
 
@@ -2935,9 +2777,7 @@ signal:50,
 
 detectionRadius:11,
 
-distanceLabel:"23 million light years",
-
-audioKey:"whirlpool"
+distanceLabel:"23 million light years"
 
 },
 
@@ -3287,13 +3127,15 @@ star.dec*
 Math.PI/
 180
 )
-)*T;
+)*
+T;
 
 const dec=
 star.dec+
 (
 20.04*T
-)/3600;
+)/
+3600;
 
 const gst=
 Astronomy.SiderealTime(
@@ -3311,13 +3153,17 @@ let ha=
 lst-
 ra/15;
 
-if(ha<-12){
+if(
+ha<-12
+){
 
 ha+=24;
 
 }
 
-if(ha>12){
+if(
+ha>12
+){
 
 ha-=24;
 
@@ -3440,15 +3286,12 @@ const results=[];
 /* PLANETS */
 
 for(
-
 const object of bodies
-
 ){
 
 try{
 
 const equator=
-
 Astronomy.Equator(
 
 object.body,
@@ -3464,7 +3307,6 @@ true
 );
 
 const horizontal=
-
 Astronomy.Horizon(
 
 date,
@@ -3511,19 +3353,15 @@ error
 /* STARS */
 
 for(
-
 const star of stars
-
 ){
 
 try{
 
 results.push(
-
 calculateStarPosition(
 star
 )
-
 );
 
 }
@@ -3543,19 +3381,15 @@ error
 /* DEEP SKY */
 
 for(
-
 const object of deepSky
-
 ){
 
 try{
 
 results.push(
-
 calculateStarPosition(
 object
 )
-
 );
 
 }
@@ -3597,7 +3431,6 @@ userLongitude===null
 ){
 
 scanStatus.innerText=
-
 "🌍 Waiting for GPS...";
 
 return;
@@ -3613,7 +3446,6 @@ phoneAltitude===null
 ){
 
 scanStatus.innerText=
-
 "🧭 Waiting for phone orientation...";
 
 return;
@@ -3630,9 +3462,7 @@ let bestScore=
 Infinity;
 
 for(
-
 const object of objects
-
 ){
 
 if(
@@ -3644,7 +3474,6 @@ continue;
 }
 
 const azimuthDifference=
-
 angleDifference(
 
 compassHeading,
@@ -3654,7 +3483,6 @@ object.azimuth
 );
 
 const altitudeDifference=
-
 Math.abs(
 
 phoneAltitude-
@@ -3664,7 +3492,6 @@ object.altitude
 );
 
 const radius=
-
 object.detectionRadius||
 12;
 
@@ -3677,9 +3504,7 @@ altitudeDifference<=radius
 ){
 
 const score=
-
 azimuthDifference+
-
 altitudeDifference;
 
 if(
@@ -3701,12 +3526,10 @@ object;
 if(bestTarget){
 
 const radius=
-
 bestTarget.detectionRadius||
 12;
 
 const azimuthDifference=
-
 angleDifference(
 
 compassHeading,
@@ -3716,7 +3539,6 @@ bestTarget.azimuth
 );
 
 const altitudeDifference=
-
 Math.abs(
 
 phoneAltitude-
@@ -3726,19 +3548,15 @@ bestTarget.altitude
 );
 
 const accuracy=
-
 Math.min(
 
 1,
 
 (
-
 azimuthDifference+
 altitudeDifference
 )
-
 /
-
 (
 radius*2
 )
@@ -3777,11 +3595,8 @@ unlockTarget();
 ================================================== */
 
 function lockTarget(
-
 object,
-
 accuracy
-
 ){
 
 currentTarget=
@@ -3842,8 +3657,13 @@ targetDistance.innerText=
 
 object.distance
 ?
-object.distance.toFixed(4)+" AU"
+
+object.distance.toFixed(4)
++
+" AU"
+
 :
+
 "---";
 
 }
@@ -3877,7 +3697,6 @@ AUDIO_FILES[audioKey];
 else{
 
 targetAudioSource.innerText=
-
 "📻 Radio noise";
 
 }
@@ -3889,8 +3708,6 @@ lockStatus.classList.add(
 "locked"
 );
 
-
-/* BLACK HOLE */
 
 if(
 object.blackHole
@@ -3905,7 +3722,6 @@ detectionPanel.classList.add(
 );
 
 scanStatus.innerText=
-
 "🕳️🌈 YOU FOUND THE VOID! 🌈🕳️";
 
 }
@@ -3921,7 +3737,6 @@ detectionPanel.classList.remove(
 );
 
 scanStatus.innerText=
-
 "🎯 LOCKED: "+
 object.name;
 
@@ -3936,16 +3751,13 @@ object.name;
 
 function unlockTarget(){
 
-if(
-currentTarget
-){
-
 currentTarget=
 null;
 
-}
-
-if(noiseGain&&audioContext){
+if(
+noiseGain&&
+audioContext
+){
 
 noiseGain.gain.setTargetAtTime(
 
@@ -3965,7 +3777,6 @@ audioMeterFill.style.width=
 "0%";
 
 audioInfo.innerText=
-
 "Signal audio: 0% | Radio noise: 100%";
 
 targetName.classList.remove(
@@ -4026,7 +3837,7 @@ scanStatus.innerText=
 
 
 /* ==================================================
-   START RECEIVER
+   START
 ================================================== */
 
 async function startReceiver(){
@@ -4042,21 +3853,7 @@ return;
 receiverActive=
 true;
 
-
-/*
-
-IMPORTANT:
-
-Audio is initialized directly
-after the user's button click.
-
-This helps Safari/iOS allow
-audio playback.
-
-*/
-
 startRadioNoise();
-
 
 statusElement.classList.add(
 "active"
@@ -4069,19 +3866,15 @@ statusElement.innerHTML=
 scanStatus.innerText=
 "📡 INITIALIZING RECEIVER...";
 
-
 startGPS();
 
-
 await enableSensors();
-
 
 setTimeout(
 
 function(){
 
 scanStatus.innerText=
-
 "🌌 CALCULATING SKY OBJECTS...";
 
 },
@@ -4089,7 +3882,6 @@ scanStatus.innerText=
 1000
 
 );
-
 
 detectionInterval=
 
@@ -4105,7 +3897,7 @@ detectObjects,
 
 
 /* ==================================================
-   STOP RECEIVER
+   STOP
 ================================================== */
 
 function stopReceiver(){
