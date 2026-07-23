@@ -2,7 +2,6 @@
 
 <html lang="pl">
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -11,7 +10,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 
 >
 
-<title>Radio Telescope v0.9.1</title>
+<title>Radio Telescope v1.0</title>
 
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 
@@ -51,7 +50,7 @@ text-align:center;
 
 width:100%;
 
-max-width:560px;
+max-width:580px;
 
 margin:auto;
 
@@ -63,7 +62,7 @@ h1{
 
 margin:0;
 
-font-size:29px;
+font-size:30px;
 
 letter-spacing:1px;
 
@@ -1093,7 +1092,7 @@ id="lockStatus"
 
 <div class="version">
 
-RADIO TELESCOPE v0.9.1
+RADIO TELESCOPE v1.0 🚀
 
 </div>
 
@@ -1105,29 +1104,28 @@ RADIO TELESCOPE v0.9.1
 
 <br><br>
 
-🧭 Kompas i czujniki telefonu
+🧭 Kompas, żyroskop i akcelerometr
 określają kierunek obserwacji.
 
 <br><br>
 
-🎧 Dźwięk obiektu jest odtwarzany
-tak długo, jak długo obiekt znajduje
-się w polu sygnału.
+🎧 Każdy obiekt może posiadać
+własną sonifikację.
 
 <br><br>
 
-📻 Im dokładniejsze namierzenie,
+📻 Im silniejszy sygnał,
 tym mniej słyszalny jest szum.
 
 <br><br>
 
-⭐ Gwiazdy mają zwiększone pole
-detekcji dla łatwiejszego namierzania.
+🌌 System obsługuje planety,
+gwiazdy, galaktyki, mgławice,
+gromady i czarne dziury.
 
 <br><br>
 
-📡 Projekt jest edukacyjnym
-symulatorem radioteleskopu.
+📡 RADIO TELESCOPE v1.0
 
 </div>
 
@@ -1137,19 +1135,18 @@ symulatorem radioteleskopu.
 
 
 /* ==================================================
-   RADIO TELESCOPE v0.9.1
-   AUDIO + SATURN + NEPTUNE UPDATE
+   RADIO TELESCOPE v1.0
+   FULL AUDIO SKY CATALOG
 ================================================== */
 
 
 /* ==================================================
    AUDIO FILES
-
-   PLIKI MUSZĄ BYĆ W TYM SAMYM
-   FOLDERZE CO index.html
 ================================================== */
 
 const AUDIO_FILES={
+
+/* PLANETS */
 
 moon:"moon.mp3",
 
@@ -1157,15 +1154,79 @@ sun:"sun.wav",
 
 venus:"venus.mp4",
 
-andromeda:"andromeda.mp3",
+mercury:"mercury.mp3",
 
-vega:"vega.mp3",
+mars:null,
+
+jupiter:null,
 
 saturn:"saturn.mp3",
 
+uranus:"uranus.mp3",
+
 neptune:"neptune.mp3",
 
-whirlpool:null
+
+/* STARS */
+
+vega:"vega.mp3",
+
+sirius:"sirius.mp3",
+
+arcturus:"arcturus.mp3",
+
+altair:"altair.mp3",
+
+capella:"capella.mp3",
+
+betelgeuse:"betelgeuse.mp3",
+
+rigel:"rigel.mp3",
+
+deneb:"deneb.mp3",
+
+aldebaran:"aldebaran.mp3",
+
+polaris:"polaris.mp3",
+
+
+/* GALAXIES */
+
+andromeda:"andromeda.mp3",
+
+whirlpool:"whirlpool.mp3",
+
+m87:"m87.mp3",
+
+sombrero:"sombrero.mp3",
+
+milkyway:"milkyway.mp3",
+
+perseus:"perseus.mp3",
+
+chandra:"chandra.mp3",
+
+
+/* NEBULAE */
+
+helix:"helix.mp3",
+
+crab:"crab.mp3",
+
+carina:"carina.mp3",
+
+eagle:"eagle.mp3",
+
+jellyfish:"jellyfish.mp3",
+
+catseye:"catseye.mp3",
+
+
+/* BLACK HOLES / OTHER */
+
+sagittarius_a:"sagittarius_a.mp3",
+
+v404:"v404.mp3"
 
 };
 
@@ -1511,7 +1572,7 @@ sourceStatus.innerText=
 
 
 /* ==================================================
-   OBJECT AUDIO KEY
+   AUDIO KEY DETECTION
 ================================================== */
 
 function getAudioKey(object){
@@ -1524,69 +1585,200 @@ return object.audioKey;
 
 }
 
-if(
-object.name.includes("MOON")
-){
+const name=
+object.name.toUpperCase();
 
+
+/* PLANETS */
+
+if(
+name.includes("MOON")
+)
 return"moon";
 
-}
-
 if(
-object.name.includes("SUN")
-){
-
+name.includes("SUN")
+)
 return"sun";
 
-}
+if(
+name.includes("MERCURY")
+)
+return"mercury";
 
 if(
-object.name.includes("VENUS")
-){
-
+name.includes("VENUS")
+)
 return"venus";
 
-}
+if(
+name.includes("MARS")
+)
+return"mars";
 
 if(
-object.name.includes("VEGA")
-){
-
-return"vega";
-
-}
+name.includes("JUPITER")
+)
+return"jupiter";
 
 if(
-object.name.includes("SATURN")
-){
-
+name.includes("SATURN")
+)
 return"saturn";
 
-}
+if(
+name.includes("URANUS")
+)
+return"uranus";
 
 if(
-object.name.includes("NEPTUNE")
-){
-
+name.includes("NEPTUNE")
+)
 return"neptune";
 
-}
+
+/* STARS */
 
 if(
-object.name.includes("M31")
-){
+name.includes("VEGA")
+)
+return"vega";
 
+if(
+name.includes("SIRIUS")
+)
+return"sirius";
+
+if(
+name.includes("ARCTURUS")
+)
+return"arcturus";
+
+if(
+name.includes("ALTAIR")
+)
+return"altair";
+
+if(
+name.includes("CAPELLA")
+)
+return"capella";
+
+if(
+name.includes("BETELGEUSE")
+)
+return"betelgeuse";
+
+if(
+name.includes("RIGEL")
+)
+return"rigel";
+
+if(
+name.includes("DENEB")
+)
+return"deneb";
+
+if(
+name.includes("ALDEBARAN")
+)
+return"aldebaran";
+
+if(
+name.includes("POLARIS")
+)
+return"polaris";
+
+
+/* GALAXIES */
+
+if(
+name.includes("ANDROMEDA")||
+name.includes("M31")
+)
 return"andromeda";
 
-}
-
 if(
-object.name.includes("M51")
-){
-
+name.includes("WHIRLPOOL")||
+name.includes("M51")
+)
 return"whirlpool";
 
-}
+if(
+name.includes("M87")
+)
+return"m87";
+
+if(
+name.includes("SOMBRERO")||
+name.includes("M104")
+)
+return"sombrero";
+
+if(
+name.includes("MILKY WAY")
+)
+return"milkyway";
+
+if(
+name.includes("PERSEUS")
+)
+return"perseus";
+
+if(
+name.includes("CHANDRA")
+)
+return"chandra";
+
+
+/* NEBULAE */
+
+if(
+name.includes("HELIX")
+)
+return"helix";
+
+if(
+name.includes("CRAB")
+)
+return"crab";
+
+if(
+name.includes("CARINA")
+)
+return"carina";
+
+if(
+name.includes("EAGLE")||
+name.includes("M16")
+)
+return"eagle";
+
+if(
+name.includes("JELLYFISH")||
+name.includes("IC 443")
+)
+return"jellyfish";
+
+if(
+name.includes("CAT'S EYE")||
+name.includes("NGC 6543")
+)
+return"catseye";
+
+
+/* BLACK HOLES */
+
+if(
+name.includes("SAGITTARIUS")
+)
+return"sagittarius_a";
+
+if(
+name.includes("V404")
+)
+return"v404";
+
 
 return null;
 
@@ -1649,7 +1841,7 @@ currentAudio.addEventListener(
 function(){
 
 console.warn(
-"Nie można odtworzyć pliku audio:",
+"Audio error:",
 file
 );
 
@@ -1791,7 +1983,7 @@ null;
 
 
 /* ==================================================
-   STOP OBJECT AUDIO
+   STOP AUDIO
 ================================================== */
 
 function stopObjectAudio(){
@@ -1902,7 +2094,10 @@ audioContext.currentTime,
 );
 
 if(
+getAudioKey(object)&&
+AUDIO_FILES[
 getAudioKey(object)
+]
 ){
 
 playObjectAudio(
@@ -2373,7 +2568,9 @@ difficulty:"BARDZO ŁATWE",
 
 signal:100,
 
-detectionRadius:14
+detectionRadius:14,
+
+audioKey:"sun"
 
 },
 
@@ -2389,7 +2586,9 @@ difficulty:"BARDZO ŁATWE",
 
 signal:100,
 
-detectionRadius:14
+detectionRadius:14,
+
+audioKey:"moon"
 
 },
 
@@ -2405,7 +2604,9 @@ difficulty:"TRUDNE",
 
 signal:55,
 
-detectionRadius:11
+detectionRadius:12,
+
+audioKey:"mercury"
 
 },
 
@@ -2439,7 +2640,9 @@ difficulty:"ŚREDNIE",
 
 signal:70,
 
-detectionRadius:12
+detectionRadius:12,
+
+audioKey:"mars"
 
 },
 
@@ -2455,7 +2658,9 @@ difficulty:"ŁATWE",
 
 signal:92,
 
-detectionRadius:13
+detectionRadius:13,
+
+audioKey:"jupiter"
 
 },
 
@@ -2489,7 +2694,9 @@ difficulty:"TRUDNE",
 
 signal:55,
 
-detectionRadius:11
+detectionRadius:12,
+
+audioKey:"uranus"
 
 },
 
@@ -2516,10 +2723,6 @@ audioKey:"neptune"
 
 /* ==================================================
    STARS
-
-   v0.9.1:
-   INCREASED DETECTION FIELD
-   FROM ~12° TO ~15°
 ================================================== */
 
 const stars=[
@@ -2562,7 +2765,9 @@ difficulty:"BARDZO ŁATWE",
 
 signal:100,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"sirius"
 
 },
 
@@ -2582,7 +2787,9 @@ difficulty:"ŁATWE",
 
 signal:96,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"arcturus"
 
 },
 
@@ -2602,7 +2809,9 @@ difficulty:"ŁATWE",
 
 signal:94,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"altair"
 
 },
 
@@ -2622,7 +2831,9 @@ difficulty:"ŁATWE",
 
 signal:95,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"capella"
 
 },
 
@@ -2642,7 +2853,9 @@ difficulty:"ŚREDNIE",
 
 signal:90,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"betelgeuse"
 
 },
 
@@ -2662,7 +2875,9 @@ difficulty:"ŚREDNIE",
 
 signal:85,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"rigel"
 
 },
 
@@ -2682,7 +2897,9 @@ difficulty:"ŚREDNIE",
 
 signal:88,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"deneb"
 
 },
 
@@ -2702,7 +2919,9 @@ difficulty:"ŁATWE",
 
 signal:91,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"aldebaran"
 
 },
 
@@ -2722,7 +2941,9 @@ difficulty:"ŁATWE",
 
 signal:93,
 
-detectionRadius:15
+detectionRadius:15,
+
+audioKey:"polaris"
 
 }
 
@@ -2730,7 +2951,7 @@ detectionRadius:15
 
 
 /* ==================================================
-   DEEP SKY
+   DEEP SKY OBJECTS
 ================================================== */
 
 const deepSky=[
@@ -2777,7 +2998,9 @@ signal:50,
 
 detectionRadius:11,
 
-distanceLabel:"23 million light years"
+distanceLabel:"23 million light years",
+
+audioKey:"whirlpool"
 
 },
 
@@ -2795,11 +3018,13 @@ distance:53500000,
 
 difficulty:"BARDZO TRUDNE",
 
-signal:50,
+signal:40,
 
 detectionRadius:10,
 
-distanceLabel:"53.5 million light years"
+distanceLabel:"53.5 million light years",
+
+audioKey:"m87"
 
 },
 
@@ -2821,7 +3046,9 @@ signal:50,
 
 detectionRadius:10,
 
-distanceLabel:"31 million light years"
+distanceLabel:"31 million light years",
+
+audioKey:"sombrero"
 
 },
 
@@ -2829,7 +3056,7 @@ distanceLabel:"31 million light years"
 
 name:"🌌 MILKY WAY CENTER",
 
-type:"Galaxy",
+type:"Galaxy Center",
 
 ra:17.761,
 
@@ -2843,7 +3070,9 @@ signal:90,
 
 detectionRadius:11,
 
-distanceLabel:"26 000 light years"
+distanceLabel:"26 000 light years",
+
+audioKey:"milkyway"
 
 },
 
@@ -2851,7 +3080,7 @@ distanceLabel:"26 000 light years"
 
 name:"💫 HELIX NEBULA",
 
-type:"Nebula",
+type:"Planetary Nebula",
 
 ra:22.493,
 
@@ -2865,7 +3094,9 @@ signal:70,
 
 detectionRadius:11,
 
-distanceLabel:"655 light years"
+distanceLabel:"655 light years",
+
+audioKey:"helix"
 
 },
 
@@ -2873,7 +3104,7 @@ distanceLabel:"655 light years"
 
 name:"💫 CRAB NEBULA",
 
-type:"Nebula",
+type:"Supernova Remnant",
 
 ra:5.5756,
 
@@ -2887,7 +3118,9 @@ signal:82,
 
 detectionRadius:11,
 
-distanceLabel:"6 500 light years"
+distanceLabel:"6 500 light years",
+
+audioKey:"crab"
 
 },
 
@@ -2909,7 +3142,9 @@ signal:80,
 
 detectionRadius:11,
 
-distanceLabel:"8 500 light years"
+distanceLabel:"8 500 light years",
+
+audioKey:"carina"
 
 },
 
@@ -2931,15 +3166,17 @@ signal:78,
 
 detectionRadius:11,
 
-distanceLabel:"7 000 light years"
+distanceLabel:"7 000 light years",
+
+audioKey:"eagle"
 
 },
 
 {
 
-name:"💫 NGC 6543 — CAT'S EYE",
+name:"👁️ NGC 6543 — CAT'S EYE NEBULA",
 
-type:"Nebula",
+type:"Planetary Nebula",
 
 ra:17.976,
 
@@ -2949,11 +3186,13 @@ distance:3300,
 
 difficulty:"TRUDNE",
 
-signal:60,
+signal:70,
 
 detectionRadius:10,
 
-distanceLabel:"3 300 light years"
+distanceLabel:"3 300 light years",
+
+audioKey:"catseye"
 
 },
 
@@ -2961,7 +3200,7 @@ distanceLabel:"3 300 light years"
 
 name:"💫 IC 443 — JELLYFISH NEBULA",
 
-type:"Nebula",
+type:"Supernova Remnant",
 
 ra:6.283,
 
@@ -2975,7 +3214,9 @@ signal:55,
 
 detectionRadius:10,
 
-distanceLabel:"5 000 light years"
+distanceLabel:"5 000 light years",
+
+audioKey:"jellyfish"
 
 },
 
@@ -3019,7 +3260,9 @@ signal:45,
 
 detectionRadius:10,
 
-distanceLabel:"240 million light years"
+distanceLabel:"240 million light years",
+
+audioKey:"perseus"
 
 },
 
@@ -3041,7 +3284,9 @@ signal:25,
 
 detectionRadius:9,
 
-distanceLabel:"Billions of light years"
+distanceLabel:"Billions of light years",
+
+audioKey:"chandra"
 
 },
 
@@ -3063,7 +3308,9 @@ signal:40,
 
 detectionRadius:9,
 
-distanceLabel:"7 800 light years"
+distanceLabel:"7 800 light years",
+
+audioKey:"v404"
 
 },
 
@@ -3086,6 +3333,8 @@ signal:88,
 detectionRadius:8,
 
 distanceLabel:"26 000 light years",
+
+audioKey:"sagittarius_a",
 
 blackHole:true
 
@@ -3830,14 +4079,11 @@ audioStatus.innerText=
 sourceStatus.innerText=
 "Source: Generated radio noise";
 
-scanStatus.innerText=
-"🌌 SCANNING SKY...";
-
 }
 
 
 /* ==================================================
-   START
+   START RECEIVER
 ================================================== */
 
 async function startReceiver(){
@@ -3897,7 +4143,7 @@ detectObjects,
 
 
 /* ==================================================
-   STOP
+   STOP RECEIVER
 ================================================== */
 
 function stopReceiver(){
