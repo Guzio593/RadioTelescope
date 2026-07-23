@@ -12,7 +12,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 
 >
 
-<title>Radio Telescope v0.8.2</title>
+<title>Radio Telescope v0.8.3</title>
 
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 
@@ -31,27 +31,18 @@ min-height:100vh;
 background:
 
 radial-gradient(
-
 circle at top,
-
 #18263b,
-
 #05070b 70%
-
 );
 
 color:white;
 
 font-family:
-
 -apple-system,
-
 BlinkMacSystemFont,
-
 "Segoe UI",
-
 Arial,
-
 sans-serif;
 
 text-align:center;
@@ -101,13 +92,9 @@ padding:25px;
 background:
 
 linear-gradient(
-
 145deg,
-
 #101827,
-
 #080b11
-
 );
 
 border:1px solid #273348;
@@ -115,7 +102,6 @@ border:1px solid #273348;
 border-radius:25px;
 
 box-shadow:
-
 0 15px 45px #00000099;
 
 }
@@ -161,7 +147,6 @@ color:#42e6a4;
 background:#42e6a4;
 
 box-shadow:
-
 0 0 15px #42e6a4;
 
 }
@@ -247,13 +232,9 @@ border-radius:50%;
 background:
 
 radial-gradient(
-
 circle,
-
 #151e2d,
-
 #080b11
-
 );
 
 border:3px solid #2b374b;
@@ -265,9 +246,7 @@ align-items:center;
 justify-content:center;
 
 box-shadow:
-
 inset 0 0 35px #000000aa,
-
 0 0 25px #00000066;
 
 }
@@ -355,13 +334,9 @@ transform:translateX(-50%);
 background:
 
 linear-gradient(
-
 to bottom,
-
 #ff3b3b 50%,
-
 white 50%
-
 );
 
 border-radius:5px;
@@ -461,13 +436,9 @@ padding:25px 20px;
 background:
 
 linear-gradient(
-
 145deg,
-
 #101827,
-
 #080c13
-
 );
 
 border:1px solid #29364b;
@@ -597,6 +568,81 @@ font-weight:bold;
 color:#42e6a4;
 
 background:#0d211b;
+
+}
+
+.black-hole{
+
+animation:
+
+blackHoleRainbow 2s linear infinite,
+
+blackHolePulse 1s ease-in-out infinite alternate;
+
+font-weight:900;
+
+}
+
+@keyframes blackHoleRainbow{
+
+0%{
+color:#ff004c;
+}
+
+20%{
+color:#ff8a00;
+}
+
+40%{
+color:#ffee00;
+}
+
+60%{
+color:#00ff88;
+}
+
+80%{
+color:#00c8ff;
+}
+
+100%{
+color:#ff00ff;
+}
+
+}
+
+@keyframes blackHolePulse{
+
+from{
+
+transform:scale(1);
+
+text-shadow:
+0 0 5px currentColor;
+
+}
+
+to{
+
+transform:scale(1.08);
+
+text-shadow:
+0 0 20px currentColor,
+0 0 40px currentColor;
+
+}
+
+}
+
+.black-hole-panel{
+
+border-color:#ff00ff;
+
+box-shadow:
+
+0 0 20px #ff00ff33,
+
+inset 0 0 20px #ff00ff11;
 
 }
 
@@ -844,7 +890,10 @@ onclick="stopReceiver()"
 
 </button>
 
-<div class="detection-panel">
+<div
+class="detection-panel"
+id="detectionPanel"
+>
 
 <div class="detection-title">
 
@@ -974,6 +1023,26 @@ id="targetDifficulty"
 
 <span class="detection-label">
 
+🎯 Detection field
+
+</span>
+
+<span
+class="detection-value"
+id="targetField"
+
+>
+
+---
+
+</span>
+
+</div>
+
+<div class="detection-row">
+
+<span class="detection-label">
+
 🎧 Audio source
 
 </span>
@@ -985,25 +1054,6 @@ id="targetAudioSource"
 >
 
 Radio noise
-
-</span>
-
-</div>
-
-<div class="detection-row">
-
-<span class="detection-label">
-
-🎯 Detection field
-
-</span>
-
-<span
-class="detection-value"
-
->
-
-±12°
 
 </span>
 
@@ -1033,7 +1083,7 @@ id="lockStatus"
 
 <div class="version">
 
-RADIO TELESCOPE v0.8.2
+RADIO TELESCOPE v0.8.3
 
 </div>
 
@@ -1041,28 +1091,27 @@ RADIO TELESCOPE v0.8.2
 
 <div class="info">
 
-🌍 Pozycja obserwatora jest pobierana
-z GPS.
+🌍 GPS określa pozycję obserwatora.
 
 <br><br>
 
-🕐 Aktualna data i godzina
-są używane do obliczeń astronomicznych.
+🕐 Aktualny czas jest używany
+do obliczeń pozycji obiektów.
 
 <br><br>
 
-🧭 Kierunek telefonu jest pobierany
-z czujników urządzenia.
+🧭 Kompas i czujniki telefonu
+określają kierunek obserwacji.
 
 <br><br>
 
-⭐ v0.8.2 dodaje katalog jasnych gwiazd.
+🎯 Każdy obiekt posiada
+indywidualny zakres wykrywania.
 
 <br><br>
 
-🪐 Pozycje planet i gwiazd są
-obliczane na podstawie aktualnego czasu
-i położenia obserwatora.
+🌈 Sagittarius A* posiada
+specjalny tryb czarnej dziury.
 
 <br><br>
 
@@ -1173,11 +1222,17 @@ document.getElementById("targetDistance");
 const targetDifficulty=
 document.getElementById("targetDifficulty");
 
+const targetField=
+document.getElementById("targetField");
+
 const targetAudioSource=
 document.getElementById("targetAudioSource");
 
 const lockStatus=
 document.getElementById("lockStatus");
+
+const detectionPanel=
+document.getElementById("detectionPanel");
 
 
 /* ==================================================
@@ -1194,7 +1249,10 @@ now.toLocaleTimeString("pl-PL");
 
 }
 
-setInterval(updateTime,1000);
+setInterval(
+updateTime,
+1000
+);
 
 updateTime();
 
@@ -1205,7 +1263,10 @@ updateTime();
 
 function getDirection(degrees){
 
-if(degrees>=337.5||degrees<22.5)
+if(
+degrees>=337.5||
+degrees<22.5
+)
 return"N";
 
 if(degrees<67.5)
@@ -1237,7 +1298,11 @@ return"NW";
 
 function angleDifference(a,b){
 
-const difference=Math.abs(a-b);
+const difference=
+
+Math.abs(
+a-b
+);
 
 return Math.min(
 
@@ -1264,7 +1329,9 @@ factor
 
 ){
 
-if(previous===null){
+if(
+previous===null
+){
 
 return current;
 
@@ -1273,37 +1340,24 @@ return current;
 let difference=
 
 (
-
 current-
-
 previous+
-
 540
-
 )
-
 %
-
 360
-
 -
-
 180;
 
 return(
 
 previous+
-
 difference*
-
 factor+
-
 360
 
 )
-
 %
-
 360;
 
 }
@@ -1329,7 +1383,10 @@ return;
 
 if(audioContext){
 
-if(audioContext.state==="suspended"){
+if(
+audioContext.state===
+"suspended"
+){
 
 audioContext.resume();
 
@@ -1339,7 +1396,8 @@ return;
 
 }
 
-audioContext=new AudioContext();
+audioContext=
+new AudioContext();
 
 const buffer=
 
@@ -1377,22 +1435,24 @@ noiseSource=
 
 audioContext.createBufferSource();
 
-noiseSource.buffer=buffer;
+noiseSource.buffer=
+buffer;
 
-noiseSource.loop=true;
+noiseSource.loop=
+true;
 
 noiseGain=
-
 audioContext.createGain();
 
-noiseGain.gain.value=0.04;
+noiseGain.gain.value=
+0.04;
 
-noiseSource.connect(noiseGain);
+noiseSource.connect(
+noiseGain
+);
 
 noiseGain.connect(
-
 audioContext.destination
-
 );
 
 noiseSource.start();
@@ -1463,11 +1523,14 @@ event.webkitCompassHeading;
 
 }
 
-else if(event.alpha!==null){
+else if(
+event.alpha!==null
+){
 
 heading=
 
-360-event.alpha;
+360-
+event.alpha;
 
 }
 
@@ -1488,15 +1551,10 @@ return;
 heading=
 
 (
-
 heading+
-
 360
-
 )
-
 %
-
 360;
 
 filteredHeading=
@@ -1512,31 +1570,25 @@ SMOOTHING
 );
 
 compassHeading=
-
 filteredHeading;
 
 headingElement.innerText=
 
 Math.round(
-
 filteredHeading
-
-)+"°";
+)
++"°";
 
 directionElement.innerText=
 
 getDirection(
-
 filteredHeading
-
 );
 
 compassElement.style.transform=
 
 "rotate("+
-
 (-filteredHeading)+
-
 "deg)";
 
 if(receiverActive){
@@ -1572,7 +1624,10 @@ const z=
 
 event.accelerationIncludingGravity.z;
 
-if(y===null||z===null){
+if(
+y===null||
+z===null
+){
 
 return;
 
@@ -1581,38 +1636,29 @@ return;
 let angle=
 
 Math.atan2(
-
 -y,
-
 z
-
 )
-
 *
-
 180/
-
 Math.PI;
 
 angle=
 
 Math.max(
-
 0,
-
 Math.min(
-
 90,
-
 angle
-
 )
-
 );
 
-if(filteredAltitude===null){
+if(
+filteredAltitude===null
+){
 
-filteredAltitude=angle;
+filteredAltitude=
+angle;
 
 }
 
@@ -1621,30 +1667,23 @@ else{
 filteredAltitude+=
 
 (
-
 angle-
-
 filteredAltitude
-
 )
-
 *
-
 SMOOTHING;
 
 }
 
 phoneAltitude=
-
 filteredAltitude;
 
 altitudeElement.innerText=
 
 Math.round(
-
 filteredAltitude
-
-)+"°";
+)
++"°";
 
 altitudeStatus.innerText=
 
@@ -1665,10 +1704,11 @@ detectObjects();
 
 function startGPS(){
 
-if(!navigator.geolocation){
+if(
+!navigator.geolocation
+){
 
 locationElement.innerText=
-
 "GPS unavailable";
 
 return;
@@ -1682,11 +1722,9 @@ navigator.geolocation.watchPosition(
 function(position){
 
 userLatitude=
-
 position.coords.latitude;
 
 userLongitude=
-
 position.coords.longitude;
 
 locationElement.innerText=
@@ -1694,29 +1732,21 @@ locationElement.innerText=
 userLatitude.toFixed(5)
 
 +
-
 "°, "
 
 +
-
 userLongitude.toFixed(5)
 
 +
-
 "°";
 
 accuracyElement.innerText=
 
 "Accuracy ±"+
-
 Math.round(
-
 position.coords.accuracy
-
 )
-
 +
-
 " m";
 
 scanStatus.innerText=
@@ -1772,7 +1802,9 @@ await
 
 DeviceOrientationEvent.requestPermission();
 
-if(permission==="granted"){
+if(
+permission==="granted"
+){
 
 window.addEventListener(
 
@@ -1829,7 +1861,9 @@ await
 
 DeviceMotionEvent.requestPermission();
 
-if(permission==="granted"){
+if(
+permission==="granted"
+){
 
 window.addEventListener(
 
@@ -1886,7 +1920,11 @@ type:"Star",
 
 difficulty:"BARDZO ŁATWE",
 
-signal:100
+signal:100,
+
+detectionRadius:14,
+
+distanceLabel:"150 million km"
 
 },
 
@@ -1900,7 +1938,11 @@ type:"Natural satellite",
 
 difficulty:"BARDZO ŁATWE",
 
-signal:100
+signal:100,
+
+detectionRadius:14,
+
+distanceLabel:"384 400 km"
 
 },
 
@@ -1914,7 +1956,9 @@ type:"Planet",
 
 difficulty:"TRUDNE",
 
-signal:55
+signal:55,
+
+detectionRadius:10
 
 },
 
@@ -1928,7 +1972,9 @@ type:"Planet",
 
 difficulty:"ŁATWE",
 
-signal:95
+signal:95,
+
+detectionRadius:14
 
 },
 
@@ -1942,7 +1988,9 @@ type:"Planet",
 
 difficulty:"ŚREDNIE",
 
-signal:70
+signal:70,
+
+detectionRadius:12
 
 },
 
@@ -1956,7 +2004,9 @@ type:"Planet",
 
 difficulty:"ŁATWE",
 
-signal:92
+signal:92,
+
+detectionRadius:13
 
 },
 
@@ -1970,7 +2020,9 @@ type:"Planet",
 
 difficulty:"ŁATWE",
 
-signal:88
+signal:88,
+
+detectionRadius:12
 
 },
 
@@ -1984,7 +2036,9 @@ type:"Planet",
 
 difficulty:"TRUDNE",
 
-signal:55
+signal:55,
+
+detectionRadius:10
 
 },
 
@@ -1998,7 +2052,9 @@ type:"Planet",
 
 difficulty:"BARDZO TRUDNE",
 
-signal:35
+signal:35,
+
+detectionRadius:10
 
 }
 
@@ -2025,7 +2081,9 @@ distance:25.04,
 
 difficulty:"ŁATWE",
 
-signal:98
+signal:98,
+
+detectionRadius:13
 
 },
 
@@ -2043,7 +2101,9 @@ distance:8.60,
 
 difficulty:"BARDZO ŁATWE",
 
-signal:100
+signal:100,
+
+detectionRadius:12
 
 },
 
@@ -2061,7 +2121,9 @@ distance:36.7,
 
 difficulty:"ŁATWE",
 
-signal:96
+signal:96,
+
+detectionRadius:12
 
 },
 
@@ -2079,7 +2141,9 @@ distance:16.73,
 
 difficulty:"ŁATWE",
 
-signal:94
+signal:94,
+
+detectionRadius:12
 
 },
 
@@ -2097,7 +2161,9 @@ distance:42.92,
 
 difficulty:"ŁATWE",
 
-signal:95
+signal:95,
+
+detectionRadius:12
 
 },
 
@@ -2115,7 +2181,9 @@ distance:642.5,
 
 difficulty:"ŚREDNIE",
 
-signal:90
+signal:90,
+
+detectionRadius:12
 
 },
 
@@ -2133,7 +2201,9 @@ distance:860,
 
 difficulty:"ŚREDNIE",
 
-signal:85
+signal:85,
+
+detectionRadius:12
 
 },
 
@@ -2151,7 +2221,9 @@ distance:2615,
 
 difficulty:"ŚREDNIE",
 
-signal:88
+signal:88,
+
+detectionRadius:12
 
 },
 
@@ -2169,7 +2241,9 @@ distance:65.23,
 
 difficulty:"ŁATWE",
 
-signal:91
+signal:91,
+
+detectionRadius:12
 
 },
 
@@ -2187,7 +2261,9 @@ distance:447,
 
 difficulty:"ŁATWE",
 
-signal:93
+signal:93,
+
+detectionRadius:12
 
 }
 
@@ -2195,93 +2271,423 @@ signal:93
 
 
 /* ==================================================
-   STAR CALCULATION
+   DEEP SKY OBJECTS
+================================================== */
+
+const deepSky=[
+
+{
+
+name:"🌌 M31 — ANDROMEDA GALAXY",
+
+type:"Galaxy",
+
+ra:0.712,
+
+dec:41.269,
+
+distance:2540000,
+
+difficulty:"ŁATWE",
+
+signal:92,
+
+detectionRadius:12,
+
+distanceLabel:"2.54 million light years"
+
+},
+
+{
+
+name:"🌌 M51 — WHIRLPOOL GALAXY",
+
+type:"Galaxy",
+
+ra:13.498,
+
+dec:47.195,
+
+distance:23000000,
+
+difficulty:"TRUDNE",
+
+signal:65,
+
+detectionRadius:11,
+
+distanceLabel:"23 million light years"
+
+},
+
+{
+
+name:"🌌 M87",
+
+type:"Galaxy",
+
+ra:12.514,
+
+dec:12.392,
+
+distance:53500000,
+
+difficulty:"BARDZO TRUDNE",
+
+signal:50,
+
+detectionRadius:10,
+
+distanceLabel:"53.5 million light years"
+
+},
+
+{
+
+name:"🌌 M104 — SOMBRERO GALAXY",
+
+type:"Galaxy",
+
+ra:12.667,
+
+dec:-11.623,
+
+distance:31000000,
+
+difficulty:"TRUDNE",
+
+signal:60,
+
+detectionRadius:10,
+
+distanceLabel:"31 million light years"
+
+},
+
+{
+
+name:"🌌 MILKY WAY CENTER",
+
+type:"Galaxy",
+
+ra:17.761,
+
+dec:-29.007,
+
+distance:26000,
+
+difficulty:"ŚREDNIE",
+
+signal:90,
+
+detectionRadius:11,
+
+distanceLabel:"26 000 light years"
+
+},
+
+{
+
+name:"💫 HELIX NEBULA",
+
+type:"Nebula",
+
+ra:22.493,
+
+dec:-20.837,
+
+distance:655,
+
+difficulty:"TRUDNE",
+
+signal:70,
+
+detectionRadius:11,
+
+distanceLabel:"655 light years"
+
+},
+
+{
+
+name:"💫 CRAB NEBULA",
+
+type:"Nebula",
+
+ra:5.5756,
+
+dec:22.0145,
+
+distance:6500,
+
+difficulty:"ŚREDNIE",
+
+signal:82,
+
+detectionRadius:11,
+
+distanceLabel:"6 500 light years"
+
+},
+
+{
+
+name:"💫 CARINA NEBULA",
+
+type:"Nebula",
+
+ra:10.75,
+
+dec:-59.87,
+
+distance:8500,
+
+difficulty:"ŚREDNIE",
+
+signal:80,
+
+detectionRadius:11,
+
+distanceLabel:"8 500 light years"
+
+},
+
+{
+
+name:"💫 M16 — EAGLE NEBULA",
+
+type:"Nebula",
+
+ra:18.313,
+
+dec:-13.783,
+
+distance:7000,
+
+difficulty:"ŚREDNIE",
+
+signal:78,
+
+detectionRadius:11,
+
+distanceLabel:"7 000 light years"
+
+},
+
+{
+
+name:"💫 NGC 6543 — CAT'S EYE",
+
+type:"Nebula",
+
+ra:17.976,
+
+dec:66.633,
+
+distance:3300,
+
+difficulty:"TRUDNE",
+
+signal:60,
+
+detectionRadius:10,
+
+distanceLabel:"3 300 light years"
+
+},
+
+{
+
+name:"💫 IC 443 — JELLYFISH NEBULA",
+
+type:"Nebula",
+
+ra:6.283,
+
+dec:22.533,
+
+distance:5000,
+
+difficulty:"TRUDNE",
+
+signal:55,
+
+detectionRadius:10,
+
+distanceLabel:"5 000 light years"
+
+},
+
+{
+
+name:"🪨 67P — CHURYUMOV-GERASIMENKO",
+
+type:"Comet",
+
+ra:0,
+
+dec:0,
+
+distance:0,
+
+difficulty:"BARDZO TRUDNE",
+
+signal:35,
+
+detectionRadius:9,
+
+distanceLabel:"Dynamic comet"
+
+},
+
+{
+
+name:"🌀 PERSEUS CLUSTER",
+
+type:"Galaxy Cluster",
+
+ra:3.333,
+
+dec:41.5,
+
+distance:240000000,
+
+difficulty:"BARDZO TRUDNE",
+
+signal:45,
+
+detectionRadius:10,
+
+distanceLabel:"240 million light years"
+
+},
+
+{
+
+name:"💥 CHANDRA DEEP FIELD",
+
+type:"Deep Field",
+
+ra:3.5,
+
+dec:-27.8,
+
+distance:13000000000,
+
+difficulty:"EKSTREMALNIE TRUDNE",
+
+signal:25,
+
+detectionRadius:9,
+
+distanceLabel:"Billions of light years"
+
+},
+
+{
+
+name:"💫 V404 CYGNI",
+
+type:"Black Hole Binary",
+
+ra:20.411,
+
+dec:33.867,
+
+distance:7800,
+
+difficulty:"BARDZO TRUDNE",
+
+signal:40,
+
+detectionRadius:9,
+
+distanceLabel:"7 800 light years"
+
+},
+
+{
+
+name:"🕳️ SAGITTARIUS A*",
+
+type:"Supermassive Black Hole",
+
+ra:17.761,
+
+dec:-29.007,
+
+distance:26000,
+
+difficulty:"BARDZO TRUDNE",
+
+signal:88,
+
+detectionRadius:8,
+
+distanceLabel:"26 000 light years",
+
+blackHole:true
+
+}
+
+];
+
+
+/* ==================================================
+   STAR POSITION
 ================================================== */
 
 function calculateStarPosition(star){
 
 const date=
-
 new Date();
 
 const jd=
-
 Astronomy.MakeTime(date).ut;
 
 const T=
-
 (
-
 jd-
-
 2451545.0
-
 )
-
 /
-
 36525.0;
 
 const raDegrees=
-
 star.ra*15;
 
 const ra=
-
 raDegrees+
-
 (
-
 3.075+
-
 1.336*
-
 Math.sin(
-
 star.dec*
-
 Math.PI/
-
 180
-
 )
-
 )*T;
 
 const dec=
-
 star.dec+
-
 (
-
 20.04*T
-
 )/3600;
 
 const gst=
-
 Astronomy.SiderealTime(
-
 date
-
 );
 
 const lst=
-
 (
-
 gst+
-
 userLongitude/15
-
 )
-
 %24;
 
 let ha=
-
 lst-
-
 ra/15;
 
 if(ha<-12){
@@ -2297,57 +2703,39 @@ ha-=24;
 }
 
 const haRad=
-
 ha*
-
 15*
-
 Math.PI/
-
 180;
 
 const decRad=
-
 dec*
-
 Math.PI/
-
 180;
 
 const latRad=
-
 userLatitude*
-
 Math.PI/
-
 180;
 
 const sinAltitude=
 
 Math.sin(decRad)*
-
 Math.sin(latRad)
 
 +
 
 Math.cos(decRad)*
-
 Math.cos(latRad)*
-
 Math.cos(haRad);
 
 const altitude=
 
 Math.asin(
-
 sinAltitude
-
 )
-
 *
-
 180/
-
 Math.PI;
 
 let azimuth=
@@ -2357,46 +2745,52 @@ Math.atan2(
 Math.sin(haRad),
 
 Math.cos(haRad)*
-
 Math.sin(latRad)
 
 -
 
 Math.tan(decRad)*
-
 Math.cos(latRad)
 
 )
-
 *
-
 180/
-
 Math.PI;
 
 azimuth=
-
 (
-
 azimuth+
-
 180+
-
 360
-
 )
-
 %360;
 
 return{
 
 ...star,
 
-azimuth:azimuth,
+azimuth:
+azimuth,
 
-altitude:altitude
+altitude:
+altitude
 
 };
+
+}
+
+
+/* ==================================================
+   DEEP SKY POSITION
+================================================== */
+
+function calculateDeepSkyPosition(object){
+
+return calculateStarPosition({
+
+...object
+
+});
 
 }
 
@@ -2432,7 +2826,6 @@ userLongitude,
 );
 
 const date=
-
 new Date();
 
 const results=[];
@@ -2485,15 +2878,12 @@ results.push({
 ...object,
 
 azimuth:
-
 horizontal.azimuth,
 
 altitude:
-
 horizontal.altitude,
 
 distance:
-
 horizontal.dist
 
 });
@@ -2503,11 +2893,8 @@ horizontal.dist
 catch(error){
 
 console.error(
-
 "Planet error",
-
 error
-
 );
 
 }
@@ -2525,17 +2912,11 @@ const star of stars
 
 try{
 
-const position=
-
-calculateStarPosition(
-
-star
-
-);
-
 results.push(
 
-position
+calculateStarPosition(
+star
+)
 
 );
 
@@ -2544,11 +2925,40 @@ position
 catch(error){
 
 console.error(
-
 "Star error",
-
 error
+);
 
+}
+
+}
+
+
+/* DEEP SKY */
+
+for(
+
+const object of deepSky
+
+){
+
+try{
+
+results.push(
+
+calculateDeepSkyPosition(
+object
+)
+
+);
+
+}
+
+catch(error){
+
+console.error(
+"Deep sky error",
+error
 );
 
 }
@@ -2605,12 +3015,13 @@ return;
 }
 
 const objects=
-
 calculateSkyPositions();
 
-let bestTarget=null;
+let bestTarget=
+null;
 
-let bestScore=Infinity;
+let bestScore=
+Infinity;
 
 for(
 
@@ -2618,7 +3029,9 @@ const object of objects
 
 ){
 
-if(object.altitude<0){
+if(
+object.altitude<0
+){
 
 continue;
 
@@ -2644,25 +3057,42 @@ object.altitude
 
 );
 
+
+/*
+
+INDIVIDUAL DETECTION RADIUS
+
+*/
+
+const radius=
+
+object.detectionRadius||
+12;
+
+
 if(
 
-azimuthDifference<=12&&
+azimuthDifference<=radius&&
 
-altitudeDifference<=12
+altitudeDifference<=radius
 
 ){
 
 const score=
 
-azimuthDifference*1.5+
+azimuthDifference+
 
 altitudeDifference;
 
-if(score<bestScore){
+if(
+score<bestScore
+){
 
-bestScore=score;
+bestScore=
+score;
 
-bestTarget=object;
+bestTarget=
+object;
 
 }
 
@@ -2672,7 +3102,9 @@ bestTarget=object;
 
 if(bestTarget){
 
-lockTarget(bestTarget);
+lockTarget(
+bestTarget
+);
 
 }
 
@@ -2691,22 +3123,19 @@ unlockTarget();
 
 function lockTarget(object){
 
-currentTarget=object;
+currentTarget=
+object;
 
 targetName.innerText=
-
-"🎯 "+object.name;
+object.name;
 
 targetType.innerText=
-
 object.type;
 
 signalStrength.innerText=
-
 object.signal;
 
 signalFill.style.width=
-
 object.signal+"%";
 
 targetDirection.innerText=
@@ -2718,25 +3147,31 @@ object.azimuth.toFixed(1)
 +
 
 getDirection(
-
 object.azimuth
-
 );
 
 targetAltitude.innerText=
 
 object.altitude.toFixed(1)
-
 +"°";
 
-if(object.distance){
 
-if(object.type==="Star"){
+if(
+object.distanceLabel
+){
+
+targetDistance.innerText=
+object.distanceLabel;
+
+}
+
+else if(
+object.type==="Star"
+){
 
 targetDistance.innerText=
 
 object.distance+
-
 " light years";
 
 }
@@ -2745,43 +3180,91 @@ else{
 
 targetDistance.innerText=
 
-object.distance.toFixed(4)
-
-+" AU";
+object.distance
+?
+object.distance.toFixed(4)+" AU"
+:
+"---";
 
 }
 
-}
 
 targetDifficulty.innerText=
-
 object.difficulty;
 
-targetAudioSource.innerText=
+targetField.innerText=
 
+"±"+
+object.detectionRadius+
+"°";
+
+targetAudioSource.innerText=
 "Object signal";
 
-lockStatus.innerText=
 
+lockStatus.innerText=
 "🟢 TARGET LOCKED";
 
 lockStatus.classList.add(
-
 "locked"
+);
 
+
+/* BLACK HOLE MODE */
+
+if(
+object.blackHole
+){
+
+targetName.classList.add(
+"black-hole"
+);
+
+detectionPanel.classList.add(
+"black-hole-panel"
+);
+
+lockStatus.innerText=
+
+"🕳️🌈 YOU FOUND THE VOID! 🌈🕳️";
+
+audioStatus.innerText=
+"🕳️ BLACK HOLE DETECTED";
+
+sourceStatus.innerText=
+
+"Source: Sagittarius A*";
+
+scanStatus.innerText=
+
+"🕳️🌈 CONGRATULATIONS! YOU FOUND A BLACK HOLE! 🌈🕳️";
+
+}
+
+else{
+
+targetName.classList.remove(
+"black-hole"
+);
+
+detectionPanel.classList.remove(
+"black-hole-panel"
 );
 
 audioStatus.innerText=
-
 "🎯 OBJECT DETECTED";
 
 sourceStatus.innerText=
 
-"Source: "+object.name;
+"Source: "+
+object.name;
 
 scanStatus.innerText=
 
-"🎯 LOCKED: "+object.name;
+"🎯 LOCKED: "+
+object.name;
+
+}
 
 }
 
@@ -2798,64 +3281,61 @@ return;
 
 }
 
-currentTarget=null;
+currentTarget=
+null;
+
+targetName.classList.remove(
+"black-hole"
+);
+
+detectionPanel.classList.remove(
+"black-hole-panel"
+);
 
 targetName.innerText=
-
 "TARGET: NULL";
 
 targetType.innerText=
-
 "POINT RECEIVER AT THE SKY";
 
 signalStrength.innerText=
-
 "000000";
 
 signalFill.style.width=
-
 "0%";
 
 targetDirection.innerText=
-
 "---";
 
 targetAltitude.innerText=
-
 "---";
 
 targetDistance.innerText=
-
 "---";
 
 targetDifficulty.innerText=
+"---";
 
+targetField.innerText=
 "---";
 
 targetAudioSource.innerText=
-
 "Radio noise";
 
 lockStatus.innerText=
-
 "🔴 NO TARGET LOCKED";
 
 lockStatus.classList.remove(
-
 "locked"
-
 );
 
 audioStatus.innerText=
-
 "🔊 RADIO RECEIVER ACTIVE";
 
 sourceStatus.innerText=
-
 "Source: Generated radio noise";
 
 scanStatus.innerText=
-
 "🌌 SCANNING SKY...";
 
 }
@@ -2867,20 +3347,21 @@ scanStatus.innerText=
 
 async function startReceiver(){
 
-if(receiverActive){
+if(
+receiverActive
+){
 
 return;
 
 }
 
-receiverActive=true;
+receiverActive=
+true;
 
 startRadioNoise();
 
 statusElement.classList.add(
-
 "active"
-
 );
 
 statusElement.innerHTML=
@@ -2888,7 +3369,6 @@ statusElement.innerHTML=
 '<span class="status-dot"></span>RECEIVER ACTIVE';
 
 scanStatus.innerText=
-
 "📡 INITIALIZING...";
 
 startGPS();
@@ -2901,7 +3381,7 @@ function(){
 
 scanStatus.innerText=
 
-"🌌 CALCULATING PLANETS + STARS...";
+"🌌 CALCULATING PLANETS + STARS + DEEP SKY...";
 
 },
 
@@ -2928,40 +3408,42 @@ detectObjects,
 
 function stopReceiver(){
 
-receiverActive=false;
+receiverActive=
+false;
 
-if(detectionInterval){
+if(
+detectionInterval
+){
 
 clearInterval(
-
 detectionInterval
-
 );
 
-detectionInterval=null;
+detectionInterval=
+null;
 
 }
 
 stopRadioNoise();
 
-if(watchID!==null){
+if(
+watchID!==null
+){
 
 navigator.geolocation.clearWatch(
-
 watchID
-
 );
 
-watchID=null;
+watchID=
+null;
 
 }
 
-currentTarget=null;
+currentTarget=
+null;
 
 statusElement.classList.remove(
-
 "active"
-
 );
 
 statusElement.innerHTML=
@@ -2969,61 +3451,57 @@ statusElement.innerHTML=
 '<span class="status-dot"></span>RECEIVER STANDBY';
 
 scanStatus.innerText=
-
 "System ready";
 
 audioStatus.innerText=
-
 "🔇 RADIO RECEIVER OFFLINE";
 
 sourceStatus.innerText=
-
 "Source: None";
 
-targetName.innerText=
+targetName.classList.remove(
+"black-hole"
+);
 
+detectionPanel.classList.remove(
+"black-hole-panel"
+);
+
+targetName.innerText=
 "TARGET: NULL";
 
 targetType.innerText=
-
 "POINT RECEIVER AT THE SKY";
 
 signalStrength.innerText=
-
 "000000";
 
 signalFill.style.width=
-
 "0%";
 
 targetDirection.innerText=
-
 "---";
 
 targetAltitude.innerText=
-
 "---";
 
 targetDistance.innerText=
-
 "---";
 
 targetDifficulty.innerText=
+"---";
 
+targetField.innerText=
 "---";
 
 targetAudioSource.innerText=
-
 "Radio noise";
 
 lockStatus.innerText=
-
 "🔴 NO TARGET LOCKED";
 
 lockStatus.classList.remove(
-
 "locked"
-
 );
 
 }
