@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Radio Telescope v1.1</title>
+<title>Radio Telescope v1.2 — Signal Hunt</title>
 
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 
@@ -27,30 +27,30 @@ text-align:center;
 
 .app{
 width:100%;
-max-width:580px;
+max-width:600px;
 margin:auto;
-padding:30px 20px 60px;
+padding:28px 18px 60px;
 }
 
 h1{
 margin:0;
-font-size:30px;
+font-size:29px;
 letter-spacing:1px;
 }
 
 .subtitle{
-margin-top:8px;
+margin-top:7px;
 color:#8290a5;
 font-size:11px;
 letter-spacing:2px;
 }
 
-.receiver-panel{
-margin-top:30px;
-padding:25px;
+.panel{
+margin-top:22px;
+padding:22px;
 background:linear-gradient(145deg,#101827,#080b11);
 border:1px solid #273348;
-border-radius:25px;
+border-radius:24px;
 box-shadow:0 15px 45px #00000099;
 }
 
@@ -59,9 +59,9 @@ display:flex;
 justify-content:center;
 align-items:center;
 gap:10px;
-color:#7f8da2;
 font-weight:bold;
 letter-spacing:1px;
+color:#7f8da2;
 }
 
 .status-dot{
@@ -81,61 +81,59 @@ box-shadow:0 0 15px #42e6a4;
 }
 
 .scan-status{
-margin-top:18px;
-min-height:24px;
+margin-top:15px;
+min-height:25px;
 color:#8ea1bb;
 font-size:13px;
-letter-spacing:1px;
 }
 
 .data-grid{
-margin-top:28px;
+margin-top:20px;
 display:grid;
-gap:14px;
+gap:12px;
 }
 
 .data-box{
-padding:18px;
+padding:15px;
 background:#0b1018;
 border:1px solid #202b3c;
-border-radius:18px;
+border-radius:17px;
 }
 
 .data-title{
 color:#78879c;
-font-size:11px;
+font-size:10px;
 letter-spacing:1px;
-margin-bottom:9px;
 }
 
 .data-value{
-font-size:21px;
+margin-top:7px;
+font-size:20px;
 font-weight:bold;
-word-break:break-word;
 }
 
 .data-small{
-margin-top:6px;
+margin-top:5px;
 color:#8492a7;
-font-size:12px;
+font-size:11px;
 }
 
 .compass-container{
 margin:25px auto;
-width:220px;
-height:220px;
+width:210px;
+height:210px;
 border-radius:50%;
 background:radial-gradient(circle,#151e2d,#080b11);
 border:3px solid #2b374b;
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:inset 0 0 35px #000000aa,0 0 25px #00000066;
+box-shadow:inset 0 0 35px #000000aa;
 }
 
 .compass{
-width:180px;
-height:180px;
+width:175px;
+height:175px;
 border-radius:50%;
 position:relative;
 transition:transform .12s linear;
@@ -144,30 +142,30 @@ transition:transform .12s linear;
 .direction{
 position:absolute;
 font-weight:bold;
-font-size:18px;
+font-size:17px;
 }
 
 .north{
-top:3px;
+top:2px;
 left:50%;
 transform:translateX(-50%);
 color:#ff5252;
 }
 
 .east{
-right:3px;
+right:2px;
 top:50%;
 transform:translateY(-50%);
 }
 
 .south{
-bottom:3px;
+bottom:2px;
 left:50%;
 transform:translateX(-50%);
 }
 
 .west{
-left:3px;
+left:2px;
 top:50%;
 transform:translateY(-50%);
 }
@@ -175,9 +173,9 @@ transform:translateY(-50%);
 .needle{
 position:absolute;
 width:4px;
-height:70px;
+height:68px;
 left:50%;
-top:20px;
+top:19px;
 transform:translateX(-50%);
 background:linear-gradient(to bottom,#ff3b3b 50%,white 50%);
 border-radius:5px;
@@ -195,96 +193,190 @@ transform:translate(-50%,-50%);
 box-shadow:0 0 12px white;
 }
 
-.audio-status{
-margin-top:15px;
-color:#42e6a4;
-font-size:13px;
-font-weight:bold;
+/* =========================
+SIGNAL HUNT
+========================= */
+
+.signal-title{
+margin-top:10px;
+font-size:12px;
+letter-spacing:2px;
+color:#8ea1bb;
 }
 
-.source-status{
-margin-top:8px;
-color:#65748a;
-font-size:11px;
+.signal-percent{
+margin-top:10px;
+font-size:42px;
+font-weight:900;
 }
 
-.audio-meter{
-margin-top:20px;
-height:10px;
+.signal-bar{
+margin-top:12px;
+height:15px;
 background:#182131;
-border-radius:10px;
+border-radius:20px;
 overflow:hidden;
+border:1px solid #29364b;
 }
 
-.audio-meter-fill{
+.signal-fill{
 height:100%;
 width:0%;
 background:#42e6a4;
 transition:width .2s ease;
 }
 
-.audio-info{
-margin-top:8px;
-font-size:11px;
-color:#738197;
-}
-
-button{
-width:100%;
-padding:20px;
-margin-top:20px;
-border:none;
-border-radius:18px;
-font-size:18px;
+.signal-message{
+margin-top:12px;
+font-size:13px;
 font-weight:bold;
-cursor:pointer;
--webkit-tap-highlight-color:transparent;
-}
-
-#startButton{
-background:#42e6a4;
-color:#07101d;
-}
-
-#stopButton{
-background:#151c28;
-color:#cbd7e9;
-border:1px solid #293448;
-}
-
-.detection-panel{
-margin-top:25px;
-padding:25px 20px;
-background:linear-gradient(145deg,#101827,#080c13);
-border:1px solid #29364b;
-border-radius:22px;
-text-align:left;
-}
-
-.detection-title{
-text-align:center;
-color:#42e6a4;
-font-size:12px;
-letter-spacing:2px;
-margin-bottom:20px;
+color:#8290a5;
+min-height:20px;
 }
 
 .target-name{
-text-align:center;
-font-size:27px;
+margin-top:15px;
+font-size:25px;
 font-weight:bold;
-margin-bottom:10px;
 }
 
 .target-type{
-text-align:center;
+margin-top:6px;
 color:#8ea1bb;
 font-size:12px;
-margin-bottom:20px;
 }
 
 /* =========================
-   OBJECT IMAGE
+RADAR
+========================= */
+
+.radar-title{
+font-size:12px;
+letter-spacing:2px;
+color:#42e6a4;
+margin-bottom:15px;
+}
+
+.radar{
+width:300px;
+height:300px;
+max-width:90vw;
+max-height:90vw;
+margin:auto;
+border-radius:50%;
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle,
+transparent 0 24%,
+#263548 25% 25.5%,
+transparent 26% 49%,
+#263548 49.5% 50%,
+transparent 50.5% 74%,
+#263548 74.5% 75%,
+transparent 75.5%
+);
+border:2px solid #42e6a4;
+box-shadow:
+0 0 20px #42e6a433,
+inset 0 0 35px #00000099;
+}
+
+.radar::before{
+content:"";
+position:absolute;
+left:50%;
+top:0;
+width:1px;
+height:100%;
+background:#263548;
+}
+
+.radar::after{
+content:"";
+position:absolute;
+top:50%;
+left:0;
+width:100%;
+height:1px;
+background:#263548;
+}
+
+.radar-sweep{
+position:absolute;
+width:50%;
+height:2px;
+left:50%;
+top:50%;
+transform-origin:left center;
+background:#42e6a4;
+box-shadow:0 0 10px #42e6a4;
+animation:radarSweep 4s linear infinite;
+}
+
+@keyframes radarSweep{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}
+
+.radar-center{
+position:absolute;
+width:12px;
+height:12px;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+border-radius:50%;
+background:#42e6a4;
+box-shadow:0 0 15px #42e6a4;
+z-index:5;
+}
+
+.radar-object{
+position:absolute;
+width:11px;
+height:11px;
+border-radius:50%;
+background:#ffffff;
+box-shadow:0 0 10px #ffffff;
+transform:translate(-50%,-50%);
+z-index:4;
+transition:all .3s ease;
+}
+
+.radar-object.near{
+background:#ffe600;
+box-shadow:0 0 15px #ffe600;
+}
+
+.radar-object.locked{
+background:#42e6a4;
+box-shadow:0 0 20px #42e6a4;
+width:15px;
+height:15px;
+}
+
+.radar-label{
+position:absolute;
+font-size:8px;
+white-space:nowrap;
+transform:translate(-50%,10px);
+color:#aab8ca;
+pointer-events:none;
+}
+
+.radar-legend{
+margin-top:14px;
+font-size:10px;
+color:#718097;
+}
+
+/* =========================
+IMAGE
 ========================= */
 
 .object-image-container{
@@ -295,7 +387,6 @@ border-radius:18px;
 overflow:hidden;
 background:#05070b;
 border:1px solid #273348;
-box-shadow:0 0 25px #00000088;
 }
 
 .object-image-container.visible{
@@ -323,96 +414,77 @@ object-fit:cover;
 }
 
 .image-caption{
-padding:10px;
+padding:9px;
 font-size:10px;
 color:#7d8ca2;
-letter-spacing:1px;
 }
 
-.detection-row{
-display:flex;
-justify-content:space-between;
-gap:15px;
-padding:10px 0;
-border-bottom:1px solid #1b2636;
-font-size:13px;
-}
+/* =========================
+DISCOVERY
+========================= */
 
-.detection-label{
-color:#78879c;
-}
-
-.detection-value{
-font-weight:bold;
-text-align:right;
-}
-
-.signal-bar{
-margin-top:18px;
-height:8px;
-background:#182131;
-border-radius:10px;
-overflow:hidden;
-}
-
-.signal-fill{
-width:0%;
-height:100%;
-background:#42e6a4;
-transition:width .3s ease;
-}
-
-.lock-status{
-margin-top:18px;
-padding:12px;
-border-radius:12px;
-text-align:center;
-background:#111a27;
-color:#8290a5;
-font-size:12px;
-font-weight:bold;
-}
-
-.locked{
+.discovery-title{
 color:#42e6a4;
-background:#0d211b;
+font-size:12px;
+letter-spacing:2px;
 }
 
-.black-hole{
-animation:blackHoleRainbow 2s linear infinite,
-blackHolePulse 1s ease-in-out infinite alternate;
+.discovery-count{
+margin-top:10px;
+font-size:35px;
 font-weight:900;
 }
 
-@keyframes blackHoleRainbow{
-0%{color:#ff004c;}
-20%{color:#ff8a00;}
-40%{color:#ffee00;}
-60%{color:#00ff88;}
-80%{color:#00c8ff;}
-100%{color:#ff00ff;}
+.discovery-list{
+margin-top:15px;
+max-height:230px;
+overflow-y:auto;
+text-align:left;
 }
 
-@keyframes blackHolePulse{
-from{
-transform:scale(1);
-text-shadow:0 0 5px currentColor;
-}
-to{
-transform:scale(1.08);
-text-shadow:0 0 20px currentColor,0 0 40px currentColor;
-}
+.discovery-item{
+padding:9px;
+border-bottom:1px solid #1c2737;
+font-size:12px;
+color:#c4d0df;
 }
 
-.black-hole-panel{
-border-color:#ff00ff;
-box-shadow:0 0 20px #ff00ff33,inset 0 0 20px #ff00ff11;
+.discovery-item::before{
+content:"✓ ";
+color:#42e6a4;
+font-weight:bold;
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+button{
+width:100%;
+padding:19px;
+margin-top:18px;
+border:none;
+border-radius:17px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#startButton{
+background:#42e6a4;
+color:#07101d;
+}
+
+#stopButton{
+background:#151c28;
+color:#cbd7e9;
+border:1px solid #293448;
 }
 
 .info{
-margin-top:22px;
+margin-top:20px;
 color:#69788e;
-font-size:12px;
+font-size:11px;
 line-height:1.6;
 }
 
@@ -421,6 +493,19 @@ margin-top:25px;
 color:#42e6a4;
 font-size:11px;
 letter-spacing:2px;
+}
+
+.black-hole{
+animation:rainbow 2s linear infinite;
+}
+
+@keyframes rainbow{
+0%{color:#ff004c;}
+20%{color:#ff8a00;}
+40%{color:#ffee00;}
+60%{color:#00ff88;}
+80%{color:#00c8ff;}
+100%{color:#ff00ff;}
 }
 
 </style>
@@ -434,10 +519,10 @@ letter-spacing:2px;
 <h1>📡 RADIO TELESCOPE</h1>
 
 <div class="subtitle">
-REAL-TIME ASTRONOMICAL SKY TRACKER
+SIGNAL HUNT — REAL-TIME SKY DETECTION
 </div>
 
-<div class="receiver-panel">
+<div class="panel">
 
 <div class="status" id="status">
 <span class="status-dot"></span>
@@ -470,7 +555,6 @@ System ready
 <div class="data-box">
 <div class="data-title">📐 PHONE ALTITUDE</div>
 <div class="data-value" id="altitude">--°</div>
-<div class="data-small" id="altitudeStatus">Orientation unavailable</div>
 </div>
 
 </div>
@@ -492,36 +576,24 @@ System ready
 
 </div>
 
-<div class="audio-status" id="audioStatus">
-🔇 RADIO RECEIVER OFFLINE
+<!-- SIGNAL -->
+
+<div class="signal-title">
+📶 SIGNAL STRENGTH
 </div>
 
-<div class="source-status" id="sourceStatus">
-Source: None
+<div class="signal-percent" id="signalPercent">
+0%
 </div>
 
-<div class="audio-meter">
+<div class="signal-bar">
 
-<div class="audio-meter-fill" id="audioMeterFill"></div>
+<div class="signal-fill" id="signalFill"></div>
 
 </div>
 
-<div class="audio-info" id="audioInfo">
-Object signal: 0% | Radio noise: 100%
-</div>
-
-<button id="startButton" onclick="startReceiver()">
-▶ START RECEIVER
-</button>
-
-<button id="stopButton" onclick="stopReceiver()">
-■ STOP RECEIVER
-</button>
-
-<div class="detection-panel" id="detectionPanel">
-
-<div class="detection-title">
-🌌 REAL-TIME SKY OBJECT DETECTION
+<div class="signal-message" id="signalMessage">
+📻 SCANNING FOR SIGNAL...
 </div>
 
 <div class="target-name" id="targetName">
@@ -532,149 +604,125 @@ TARGET: NULL
 POINT RECEIVER AT THE SKY
 </div>
 
-<!-- AUTOMATIC OBJECT IMAGE -->
+</div>
+
+<!-- RADAR -->
+
+<div class="panel">
+
+<div class="radar-title">
+🧭 360° SKY RADAR
+</div>
+
+<div class="radar" id="radar">
+
+<div class="radar-sweep"></div>
+
+<div class="radar-center"></div>
+
+</div>
+
+<div class="radar-legend">
+⚪ Obiekt &nbsp; 🟡 Blisko sygnału &nbsp; 🟢 Zablokowany
+</div>
+
+</div>
+
+<!-- OBJECT -->
+
+<div class="panel">
 
 <div class="object-image-container" id="objectImageContainer">
 
-<img
-id="objectImage"
-src=""
-alt="Detected astronomical object"
-
->
+<img id="objectImage" src="" alt="Astronomical object">
 
 <div class="image-caption" id="imageCaption">
-IMAGE FROM NASA / ESA / PUBLIC ASTRONOMICAL SOURCE
+ASTRONOMICAL IMAGE
 </div>
 
 </div>
 
-<div class="detection-row">
+<div class="data-grid">
 
-<span class="detection-label">
-📡 Signal strength
-</span>
-
-<span class="detection-value" id="signalStrength">
-000000
-</span>
-
+<div class="data-box">
+<div class="data-title">📡 TARGET SIGNAL</div>
+<div class="data-value" id="targetSignal">000000</div>
 </div>
 
-<div class="detection-row">
-
-<span class="detection-label">
-🧭 Object azimuth
-</span>
-
-<span class="detection-value" id="targetDirection">
----
-</span>
-
+<div class="data-box">
+<div class="data-title">🎯 TARGET AZIMUTH</div>
+<div class="data-value" id="targetDirection">---</div>
 </div>
 
-<div class="detection-row">
-
-<span class="detection-label">
-📐 Object altitude
-</span>
-
-<span class="detection-value" id="targetAltitude">
----
-</span>
-
+<div class="data-box">
+<div class="data-title">📐 TARGET ALTITUDE</div>
+<div class="data-value" id="targetAltitude">---</div>
 </div>
 
-<div class="detection-row">
-
-<span class="detection-label">
-📏 Distance
-</span>
-
-<span class="detection-value" id="targetDistance">
----
-</span>
-
+<div class="data-box">
+<div class="data-title">📏 DISTANCE</div>
+<div class="data-value" id="targetDistance">---</div>
 </div>
 
-<div class="detection-row">
-
-<span class="detection-label">
-🔭 Detection difficulty
-</span>
-
-<span class="detection-value" id="targetDifficulty">
----
-</span>
-
-</div>
-
-<div class="detection-row">
-
-<span class="detection-label">
-🎯 Detection field
-</span>
-
-<span class="detection-value" id="targetField">
----
-</span>
-
-</div>
-
-<div class="detection-row">
-
-<span class="detection-label">
-🎧 Audio signal
-</span>
-
-<span class="detection-value" id="targetAudioSource">
-Radio noise
-</span>
-
-</div>
-
-<div class="signal-bar">
-
-<div class="signal-fill" id="signalFill"></div>
-
-</div>
-
-<div class="lock-status" id="lockStatus">
-🔴 NO TARGET LOCKED
+<div class="data-box">
+<div class="data-title">🔭 DIFFICULTY</div>
+<div class="data-value" id="targetDifficulty">---</div>
 </div>
 
 </div>
+
+</div>
+
+<!-- DISCOVERY -->
+
+<div class="panel">
+
+<div class="discovery-title">
+🏆 OBJECT DISCOVERY
+</div>
+
+<div class="discovery-count">
+
+<span id="discoveryCount">0</span>
+/ <span id="totalObjects">0</span>
+
+</div>
+
+<div class="discovery-list" id="discoveryList">
+
+No objects discovered yet.
+
+</div>
+
+</div>
+
+<button id="startButton" onclick="startReceiver()">
+▶ START RECEIVER
+</button>
+
+<button id="stopButton" onclick="stopReceiver()">
+■ STOP RECEIVER
+</button>
 
 <div class="version">
-RADIO TELESCOPE v1.1 🚀
-</div>
-
+RADIO TELESCOPE v1.2 🚀
 </div>
 
 <div class="info">
 
-🌍 GPS określa pozycję obserwatora.
+🌍 GPS + 🧭 COMPASS + 📐 GYROSCOPE
 
 <br><br>
 
-🧭 Kompas, żyroskop i akcelerometr
-określają kierunek obserwacji.
+📡 SIGNAL HUNT MODE
 
 <br><br>
 
-🎧 Im silniejszy sygnał,
-tym głośniejszy jest obiekt
-i tym cichszy jest szum.
+🎯 FIND THE SKY
 
 <br><br>
 
-🖼️ Po zablokowaniu celu
-aplikacja automatycznie pobiera
-obraz obiektu z internetu.
-
-<br><br>
-
-🌌 RADIO TELESCOPE v1.1
+🌌 DISCOVER THE UNIVERSE
 
 </div>
 
@@ -683,12 +731,13 @@ obraz obiektu z internetu.
 <script>
 
 /* ==================================================
-   RADIO TELESCOPE v1.1
+RADIO TELESCOPE v1.2
+SIGNAL HUNT
 ================================================== */
 
 
 /* ==================================================
-   AUDIO FILES
+AUDIO
 ================================================== */
 
 const AUDIO_FILES={
@@ -736,94 +785,69 @@ v404:"v404.mp3"
 
 
 /* ==================================================
-   OBJECT IMAGES
-   NASA / ESA / PUBLIC SOURCES
+IMAGES
 ================================================== */
 
 const OBJECT_IMAGES={
 
-sun:
-"https://upload.wikimedia.org/wikipedia/commons/c/c3/SOHO-EIT_Sun_edited.jpg",
+sun:"https://upload.wikimedia.org/wikipedia/commons/c/c3/SOHO-EIT_Sun_edited.jpg",
 
-moon:
-"https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+moon:"https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
 
-mercury:
-"https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg",
+mercury:"https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg",
 
-venus:
-"https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg",
+venus:"https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg",
 
-mars:
-"https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg",
+mars:"https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg",
 
-jupiter:
-"https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg",
+jupiter:"https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg",
 
-saturn:
-"https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg",
+saturn:"https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg",
 
-uranus:
-"https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg",
+uranus:"https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg",
 
-neptune:
-"https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg",
+neptune:"https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg",
 
-vega:
-"https://upload.wikimedia.org/wikipedia/commons/1/1f/Vega_-_a0.jpg",
+vega:"https://upload.wikimedia.org/wikipedia/commons/1/1f/Vega_-_a0.jpg",
 
-sirius:
-"https://upload.wikimedia.org/wikipedia/commons/1/1f/Sirius_A_and_B_Hubble.jpg",
+sirius:"https://upload.wikimedia.org/wikipedia/commons/1/1f/Sirius_A_and_B_Hubble.jpg",
 
-arcturus:
-"https://upload.wikimedia.org/wikipedia/commons/2/2d/Arcturus-star.jpg",
+arcturus:"https://upload.wikimedia.org/wikipedia/commons/2/2d/Arcturus-star.jpg",
 
-andromeda:
-"https://upload.wikimedia.org/wikipedia/commons/a/ae/Andromeda_Galaxy_%28with_h-alpha%29.jpg",
+andromeda:"https://upload.wikimedia.org/wikipedia/commons/a/ae/Andromeda_Galaxy_%28with_h-alpha%29.jpg",
 
-whirlpool:
-"https://upload.wikimedia.org/wikipedia/commons/d/db/Messier51_sRGB.jpg",
+whirlpool:"https://upload.wikimedia.org/wikipedia/commons/d/db/Messier51_sRGB.jpg",
 
-m87:
-"https://upload.wikimedia.org/wikipedia/commons/4/4f/Black_hole_-_Messier_87_crop_max_res.jpg",
+m87:"https://upload.wikimedia.org/wikipedia/commons/4/4f/Black_hole_-_Messier_87_crop_max_res.jpg",
 
-sombrero:
-"https://upload.wikimedia.org/wikipedia/commons/5/5f/M104_ngc4594.jpg",
+sombrero:"https://upload.wikimedia.org/wikipedia/commons/5/5f/M104_ngc4594.jpg",
 
-milkyway:
-"https://upload.wikimedia.org/wikipedia/commons/0/09/Milky_Way_Galaxy.jpg",
+milkyway:"https://upload.wikimedia.org/wikipedia/commons/0/09/Milky_Way_Galaxy.jpg",
 
-helix:
-"https://upload.wikimedia.org/wikipedia/commons/4/4b/NGC7293_%28ESO-VLT%29.jpg",
+helix:"https://upload.wikimedia.org/wikipedia/commons/4/4b/NGC7293_%28ESO-VLT%29.jpg",
 
-crab:
-"https://upload.wikimedia.org/wikipedia/commons/0/00/Crab_Nebula.jpg",
+crab:"https://upload.wikimedia.org/wikipedia/commons/0/00/Crab_Nebula.jpg",
 
-carina:
-"https://upload.wikimedia.org/wikipedia/commons/7/7a/ESO_-_The_Carina_Nebula_%28by%29.jpg",
+carina:"https://upload.wikimedia.org/wikipedia/commons/7/7a/ESO_-_The_Carina_Nebula_%28by%29.jpg",
 
-eagle:
-"https://upload.wikimedia.org/wikipedia/commons/5/5d/M16_The_Eagle_Nebula.jpg",
+eagle:"https://upload.wikimedia.org/wikipedia/commons/5/5d/M16_The_Eagle_Nebula.jpg",
 
-catseye:
-"https://upload.wikimedia.org/wikipedia/commons/5/59/NGC_6543.jpg",
+catseye:"https://upload.wikimedia.org/wikipedia/commons/5/59/NGC_6543.jpg",
 
-sagittarius_a:
-"https://upload.wikimedia.org/wikipedia/commons/4/4f/Black_hole_-_Messier_87_crop_max_res.jpg",
-
-v404:
-"https://upload.wikimedia.org/wikipedia/commons/7/7d/Black_hole_-_Messier_87_crop_max_res.jpg"
+sagittarius_a:"https://upload.wikimedia.org/wikipedia/commons/4/4f/Black_hole_-_Messier_87_crop_max_res.jpg"
 
 };
 
 
 /* ==================================================
-   VARIABLES
+VARIABLES
 ================================================== */
 
 let receiverActive=false;
 
-let watchID=null;
+let userLatitude=null;
+
+let userLongitude=null;
 
 let compassHeading=null;
 
@@ -833,9 +857,9 @@ let phoneAltitude=null;
 
 let filteredAltitude=null;
 
-let userLatitude=null;
+let watchID=null;
 
-let userLongitude=null;
+let detectionInterval=null;
 
 let audioContext=null;
 
@@ -843,137 +867,505 @@ let noiseSource=null;
 
 let noiseGain=null;
 
-let detectionInterval=null;
-
-let currentTarget=null;
-
 let currentAudio=null;
 
 let currentAudioKey=null;
 
-let audioFadeInterval=null;
+let currentTarget=null;
 
-const SMOOTHING=.15;
+let discovered=
+JSON.parse(
+localStorage.getItem(
+"radioTelescopeDiscoveries"
+)||"[]"
+);
 
 
 /* ==================================================
-   ELEMENTS
+ELEMENTS
 ================================================== */
 
-const statusElement=
-document.getElementById("status");
+const $=id=>
+document.getElementById(id);
 
-const scanStatus=
-document.getElementById("scanStatus");
+const status=$("status");
 
-const locationElement=
-document.getElementById("location");
+const scanStatus=$("scanStatus");
 
-const accuracyElement=
-document.getElementById("accuracy");
+const locationElement=$("location");
 
-const timeElement=
-document.getElementById("time");
+const accuracyElement=$("accuracy");
 
-const headingElement=
-document.getElementById("heading");
+const timeElement=$("time");
 
-const directionElement=
-document.getElementById("direction");
+const headingElement=$("heading");
 
-const altitudeElement=
-document.getElementById("altitude");
+const directionElement=$("direction");
 
-const altitudeStatus=
-document.getElementById("altitudeStatus");
+const altitudeElement=$("altitude");
 
-const compassElement=
-document.getElementById("compass");
+const compass=$("compass");
 
-const audioStatus=
-document.getElementById("audioStatus");
+const signalPercent=$("signalPercent");
 
-const sourceStatus=
-document.getElementById("sourceStatus");
+const signalFill=$("signalFill");
 
-const audioMeterFill=
-document.getElementById("audioMeterFill");
+const signalMessage=$("signalMessage");
 
-const audioInfo=
-document.getElementById("audioInfo");
+const targetName=$("targetName");
 
-const targetName=
-document.getElementById("targetName");
+const targetType=$("targetType");
 
-const targetType=
-document.getElementById("targetType");
+const targetSignal=$("targetSignal");
 
-const signalStrength=
-document.getElementById("signalStrength");
+const targetDirection=$("targetDirection");
 
-const signalFill=
-document.getElementById("signalFill");
+const targetAltitude=$("targetAltitude");
 
-const targetDirection=
-document.getElementById("targetDirection");
+const targetDistance=$("targetDistance");
 
-const targetAltitude=
-document.getElementById("targetAltitude");
-
-const targetDistance=
-document.getElementById("targetDistance");
-
-const targetDifficulty=
-document.getElementById("targetDifficulty");
-
-const targetField=
-document.getElementById("targetField");
-
-const targetAudioSource=
-document.getElementById("targetAudioSource");
-
-const lockStatus=
-document.getElementById("lockStatus");
-
-const detectionPanel=
-document.getElementById("detectionPanel");
+const targetDifficulty=$("targetDifficulty");
 
 const objectImageContainer=
-document.getElementById("objectImageContainer");
+$("objectImageContainer");
 
 const objectImage=
-document.getElementById("objectImage");
+$("objectImage");
 
 const imageCaption=
-document.getElementById("imageCaption");
+$("imageCaption");
+
+const radar=$("radar");
+
+const discoveryCount=
+$("discoveryCount");
+
+const totalObjects=
+$("totalObjects");
+
+const discoveryList=
+$("discoveryList");
 
 
 /* ==================================================
-   TIME
+TIME
 ================================================== */
 
-function updateTime(){
-
+setInterval(
+()=>{
 timeElement.innerText=
 new Date().toLocaleTimeString("pl-PL");
-
-}
-
-setInterval(
-updateTime,
+},
 1000
 );
 
-updateTime();
+
+/* ==================================================
+DISCOVERY
+================================================== */
+
+function updateDiscoveries(){
+
+discoveryCount.innerText=
+discovered.length;
+
+discoveryList.innerHTML="";
+
+if(
+discovered.length===0
+){
+
+discoveryList.innerText=
+"No objects discovered yet.";
+
+return;
+
+}
+
+discovered.forEach(
+name=>{
+
+const div=
+document.createElement("div");
+
+div.className=
+"discovery-item";
+
+div.innerText=
+name;
+
+discoveryList.appendChild(
+div
+);
+
+}
+
+);
+
+}
 
 
 /* ==================================================
-   DIRECTION
+OBJECTS
 ================================================== */
+
+const bodies=[
+
+{
+name:"☀️ SUN",
+body:"Sun",
+type:"Star",
+signal:100,
+detectionRadius:14,
+audioKey:"sun",
+imageKey:"sun",
+difficulty:"VERY EASY"
+},
+
+{
+name:"🌙 MOON",
+body:"Moon",
+type:"Natural Satellite",
+signal:100,
+detectionRadius:14,
+audioKey:"moon",
+imageKey:"moon",
+difficulty:"VERY EASY"
+},
+
+{
+name:"☿ MERCURY",
+body:"Mercury",
+type:"Planet",
+signal:55,
+detectionRadius:12,
+audioKey:"mercury",
+imageKey:"mercury",
+difficulty:"HARD"
+},
+
+{
+name:"♀ VENUS",
+body:"Venus",
+type:"Planet",
+signal:95,
+detectionRadius:14,
+audioKey:"venus",
+imageKey:"venus",
+difficulty:"EASY"
+},
+
+{
+name:"♂ MARS",
+body:"Mars",
+type:"Planet",
+signal:70,
+detectionRadius:12,
+audioKey:"mars",
+imageKey:"mars",
+difficulty:"MEDIUM"
+},
+
+{
+name:"♃ JUPITER",
+body:"Jupiter",
+type:"Planet",
+signal:92,
+detectionRadius:13,
+audioKey:"jupiter",
+imageKey:"jupiter",
+difficulty:"EASY"
+},
+
+{
+name:"♄ SATURN",
+body:"Saturn",
+type:"Planet",
+signal:88,
+detectionRadius:13,
+audioKey:"saturn",
+imageKey:"saturn",
+difficulty:"EASY"
+},
+
+{
+name:"♅ URANUS",
+body:"Uranus",
+type:"Planet",
+signal:55,
+detectionRadius:12,
+audioKey:"uranus",
+imageKey:"uranus",
+difficulty:"HARD"
+},
+
+{
+name:"♆ NEPTUNE",
+body:"Neptune",
+type:"Planet",
+signal:35,
+detectionRadius:11,
+audioKey:"neptune",
+imageKey:"neptune",
+difficulty:"VERY HARD"
+}
+
+];
+
+
+const stars=[
+
+{
+name:"⭐ VEGA",
+type:"Star",
+ra:18.6156,
+dec:38.7837,
+distance:25,
+signal:90,
+detectionRadius:15,
+audioKey:"vega",
+imageKey:"vega",
+difficulty:"EASY"
+},
+
+{
+name:"⭐ SIRIUS",
+type:"Star",
+ra:6.7525,
+dec:-16.7161,
+distance:8.6,
+signal:100,
+detectionRadius:15,
+audioKey:"sirius",
+imageKey:"sirius",
+difficulty:"VERY EASY"
+},
+
+{
+name:"⭐ ARCTURUS",
+type:"Star",
+ra:14.261,
+dec:19.1825,
+distance:36.7,
+signal:96,
+detectionRadius:15,
+audioKey:"arcturus",
+imageKey:"arcturus",
+difficulty:"EASY"
+},
+
+{
+name:"⭐ ALTAIR",
+type:"Star",
+ra:19.8464,
+dec:8.8683,
+distance:16.7,
+signal:94,
+detectionRadius:15,
+audioKey:"altair",
+difficulty:"EASY"
+},
+
+{
+name:"⭐ CAPELLA",
+type:"Star",
+ra:5.2782,
+dec:45.998,
+distance:42.9,
+signal:95,
+detectionRadius:15,
+audioKey:"capella",
+difficulty:"EASY"
+},
+
+{
+name:"⭐ BETELGEUSE",
+type:"Star",
+ra:5.9195,
+dec:7.4071,
+distance:642,
+signal:90,
+detectionRadius:15,
+audioKey:"betelgeuse",
+difficulty:"MEDIUM"
+}
+
+];
+
+
+const deepSky=[
+
+{
+name:"🌌 M31 — ANDROMEDA",
+type:"Galaxy",
+ra:.712,
+dec:41.269,
+distanceLabel:"2.54 million light years",
+signal:80,
+detectionRadius:12,
+audioKey:"andromeda",
+imageKey:"andromeda",
+difficulty:"EASY"
+},
+
+{
+name:"🌀 M51 — WHIRLPOOL",
+type:"Galaxy",
+ra:13.498,
+dec:47.195,
+distanceLabel:"23 million light years",
+signal:50,
+detectionRadius:11,
+audioKey:"whirlpool",
+imageKey:"whirlpool",
+difficulty:"HARD"
+},
+
+{
+name:"🌌 M87",
+type:"Galaxy",
+ra:12.514,
+dec:12.392,
+distanceLabel:"53.5 million light years",
+signal:40,
+detectionRadius:10,
+audioKey:"m87",
+imageKey:"m87",
+difficulty:"VERY HARD"
+},
+
+{
+name:"💫 HELIX NEBULA",
+type:"Nebula",
+ra:22.493,
+dec:-20.837,
+distanceLabel:"655 light years",
+signal:70,
+detectionRadius:11,
+audioKey:"helix",
+imageKey:"helix",
+difficulty:"HARD"
+},
+
+{
+name:"👁️ CAT'S EYE NEBULA",
+type:"Nebula",
+ra:17.976,
+dec:66.633,
+distanceLabel:"3 300 light years",
+signal:70,
+detectionRadius:10,
+audioKey:"catseye",
+imageKey:"catseye",
+difficulty:"HARD"
+},
+
+{
+name:"🕳️ SAGITTARIUS A*",
+type:"Supermassive Black Hole",
+ra:17.761,
+dec:-29.007,
+distanceLabel:"26 000 light years",
+signal:88,
+detectionRadius:8,
+audioKey:"sagittarius_a",
+imageKey:"sagittarius_a",
+difficulty:"VERY HARD",
+blackHole:true
+}
+
+];
+
+
+const allObjects=
+[
+...bodies,
+...stars,
+...deepSky
+];
+
+totalObjects.innerText=
+allObjects.length;
+
+updateDiscoveries();
+
+
+/* ==================================================
+GPS
+================================================== */
+
+function startGPS(){
+
+if(
+!navigator.geolocation
+){
+
+return;
+
+}
+
+watchID=
+navigator.geolocation.watchPosition(
+
+position=>{
+
+userLatitude=
+position.coords.latitude;
+
+userLongitude=
+position.coords.longitude;
+
+locationElement.innerText=
+userLatitude.toFixed(4)
++"°, "
++
+userLongitude.toFixed(4)
++"°";
+
+accuracyElement.innerText=
+"GPS ±"+
+Math.round(
+position.coords.accuracy
+)+" m";
+
+},
+
+error=>{
+
+console.log(error);
+
+},
+
+{
+enableHighAccuracy:true,
+maximumAge:1000,
+timeout:10000
+}
+
+);
+
+}
+
+
+/* ==================================================
+COMPASS
+================================================== */
+
+function angleDiff(a,b){
+
+return Math.abs(
+(a-b+540)%360-180
+);
+
+}
+
 
 function getDirection(degrees){
 
-if(degrees>=337.5||degrees<22.5)return"N";
+if(
+degrees<22.5||
+degrees>=337.5
+)return"N";
 
 if(degrees<67.5)return"NE";
 
@@ -992,464 +1384,13 @@ return"NW";
 }
 
 
-/* ==================================================
-   ANGLE DIFFERENCE
-================================================== */
-
-function angleDifference(a,b){
-
-const difference=Math.abs(a-b);
-
-return Math.min(
-difference,
-360-difference
-);
-
-}
-
-
-/* ==================================================
-   SMOOTH ANGLE
-================================================== */
-
-function smoothAngle(previous,current,factor){
-
-if(previous===null){
-
-return current;
-
-}
-
-let difference=
-(current-previous+540)%360-180;
-
-return(
-previous+
-difference*factor+
-360
-)%360;
-
-}
-
-
-/* ==================================================
-   RADIO NOISE
-================================================== */
-
-function startRadioNoise(){
-
-const AudioContext=
-window.AudioContext||
-window.webkitAudioContext;
-
-if(!AudioContext){
-
-return;
-
-}
-
-if(audioContext){
-
-if(
-audioContext.state==="suspended"
-){
-
-audioContext.resume();
-
-}
-
-return;
-
-}
-
-audioContext=
-new AudioContext();
-
-const buffer=
-audioContext.createBuffer(
-1,
-audioContext.sampleRate*2,
-audioContext.sampleRate
-);
-
-const data=
-buffer.getChannelData(0);
-
-for(
-let i=0;
-i<data.length;
-i++
-){
-
-data[i]=
-Math.random()*2-1;
-
-}
-
-noiseSource=
-audioContext.createBufferSource();
-
-noiseSource.buffer=
-buffer;
-
-noiseSource.loop=
-true;
-
-noiseGain=
-audioContext.createGain();
-
-noiseGain.gain.value=.04;
-
-noiseSource.connect(noiseGain);
-
-noiseGain.connect(
-audioContext.destination
-);
-
-noiseSource.start();
-
-audioStatus.innerText=
-"🔊 RADIO RECEIVER ACTIVE";
-
-sourceStatus.innerText=
-"Source: Generated radio noise";
-
-}
-
-
-/* ==================================================
-   AUDIO KEY
-================================================== */
-
-function getAudioKey(object){
-
-return object.audioKey||null;
-
-}
-
-
-/* ==================================================
-   PLAY OBJECT AUDIO
-================================================== */
-
-function playObjectAudio(object,volume){
-
-const key=
-getAudioKey(object);
-
-const file=
-AUDIO_FILES[key];
-
-if(!file){
-
-return;
-
-}
-
-if(
-currentAudio&&
-currentAudioKey===key
-){
-
-fadeAudioVolume(volume);
-
-return;
-
-}
-
-stopObjectAudio();
-
-currentAudio=
-new Audio(file);
-
-currentAudio.loop=true;
-
-currentAudio.volume=0;
-
-currentAudio.preload="auto";
-
-currentAudioKey=key;
-
-currentAudio.addEventListener(
-"error",
-function(){
-
-sourceStatus.innerText=
-"⚠️ Audio unavailable: "+
-file;
-
-}
-);
-
-const promise=
-currentAudio.play();
-
-if(promise){
-
-promise.catch(
-function(){
-
-sourceStatus.innerText=
-"⚠️ Audio playback blocked";
-
-}
-);
-
-}
-
-fadeAudioVolume(volume);
-
-audioStatus.innerText=
-"🎧 OBJECT AUDIO ACTIVE";
-
-sourceStatus.innerText=
-"Source: "+
-file;
-
-}
-
-
-/* ==================================================
-   FADE AUDIO
-================================================== */
-
-function fadeAudioVolume(targetVolume){
-
-if(!currentAudio){
-
-return;
-
-}
-
-targetVolume=
-Math.max(
-0,
-Math.min(
-1,
-targetVolume
-)
-);
-
-if(audioFadeInterval){
-
-clearInterval(
-audioFadeInterval
-);
-
-}
-
-const start=
-currentAudio.volume;
-
-const difference=
-targetVolume-start;
-
-const steps=12;
-
-let step=0;
-
-audioFadeInterval=
-setInterval(
-
-function(){
-
-step++;
-
-currentAudio.volume=
-Math.max(
-0,
-Math.min(
-1,
-start+
-difference*
-(step/steps)
-)
-);
-
-if(step>=steps){
-
-clearInterval(
-audioFadeInterval
-);
-
-audioFadeInterval=null;
-
-}
-
-},
-
-30
-
-);
-
-}
-
-
-/* ==================================================
-   STOP AUDIO
-================================================== */
-
-function stopObjectAudio(){
-
-if(audioFadeInterval){
-
-clearInterval(
-audioFadeInterval
-);
-
-audioFadeInterval=null;
-
-}
-
-if(currentAudio){
-
-const audioToStop=
-currentAudio;
-
-audioToStop.pause();
-
-audioToStop.currentTime=0;
-
-}
-
-currentAudio=null;
-
-currentAudioKey=null;
-
-}
-
-
-/* ==================================================
-   AUDIO MIX
-   SIGNAL 100 = FULL OBJECT VOLUME
-================================================== */
-
-function updateAudioMix(object,accuracyScore){
-
-if(!noiseGain){
-
-return;
-
-}
-
-/*
-accuracyScore:
-0 = center of target
-1 = edge of detection field
-*/
-
-const alignment=
-Math.max(
-0,
-Math.min(
-1,
-1-accuracyScore
-)
-);
-
-/*
-Object volume:
-
-100% signal + perfect alignment
-= 100% original audio volume
-
-Weak alignment
-= quieter object
-*/
-
-const objectVolume=
-(object.signal/100)*
-alignment;
-
-
-/*
-Noise is inverse:
-
-Strong signal
-= very little noise
-
-Weak signal
-= more noise
-*/
-
-const noiseVolume=
-.04*
-(
-1-objectVolume
-);
-
-
-/* RADIO NOISE */
-
-noiseGain.gain.setTargetAtTime(
-
-noiseVolume,
-
-audioContext.currentTime,
-
-.08
-
-);
-
-
-/* OBJECT AUDIO */
-
-if(
-getAudioKey(object)&&
-AUDIO_FILES[
-getAudioKey(object)
-]
-){
-
-playObjectAudio(
-
-object,
-
-objectVolume
-
-);
-
-}
-
-else{
-
-stopObjectAudio();
-
-}
-
-
-/* UI */
-
-audioMeterFill.style.width=
-Math.round(
-objectVolume*100
-)+"%";
-
-audioInfo.innerText=
-"Object signal: "+
-Math.round(
-objectVolume*100
-)+
-"% | Radio noise: "+
-Math.round(
-(1-objectVolume)*100
-)+
-"%";
-
-}
-
-
-/* ==================================================
-   COMPASS
-================================================== */
-
-function handleOrientation(event){
+function orientation(event){
 
 let heading;
 
 if(
-event.webkitCompassHeading!==undefined&&
-event.webkitCompassHeading!==null
+event.webkitCompassHeading
+!==undefined
 ){
 
 heading=
@@ -1467,24 +1408,34 @@ heading=
 }
 
 if(
-heading===undefined||
-heading===null||
-isNaN(heading)
-){
-
-return;
-
-}
+heading===undefined
+)return;
 
 heading=
 (heading+360)%360;
 
+if(
+filteredHeading===null
+){
+
 filteredHeading=
-smoothAngle(
-filteredHeading,
-heading,
-SMOOTHING
-);
+heading;
+
+}
+
+else{
+
+let diff=
+(heading-filteredHeading+540)%360-180;
+
+filteredHeading=
+(
+filteredHeading+
+diff*.15+
+360
+)%360;
+
+}
 
 compassHeading=
 filteredHeading;
@@ -1499,33 +1450,23 @@ getDirection(
 filteredHeading
 );
 
-compassElement.style.transform=
+compass.style.transform=
 "rotate("+
-(-filteredHeading)+
-"deg)";
-
-if(receiverActive){
-
-detectObjects();
-
-}
+(-filteredHeading)
++"deg)";
 
 }
 
 
 /* ==================================================
-   MOTION
+MOTION
 ================================================== */
 
-function handleMotion(event){
+function motion(event){
 
 if(
 !event.accelerationIncludingGravity
-){
-
-return;
-
-}
+)return;
 
 const y=
 event.accelerationIncludingGravity.y;
@@ -1536,11 +1477,7 @@ event.accelerationIncludingGravity.z;
 if(
 y===null||
 z===null
-){
-
-return;
-
-}
+)return;
 
 let angle=
 Math.atan2(-y,z)
@@ -1561,16 +1498,18 @@ if(
 filteredAltitude===null
 ){
 
-filteredAltitude=angle;
+filteredAltitude=
+angle;
 
 }
 
 else{
 
 filteredAltitude+=
-(angle-filteredAltitude)
-*
-SMOOTHING;
+(
+angle-
+filteredAltitude
+)*.15;
 
 }
 
@@ -1579,87 +1518,14 @@ filteredAltitude;
 
 altitudeElement.innerText=
 Math.round(
-filteredAltitude
+phoneAltitude
 )+"°";
 
-altitudeStatus.innerText=
-"Orientation active";
-
-if(receiverActive){
-
-detectObjects();
-
-}
-
 }
 
 
 /* ==================================================
-   GPS
-================================================== */
-
-function startGPS(){
-
-if(
-!navigator.geolocation
-){
-
-locationElement.innerText=
-"GPS unavailable";
-
-return;
-
-}
-
-watchID=
-navigator.geolocation.watchPosition(
-
-function(position){
-
-userLatitude=
-position.coords.latitude;
-
-userLongitude=
-position.coords.longitude;
-
-locationElement.innerText=
-userLatitude.toFixed(5)
-+"°, "
-+
-userLongitude.toFixed(5)
-+"°";
-
-accuracyElement.innerText=
-"Accuracy ±"+
-Math.round(
-position.coords.accuracy
-)+" m";
-
-scanStatus.innerText=
-"🌍 GPS POSITION LOCKED";
-
-},
-
-function(){
-
-scanStatus.innerText=
-"⚠️ GPS ERROR";
-
-},
-
-{
-enableHighAccuracy:true,
-maximumAge:1000,
-timeout:10000
-}
-
-);
-
-}
-
-
-/* ==================================================
-   SENSOR PERMISSIONS
+PERMISSIONS
 ================================================== */
 
 async function enableSensors(){
@@ -1671,28 +1537,23 @@ typeof DeviceOrientationEvent.requestPermission==="function"
 
 try{
 
-const permission=
-await
-DeviceOrientationEvent.requestPermission();
+const p=
+await DeviceOrientationEvent.requestPermission();
 
 if(
-permission==="granted"
+p==="granted"
 ){
 
 window.addEventListener(
 "deviceorientation",
-handleOrientation,
+orientation,
 true
 );
 
 }
 
 }
-catch(error){
-
-console.error(error);
-
-}
+catch(e){}
 
 }
 
@@ -1700,7 +1561,7 @@ else{
 
 window.addEventListener(
 "deviceorientation",
-handleOrientation,
+orientation,
 true
 );
 
@@ -1714,28 +1575,23 @@ typeof DeviceMotionEvent.requestPermission==="function"
 
 try{
 
-const permission=
-await
-DeviceMotionEvent.requestPermission();
+const p=
+await DeviceMotionEvent.requestPermission();
 
 if(
-permission==="granted"
+p==="granted"
 ){
 
 window.addEventListener(
 "devicemotion",
-handleMotion,
+motion,
 true
 );
 
 }
 
 }
-catch(error){
-
-console.error(error);
-
-}
+catch(e){}
 
 }
 
@@ -1743,7 +1599,7 @@ else{
 
 window.addEventListener(
 "devicemotion",
-handleMotion,
+motion,
 true
 );
 
@@ -1753,544 +1609,77 @@ true
 
 
 /* ==================================================
-   PLANETS
+POSITION
 ================================================== */
 
-const bodies=[
+function starPosition(object){
 
-{
-name:"☀️ SUN",
-body:"Sun",
-type:"Star",
-difficulty:"BARDZO ŁATWE",
-signal:100,
-detectionRadius:14,
-audioKey:"sun",
-imageKey:"sun"
-},
+const date=
+new Date();
 
-{
-name:"🌙 MOON",
-body:"Moon",
-type:"Natural satellite",
-difficulty:"BARDZO ŁATWE",
-signal:100,
-detectionRadius:14,
-audioKey:"moon",
-imageKey:"moon"
-},
+const observer=
+new Astronomy.Observer(
+userLatitude,
+userLongitude,
+0
+);
 
-{
-name:"☿ MERCURY",
-body:"Mercury",
-type:"Planet",
-difficulty:"TRUDNE",
-signal:55,
-detectionRadius:12,
-audioKey:"mercury",
-imageKey:"mercury"
-},
-
-{
-name:"♀ VENUS",
-body:"Venus",
-type:"Planet",
-difficulty:"ŁATWE",
-signal:95,
-detectionRadius:14,
-audioKey:"venus",
-imageKey:"venus"
-},
-
-{
-name:"♂ MARS",
-body:"Mars",
-type:"Planet",
-difficulty:"ŚREDNIE",
-signal:70,
-detectionRadius:12,
-audioKey:"mars",
-imageKey:"mars"
-},
-
-{
-name:"♃ JUPITER",
-body:"Jupiter",
-type:"Planet",
-difficulty:"ŁATWE",
-signal:92,
-detectionRadius:13,
-audioKey:"jupiter",
-imageKey:"jupiter"
-},
-
-{
-name:"♄ SATURN",
-body:"Saturn",
-type:"Planet",
-difficulty:"ŁATWE",
-signal:88,
-detectionRadius:13,
-audioKey:"saturn",
-imageKey:"saturn"
-},
-
-{
-name:"♅ URANUS",
-body:"Uranus",
-type:"Planet",
-difficulty:"TRUDNE",
-signal:55,
-detectionRadius:12,
-audioKey:"uranus",
-imageKey:"uranus"
-},
-
-{
-name:"♆ NEPTUNE",
-body:"Neptune",
-type:"Planet",
-difficulty:"BARDZO TRUDNE",
-signal:35,
-detectionRadius:11,
-audioKey:"neptune",
-imageKey:"neptune"
-}
-
-];
-
-
-/* ==================================================
-   STARS
-================================================== */
-
-const stars=[
-
-{
-name:"⭐ VEGA",
-type:"Star",
-ra:18.6156,
-dec:38.7837,
-distance:25.04,
-difficulty:"ŁATWE",
-signal:90,
-detectionRadius:15,
-audioKey:"vega",
-imageKey:"vega"
-},
-
-{
-name:"⭐ SIRIUS",
-type:"Star",
-ra:6.7525,
-dec:-16.7161,
-distance:8.60,
-difficulty:"BARDZO ŁATWE",
-signal:100,
-detectionRadius:15,
-audioKey:"sirius",
-imageKey:"sirius"
-},
-
-{
-name:"⭐ ARCTURUS",
-type:"Star",
-ra:14.2610,
-dec:19.1825,
-distance:36.7,
-difficulty:"ŁATWE",
-signal:96,
-detectionRadius:15,
-audioKey:"arcturus",
-imageKey:"arcturus"
-},
-
-{
-name:"⭐ ALTAIR",
-type:"Star",
-ra:19.8464,
-dec:8.8683,
-distance:16.73,
-difficulty:"ŁATWE",
-signal:94,
-detectionRadius:15,
-audioKey:"altair"
-},
-
-{
-name:"⭐ CAPELLA",
-type:"Star",
-ra:5.2782,
-dec:45.9980,
-distance:42.92,
-difficulty:"ŁATWE",
-signal:95,
-detectionRadius:15,
-audioKey:"capella"
-},
-
-{
-name:"⭐ BETELGEUSE",
-type:"Star",
-ra:5.9195,
-dec:7.4071,
-distance:642.5,
-difficulty:"ŚREDNIE",
-signal:90,
-detectionRadius:15,
-audioKey:"betelgeuse"
-},
-
-{
-name:"⭐ RIGEL",
-type:"Star",
-ra:5.2423,
-dec:-8.2016,
-distance:860,
-difficulty:"ŚREDNIE",
-signal:85,
-detectionRadius:15,
-audioKey:"rigel"
-},
-
-{
-name:"⭐ DENEB",
-type:"Star",
-ra:20.6905,
-dec:45.2803,
-distance:2615,
-difficulty:"ŚREDNIE",
-signal:88,
-detectionRadius:15,
-audioKey:"deneb"
-},
-
-{
-name:"⭐ ALDEBARAN",
-type:"Star",
-ra:4.5987,
-dec:16.5093,
-distance:65.23,
-difficulty:"ŁATWE",
-signal:91,
-detectionRadius:15,
-audioKey:"aldebaran"
-},
-
-{
-name:"⭐ POLARIS",
-type:"Star",
-ra:2.5303,
-dec:89.2641,
-distance:447,
-difficulty:"ŁATWE",
-signal:93,
-detectionRadius:15,
-audioKey:"polaris"
-}
-
-];
-
-
-/* ==================================================
-   DEEP SKY
-================================================== */
-
-const deepSky=[
-
-{
-name:"🌌 M31 — ANDROMEDA GALAXY",
-type:"Galaxy",
-ra:.712,
-dec:41.269,
-distance:2540000,
-difficulty:"ŁATWE",
-signal:80,
-detectionRadius:12,
-distanceLabel:"2.54 million light years",
-audioKey:"andromeda",
-imageKey:"andromeda"
-},
-
-{
-name:"🌀 M51 — WHIRLPOOL GALAXY",
-type:"Galaxy",
-ra:13.498,
-dec:47.195,
-distance:23000000,
-difficulty:"TRUDNE",
-signal:50,
-detectionRadius:11,
-distanceLabel:"23 million light years",
-audioKey:"whirlpool",
-imageKey:"whirlpool"
-},
-
-{
-name:"🌌 M87",
-type:"Galaxy",
-ra:12.514,
-dec:12.392,
-distance:53500000,
-difficulty:"BARDZO TRUDNE",
-signal:40,
-detectionRadius:10,
-distanceLabel:"53.5 million light years",
-audioKey:"m87",
-imageKey:"m87"
-},
-
-{
-name:"🌌 M104 — SOMBRERO GALAXY",
-type:"Galaxy",
-ra:12.667,
-dec:-11.623,
-distance:31000000,
-difficulty:"TRUDNE",
-signal:50,
-detectionRadius:10,
-distanceLabel:"31 million light years",
-audioKey:"sombrero",
-imageKey:"sombrero"
-},
-
-{
-name:"🌌 MILKY WAY CENTER",
-type:"Galaxy Center",
-ra:17.761,
-dec:-29.007,
-distance:26000,
-difficulty:"ŚREDNIE",
-signal:90,
-detectionRadius:11,
-distanceLabel:"26 000 light years",
-audioKey:"milkyway",
-imageKey:"milkyway"
-},
-
-{
-name:"💫 HELIX NEBULA",
-type:"Planetary Nebula",
-ra:22.493,
-dec:-20.837,
-distance:655,
-difficulty:"TRUDNE",
-signal:70,
-detectionRadius:11,
-distanceLabel:"655 light years",
-audioKey:"helix",
-imageKey:"helix"
-},
-
-{
-name:"💫 CRAB NEBULA",
-type:"Supernova Remnant",
-ra:5.5756,
-dec:22.0145,
-distance:6500,
-difficulty:"ŚREDNIE",
-signal:82,
-detectionRadius:11,
-distanceLabel:"6 500 light years",
-audioKey:"crab",
-imageKey:"crab"
-},
-
-{
-name:"💫 CARINA NEBULA",
-type:"Nebula",
-ra:10.75,
-dec:-59.87,
-distance:8500,
-difficulty:"ŚREDNIE",
-signal:80,
-detectionRadius:11,
-distanceLabel:"8 500 light years",
-audioKey:"carina",
-imageKey:"carina"
-},
-
-{
-name:"💫 M16 — EAGLE NEBULA",
-type:"Nebula",
-ra:18.313,
-dec:-13.783,
-distance:7000,
-difficulty:"ŚREDNIE",
-signal:78,
-detectionRadius:11,
-distanceLabel:"7 000 light years",
-audioKey:"eagle",
-imageKey:"eagle"
-},
-
-{
-name:"👁️ NGC 6543 — CAT'S EYE NEBULA",
-type:"Planetary Nebula",
-ra:17.976,
-dec:66.633,
-distance:3300,
-difficulty:"TRUDNE",
-signal:70,
-detectionRadius:10,
-distanceLabel:"3 300 light years",
-audioKey:"catseye",
-imageKey:"catseye"
-},
-
-{
-name:"💫 IC 443 — JELLYFISH NEBULA",
-type:"Supernova Remnant",
-ra:6.283,
-dec:22.533,
-distance:5000,
-difficulty:"TRUDNE",
-signal:55,
-detectionRadius:10,
-distanceLabel:"5 000 light years",
-audioKey:"jellyfish"
-},
-
-{
-name:"🌀 PERSEUS CLUSTER",
-type:"Galaxy Cluster",
-ra:3.333,
-dec:41.5,
-distance:240000000,
-difficulty:"BARDZO TRUDNE",
-signal:45,
-detectionRadius:10,
-distanceLabel:"240 million light years",
-audioKey:"perseus",
-imageKey:"perseus"
-},
-
-{
-name:"💥 CHANDRA DEEP FIELD",
-type:"Deep Field",
-ra:3.5,
-dec:-27.8,
-distance:13000000000,
-difficulty:"EKSTREMALNIE TRUDNE",
-signal:25,
-detectionRadius:9,
-distanceLabel:"Billions of light years",
-audioKey:"chandra",
-imageKey:"chandra"
-},
-
-{
-name:"💫 V404 CYGNI",
-type:"Black Hole Binary",
-ra:20.411,
-dec:33.867,
-distance:7800,
-difficulty:"BARDZO TRUDNE",
-signal:40,
-detectionRadius:9,
-distanceLabel:"7 800 light years",
-audioKey:"v404"
-},
-
-{
-name:"🕳️ SAGITTARIUS A*",
-type:"Supermassive Black Hole",
-ra:17.761,
-dec:-29.007,
-distance:26000,
-difficulty:"BARDZO TRUDNE",
-signal:88,
-detectionRadius:8,
-distanceLabel:"26 000 light years",
-audioKey:"sagittarius_a",
-imageKey:"sagittarius_a",
-blackHole:true
-}
-
-];
-
-
-/* ==================================================
-   STAR POSITION
-================================================== */
-
-function calculateStarPosition(star){
-
-const date=new Date();
-
-const jd=
-Astronomy.MakeTime(date).ut;
-
-const T=
-(jd-2451545)/36525;
-
-const raDegrees=
-star.ra*15;
-
-const ra=
-raDegrees+
-(3.075+
-1.336*
-Math.sin(
-star.dec*
-Math.PI/
-180
-)
-)*T;
-
-const dec=
-star.dec+
-(20.04*T)/3600;
-
-const gst=
-Astronomy.SiderealTime(date);
+const eq=
+Astronomy.Equator(
+"Sun",
+date,
+observer,
+true,
+true
+);
 
 const lst=
-(gst+userLongitude/15)%24;
+Astronomy.SiderealTime(date)
++
+userLongitude/15;
 
 let ha=
-lst-ra/15;
+lst-
+object.ra;
 
-if(ha<-12)ha+=24;
-
-if(ha>12)ha-=24;
+if(ha<0)ha+=24;
 
 const haRad=
 ha*15*Math.PI/180;
 
-const decRad=
-dec*Math.PI/180;
+const dec=
+object.dec*
+Math.PI/
+180;
 
-const latRad=
-userLatitude*Math.PI/180;
-
-const sinAltitude=
-Math.sin(decRad)*
-Math.sin(latRad)
-+
-Math.cos(decRad)*
-Math.cos(latRad)*
-Math.cos(haRad);
+const lat=
+userLatitude*
+Math.PI/
+180;
 
 const altitude=
 Math.asin(
-sinAltitude
-)*
+Math.sin(dec)*
+Math.sin(lat)
++
+Math.cos(dec)*
+Math.cos(lat)*
+Math.cos(haRad)
+)
+*
 180/
 Math.PI;
 
 let azimuth=
 Math.atan2(
-
 Math.sin(haRad),
-
 Math.cos(haRad)*
-Math.sin(latRad)
+Math.sin(lat)
 -
-Math.tan(decRad)*
-Math.cos(latRad)
-
-)*
+Math.tan(dec)*
+Math.cos(lat)
+)
+*
 180/
 Math.PI;
 
@@ -2298,7 +1687,7 @@ azimuth=
 (azimuth+180+360)%360;
 
 return{
-...star,
+...object,
 azimuth,
 altitude
 };
@@ -2306,11 +1695,7 @@ altitude
 }
 
 
-/* ==================================================
-   SKY POSITIONS
-================================================== */
-
-function calculateSkyPositions(){
+function getPositions(){
 
 if(
 userLatitude===null||
@@ -2328,20 +1713,20 @@ userLongitude,
 0
 );
 
-const date=new Date();
+const date=
+new Date();
 
-const results=[];
+let result=[];
 
 
 /* PLANETS */
 
-for(
-const object of bodies
-){
+bodies.forEach(
+object=>{
 
 try{
 
-const equator=
+const eq=
 Astronomy.Equator(
 object.body,
 date,
@@ -2354,12 +1739,12 @@ const horizontal=
 Astronomy.Horizon(
 date,
 observer,
-equator.ra,
-equator.dec,
+eq.ra,
+eq.dec,
 "normal"
 );
 
-results.push({
+result.push({
 
 ...object,
 
@@ -2367,459 +1752,229 @@ azimuth:
 horizontal.azimuth,
 
 altitude:
-horizontal.altitude,
-
-distance:
-horizontal.dist
+horizontal.altitude
 
 });
 
 }
+catch(e){}
 
-catch(error){
-
-console.error(
-"Planet error",
-error
+}
 );
 
-}
 
-}
+/* STARS + DEEP SKY */
 
-
-/* STARS */
-
-for(
-const star of stars
-){
-
-results.push(
-calculateStarPosition(
-star
+stars.forEach(
+object=>
+result.push(
+starPosition(object)
 )
 );
 
-}
-
-
-/* DEEP SKY */
-
-for(
-const object of deepSky
-){
-
-results.push(
-calculateStarPosition(
-object
+deepSky.forEach(
+object=>
+result.push(
+starPosition(object)
 )
 );
 
-}
-
-return results;
+return result;
 
 }
 
 
 /* ==================================================
-   DETECTION
+RADAR
 ================================================== */
 
-function detectObjects(){
+function updateRadar(objects,best){
 
-if(!receiverActive){
+document
+.querySelectorAll(
+".radar-object"
+)
+.forEach(
+el=>el.remove()
+);
 
-return;
-
-}
+objects.forEach(
+object=>{
 
 if(
-userLatitude===null||
-userLongitude===null
+object.altitude<0
+)return;
+
+const az=
+object.azimuth;
+
+const alt=
+object.altitude;
+
+const radius=
+Math.min(
+1,
+Math.max(
+0,
+alt/90
+)
+);
+
+const angle=
+(az-compassHeading)
+*
+Math.PI/
+180;
+
+const x=
+50+
+Math.sin(angle)
+*
+radius*
+45;
+
+const y=
+50-
+Math.cos(angle)
+*
+radius*
+45;
+
+const dot=
+document.createElement(
+"div"
+);
+
+dot.className=
+"radar-object";
+
+if(
+best&&
+best.name===
+object.name
 ){
 
-scanStatus.innerText=
-"🌍 Waiting for GPS...";
-
-return;
+dot.classList.add(
+"locked"
+);
 
 }
 
+else if(
+object.altitude>0
+){
+
+dot.classList.add(
+"near"
+);
+
+}
+
+dot.style.left=
+x+"%";
+
+dot.style.top=
+y+"%";
+
+dot.title=
+object.name;
+
+radar.appendChild(
+dot
+);
+
+}
+);
+
+}
+
+
+/* ==================================================
+DETECTION
+================================================== */
+
+function detect(){
+
 if(
+!receiverActive||
 compassHeading===null||
 phoneAltitude===null
 ){
-
-scanStatus.innerText=
-"🧭 Waiting for phone orientation...";
 
 return;
 
 }
 
 const objects=
-calculateSkyPositions();
+getPositions();
 
-let bestTarget=null;
+let best=null;
 
 let bestScore=Infinity;
 
-for(
-const object of objects
-){
+objects.forEach(
+object=>{
 
 if(
 object.altitude<0
-){
+)return;
 
-continue;
-
-}
-
-const azimuthDifference=
-angleDifference(
+const azDiff=
+angleDiff(
 compassHeading,
 object.azimuth
 );
 
-const altitudeDifference=
+const altDiff=
 Math.abs(
 phoneAltitude-
 object.altitude
 );
 
 const radius=
-object.detectionRadius||12;
-
-if(
-azimuthDifference<=radius&&
-altitudeDifference<=radius
-){
+object.detectionRadius;
 
 const score=
-azimuthDifference+
-altitudeDifference;
+Math.sqrt(
+azDiff*azDiff+
+altDiff*altDiff
+);
 
 if(
+azDiff<=radius&&
+altDiff<=radius&&
 score<bestScore
 ){
 
-bestScore=score;
+bestScore=
+score;
 
-bestTarget=object;
-
-}
-
-}
-
-}
-
-if(bestTarget){
-
-const radius=
-bestTarget.detectionRadius||12;
-
-const azimuthDifference=
-angleDifference(
-compassHeading,
-bestTarget.azimuth
-);
-
-const altitudeDifference=
-Math.abs(
-phoneAltitude-
-bestTarget.altitude
-);
-
-const accuracy=
-Math.min(
-1,
-(
-azimuthDifference+
-altitudeDifference
-)/
-(radius*2)
-);
-
-updateAudioMix(
-bestTarget,
-accuracy
-);
-
-lockTarget(
-bestTarget,
-accuracy
-);
-
-}
-
-else{
-
-unlockTarget();
+best=object;
 
 }
 
 }
-
-
-/* ==================================================
-   LOAD OBJECT IMAGE
-================================================== */
-
-function loadObjectImage(object){
-
-const key=
-object.imageKey;
-
-const imageUrl=
-OBJECT_IMAGES[key];
-
-if(
-!imageUrl
-){
-
-objectImageContainer.classList.remove(
-"visible"
 );
 
-return;
 
-}
+/* RADAR */
 
-objectImage.onload=
-function(){
-
-objectImageContainer.classList.add(
-"visible"
+updateRadar(
+objects,
+best
 );
 
-imageCaption.innerText=
-"IMAGE: "+
-object.name+
-" | PUBLIC ASTRONOMICAL SOURCE";
 
-};
+if(!best){
 
-objectImage.onerror=
-function(){
-
-objectImageContainer.classList.remove(
-"visible"
-);
-
-};
-
-objectImage.src=
-imageUrl;
-
-}
-
-
-/* ==================================================
-   LOCK TARGET
-================================================== */
-
-function lockTarget(object,accuracy){
-
-currentTarget=object;
-
-targetName.innerText=
-object.name;
-
-targetType.innerText=
-object.type;
-
-
-/* IMAGE */
-
-loadObjectImage(object);
-
-
-/* SIGNAL */
-
-signalStrength.innerText=
-object.signal;
+signalPercent.innerText=
+"0%";
 
 signalFill.style.width=
-object.signal+"%";
+"0%";
 
-
-/* POSITION */
-
-targetDirection.innerText=
-object.azimuth.toFixed(1)
-+"° "
-+
-getDirection(
-object.azimuth
-);
-
-targetAltitude.innerText=
-object.altitude.toFixed(1)
-+"°";
-
-
-/* DISTANCE */
-
-if(
-object.distanceLabel
-){
-
-targetDistance.innerText=
-object.distanceLabel;
-
-}
-
-else if(
-object.type==="Star"
-){
-
-targetDistance.innerText=
-object.distance+
-" light years";
-
-}
-
-else{
-
-targetDistance.innerText=
-object.distance
-?
-object.distance.toFixed(4)
-+" AU"
-:
-"---";
-
-}
-
-
-/* INFO */
-
-targetDifficulty.innerText=
-object.difficulty;
-
-targetField.innerText=
-"±"+
-object.detectionRadius+
-"°";
-
-
-/* AUDIO */
-
-const audioKey=
-getAudioKey(object);
-
-if(
-audioKey&&
-AUDIO_FILES[audioKey]
-){
-
-targetAudioSource.innerText=
-"🎧 "+
-AUDIO_FILES[audioKey];
-
-}
-
-else{
-
-targetAudioSource.innerText=
-"📻 Radio noise";
-
-}
-
-
-lockStatus.innerText=
-"🟢 TARGET LOCKED";
-
-lockStatus.classList.add(
-"locked"
-);
-
-
-/* BLACK HOLE */
-
-if(
-object.blackHole
-){
-
-targetName.classList.add(
-"black-hole"
-);
-
-detectionPanel.classList.add(
-"black-hole-panel"
-);
-
-scanStatus.innerText=
-"🕳️🌈 YOU FOUND THE VOID! 🌈🕳️";
-
-}
-
-else{
-
-targetName.classList.remove(
-"black-hole"
-);
-
-detectionPanel.classList.remove(
-"black-hole-panel"
-);
-
-scanStatus.innerText=
-"🎯 LOCKED: "+
-object.name;
-
-}
-
-}
-
-
-/* ==================================================
-   UNLOCK
-================================================== */
-
-function unlockTarget(){
-
-currentTarget=null;
-
-if(
-noiseGain&&
-audioContext
-){
-
-noiseGain.gain.setTargetAtTime(
-.04,
-audioContext.currentTime,
-.15
-);
-
-}
-
-stopObjectAudio();
-
-audioMeterFill.style.width="0%";
-
-audioInfo.innerText=
-"Object signal: 0% | Radio noise: 100%";
-
-
-/* HIDE IMAGE */
-
-objectImageContainer.classList.remove(
-"visible"
-);
-
-objectImage.src="";
-
-
-targetName.classList.remove(
-"black-hole"
-);
-
-detectionPanel.classList.remove(
-"black-hole-panel"
-);
+signalMessage.innerText=
+"📻 SCANNING FOR SIGNAL...";
 
 targetName.innerText=
 "TARGET: NULL";
@@ -2827,83 +1982,224 @@ targetName.innerText=
 targetType.innerText=
 "POINT RECEIVER AT THE SKY";
 
-signalStrength.innerText=
-"000000";
-
-signalFill.style.width="0%";
-
-targetDirection.innerText="---";
-
-targetAltitude.innerText="---";
-
-targetDistance.innerText="---";
-
-targetDifficulty.innerText="---";
-
-targetField.innerText="---";
-
-targetAudioSource.innerText=
-"Radio noise";
-
-lockStatus.innerText=
-"🔴 NO TARGET LOCKED";
-
-lockStatus.classList.remove(
-"locked"
+objectImageContainer
+.classList
+.remove(
+"visible"
 );
-
-audioStatus.innerText=
-"🔊 RADIO RECEIVER ACTIVE";
-
-sourceStatus.innerText=
-"Source: Generated radio noise";
-
-}
-
-
-/* ==================================================
-   START
-================================================== */
-
-async function startReceiver(){
-
-if(receiverActive){
 
 return;
 
 }
 
-receiverActive=true;
 
-startRadioNoise();
+/* SIGNAL */
 
-statusElement.classList.add(
+const radius=
+best.detectionRadius;
+
+const azDiff=
+angleDiff(
+compassHeading,
+best.azimuth
+);
+
+const altDiff=
+Math.abs(
+phoneAltitude-
+best.altitude
+);
+
+const distance=
+Math.sqrt(
+azDiff*azDiff+
+altDiff*altDiff
+);
+
+const alignment=
+Math.max(
+0,
+1-distance/
+(radius*
+1.414)
+);
+
+const signal=
+Math.round(
+best.signal*
+alignment
+);
+
+
+signalPercent.innerText=
+signal+"%";
+
+signalFill.style.width=
+signal+"%";
+
+targetName.innerText=
+best.name;
+
+targetType.innerText=
+best.type;
+
+
+/* SIGNAL MESSAGE */
+
+if(
+signal>=90
+){
+
+signalMessage.innerText=
+"🟢 TARGET LOCKED — MAXIMUM SIGNAL";
+
+}
+
+else if(
+signal>=60
+){
+
+signalMessage.innerText=
+"🟡 STRONG SIGNAL — KEEP AIMING";
+
+}
+
+else if(
+signal>=25
+){
+
+signalMessage.innerText=
+"🟠 WEAK SIGNAL DETECTED — SEARCHING";
+
+}
+
+else{
+
+signalMessage.innerText=
+"🔴 VERY WEAK SIGNAL";
+
+}
+
+
+/* TARGET INFO */
+
+targetSignal.innerText=
+signal+"%";
+
+targetDirection.innerText=
+best.azimuth.toFixed(1)
++"°";
+
+targetAltitude.innerText=
+best.altitude.toFixed(1)
++"°";
+
+targetDistance.innerText=
+best.distanceLabel||
+(
+best.distance?
+best.distance+
+" light years"
+:"---"
+);
+
+targetDifficulty.innerText=
+best.difficulty;
+
+
+/* IMAGE */
+
+if(
+best.imageKey&&
+OBJECT_IMAGES[
+best.imageKey
+]
+){
+
+objectImage.src=
+OBJECT_IMAGES[
+best.imageKey
+];
+
+objectImageContainer
+.classList
+.add(
+"visible"
+);
+
+imageCaption.innerText=
+"🖼️ "+
+best.name;
+
+}
+
+
+/* DISCOVERY */
+
+if(
+signal>=80
+){
+
+if(
+!discovered.includes(
+best.name
+)
+){
+
+discovered.push(
+best.name
+);
+
+localStorage.setItem(
+"radioTelescopeDiscoveries",
+JSON.stringify(
+discovered
+)
+);
+
+updateDiscoveries();
+
+scanStatus.innerText=
+"🏆 NEW DISCOVERY: "+
+best.name;
+
+}
+
+}
+
+}
+
+
+/* ==================================================
+START
+================================================== */
+
+async function startReceiver(){
+
+if(
+receiverActive
+)return;
+
+receiverActive=
+true;
+
+status.classList.add(
 "active"
 );
 
-statusElement.innerHTML=
+status.innerHTML=
 '<span class="status-dot"></span>RECEIVER ACTIVE';
 
 scanStatus.innerText=
-"📡 INITIALIZING RECEIVER...";
+"📡 INITIALIZING SIGNAL HUNT...";
 
 startGPS();
 
 await enableSensors();
 
-setTimeout(
-function(){
-
-scanStatus.innerText=
-"🌌 CALCULATING SKY OBJECTS...";
-
-},
-1000
-);
-
 detectionInterval=
 setInterval(
-detectObjects,
+detect,
 500
 );
 
@@ -2911,47 +2207,26 @@ detectObjects,
 
 
 /* ==================================================
-   STOP
+STOP
 ================================================== */
 
 function stopReceiver(){
 
-receiverActive=false;
+receiverActive=
+false;
 
-if(detectionInterval){
+if(
+detectionInterval
+){
 
 clearInterval(
 detectionInterval
 );
 
-detectionInterval=null;
+detectionInterval=
+null;
 
 }
-
-stopObjectAudio();
-
-if(noiseSource){
-
-try{
-noiseSource.stop();
-}
-catch(e){}
-
-noiseSource.disconnect();
-
-noiseSource=null;
-
-}
-
-if(audioContext){
-
-audioContext.close();
-
-audioContext=null;
-
-}
-
-noiseGain=null;
 
 if(
 watchID!==null
@@ -2961,38 +2236,29 @@ navigator.geolocation.clearWatch(
 watchID
 );
 
-watchID=null;
+watchID=
+null;
 
 }
 
-objectImageContainer.classList.remove(
-"visible"
-);
-
-objectImage.src="";
-
-currentTarget=null;
-
-statusElement.classList.remove(
+status.classList.remove(
 "active"
 );
 
-statusElement.innerHTML=
+status.innerHTML=
 '<span class="status-dot"></span>RECEIVER STANDBY';
 
 scanStatus.innerText=
 "System ready";
 
-audioStatus.innerText=
-"🔇 RADIO RECEIVER OFFLINE";
+signalPercent.innerText=
+"0%";
 
-sourceStatus.innerText=
-"Source: None";
+signalFill.style.width=
+"0%";
 
-audioMeterFill.style.width="0%";
-
-audioInfo.innerText=
-"Object signal: 0% | Radio noise: 100%";
+signalMessage.innerText=
+"📻 SCANNING FOR SIGNAL...";
 
 targetName.innerText=
 "TARGET: NULL";
@@ -3000,39 +2266,33 @@ targetName.innerText=
 targetType.innerText=
 "POINT RECEIVER AT THE SKY";
 
-signalStrength.innerText=
-"000000";
+objectImageContainer
+.classList
+.remove(
+"visible"
+);
 
-signalFill.style.width="0%";
-
-targetDirection.innerText="---";
-
-targetAltitude.innerText="---";
-
-targetDistance.innerText="---";
-
-targetDifficulty.innerText="---";
-
-targetField.innerText="---";
-
-targetAudioSource.innerText=
-"Radio noise";
-
-lockStatus.innerText=
-"🔴 NO TARGET LOCKED";
-
-lockStatus.classList.remove(
-"locked"
+document
+.querySelectorAll(
+".radar-object"
+)
+.forEach(
+el=>el.remove()
 );
 
 }
 
 
 /* ==================================================
-   INITIAL
+INITIAL
 ================================================== */
 
-updateTime();
+updateDiscoveries();
+
+timeElement.innerText=
+new Date().toLocaleTimeString(
+"pl-PL"
+);
 
 </script>
 
